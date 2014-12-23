@@ -1,0 +1,40 @@
+%br
+.row
+  %div{"ng-repeat" => "batch in batches"}
+    .col-md-3
+    .row
+      .well.col-md-6
+        %h1{style: 'display:inline;'}
+          {{batch.flavor}}
+        %span
+          %b
+            brewed:
+          {{batch.created_at}}
+
+        %table.table.table-striped
+          %thead
+            %tr
+              %th
+                DATE
+              %th
+                BRIX
+              %th
+                PH
+              %th
+                TEMP
+              %th
+          %tbody
+            %tr{"ng-repeat" => "read in batch.batch_readings"}
+              %td
+                {{read.reading_date}}
+              %td
+                {{read.ph}}
+              %td
+                {{read.brix}}
+              %td
+                {{read.temp}}
+              %td
+                %button
+                  edit
+        %button.btn.btn-info
+          new

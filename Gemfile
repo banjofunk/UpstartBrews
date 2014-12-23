@@ -13,6 +13,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'bower-rails'
 gem 'angular-rails-templates'
 
+gem "therubyracer"
+gem "less-rails"
+
 gem 'byebug',        group: :development
 gem 'spring',        group: :development
 

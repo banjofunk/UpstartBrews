@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :batches
+  resources :batch_readings
+  resources :flavors
+
   root 'application#index'
   get '*path' => 'application#index'
 

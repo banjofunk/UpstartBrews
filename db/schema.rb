@@ -11,9 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20141210183543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "batch_readings", force: true do |t|
+    t.integer  "batch_id"
+    t.float    "ph"
+    t.float    "temp"
+    t.float    "brix"
+    t.datetime "reading_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "batches", force: true do |t|
+    t.integer  "flavor_id"
+    t.integer  "fermenter_id"
+    t.integer  "state"
+    t.datetime "brew_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "fermenters", force: true do |t|
+    t.integer  "flavor_id"
+    t.integer  "capacity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "flavors", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
