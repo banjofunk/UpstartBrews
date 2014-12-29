@@ -7,6 +7,10 @@ angular
       .when('/', {
         templateUrl: 'brewery.html',
         controller: 'BreweryCtrl'
+      })
+      .when('/batches', {
+        templateUrl: 'brewery.html',
+        controller: 'BatchCtrl'
       });
     $locationProvider.html5Mode(true);
   });
