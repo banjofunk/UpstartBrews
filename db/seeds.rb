@@ -6,23 +6,48 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-flavor_1 = Flavor.create(:name => 'lemon ginger')
-flavor_2 = Flavor.create(:name => 'berry black')
-flavor_3 = Flavor.create(:name => 'mint green')
-flavor_4 = Flavor.create(:name => 'rose bud')
+lemon = Flavor.create(:name => 'lemon ginger')
+berry = Flavor.create(:name => 'berry black')
+mint = Flavor.create(:name => 'mint green')
+rose = Flavor.create(:name => 'rose bud')
 
-ferm_1 = Fermenter.create(:flavor_id => flavor_1.id,:capacity => 250)
-ferm_2 = Fermenter.create(:flavor_id => flavor_2.id,:capacity => 250)
-ferm_3 = Fermenter.create(:flavor_id => flavor_3.id,:capacity => 250)
-ferm_4 = Fermenter.create(:flavor_id => flavor_4.id,:capacity => 250)
+ferm_1 = Fermenter.create(:flavor_id => lemon.id,:capacity => 250, :position => 1)
+ferm_2 = Fermenter.create(:flavor_id => berry.id,:capacity => 250, :position => 2)
+ferm_3 = Fermenter.create(:flavor_id => mint.id,:capacity => 250, :position => 3)
+ferm_4 = Fermenter.create(:flavor_id => rose.id,:capacity => 250, :position => 4)
+ferm_5 = Fermenter.create(:flavor_id => lemon.id,:capacity => 250, :position => 5)
+ferm_6 = Fermenter.create(:flavor_id => berry.id,:capacity => 250, :position => 6)
+ferm_7 = Fermenter.create(:flavor_id => mint.id,:capacity => 250, :position => 7)
+ferm_8 = Fermenter.create(:flavor_id => rose.id,:capacity => 250, :position => 8)
+ferm_9 = Fermenter.create(:flavor_id => lemon.id,:capacity => 250, :position => 9)
+ferm_10 = Fermenter.create(:flavor_id => berry.id,:capacity => 250, :position => 10)
+ferm_11 = Fermenter.create(:flavor_id => mint.id,:capacity => 250, :position => 11)
+ferm_12 = Fermenter.create(:flavor_id => rose.id,:capacity => 250, :position => 12)
 
-Batch.create(:flavor_id => flavor_1.id, :fermenter_id => ferm_1.id, :state => 0, :brew_date => (Time.now-1.days))
-Batch.create(:flavor_id => flavor_2.id, :fermenter_id => ferm_2.id, :state => 0, :brew_date => (Time.now-2.days))
-Batch.create(:flavor_id => flavor_3.id, :fermenter_id => ferm_3.id, :state => 0, :brew_date => (Time.now-3.days))
-Batch.create(:flavor_id => flavor_4.id, :fermenter_id => ferm_4.id, :state => 0, :brew_date => (Time.now-4.days))
+#lemon
+Batch.create(:flavor_id => lemon.id, :fermenter_id => ferm_1.id, :state => 0, :brew_date => (Time.now-rand(1..20).days))
+Batch.create(:flavor_id => lemon.id, :fermenter_id => ferm_9.id, :state => 0, :brew_date => (Time.now-rand(1..20).days))
+Batch.create(:flavor_id => lemon.id, :fermenter_id => ferm_5.id, :state => 0, :brew_date => (Time.now-rand(1..20).days))
+
+#berry
+Batch.create(:flavor_id => berry.id, :fermenter_id => ferm_2.id, :state => 0, :brew_date => (Time.now-rand(1..20).days))
+Batch.create(:flavor_id => berry.id, :fermenter_id => ferm_10.id, :state => 0, :brew_date => (Time.now-rand(1..20).days))
+Batch.create(:flavor_id => berry.id, :fermenter_id => ferm_6.id, :state => 0, :brew_date => (Time.now-rand(1..20).days))
+
+#mint
+Batch.create(:flavor_id => mint.id, :fermenter_id => ferm_3.id, :state => 0, :brew_date => (Time.now-rand(1..20).days))
+Batch.create(:flavor_id => mint.id, :fermenter_id => ferm_11.id, :state => 0, :brew_date => (Time.now-rand(1..20).days))
+Batch.create(:flavor_id => mint.id, :fermenter_id => ferm_7.id, :state => 0, :brew_date => (Time.now-rand(1..20).days))
+
+#rose
+Batch.create(:flavor_id => rose.id, :fermenter_id => ferm_4.id, :state => 0, :brew_date => (Time.now-rand(1..20).days))
+Batch.create(:flavor_id => rose.id, :fermenter_id => ferm_12.id, :state => 0, :brew_date => (Time.now-rand(1..20).days))
+Batch.create(:flavor_id => rose.id, :fermenter_id => ferm_8.id, :state => 0, :brew_date => (Time.now-rand(1..20).days))
 
 Batch.all.each do |batch|
-  5.times do |i|
-    batch.batch_readings.create(:ph => "#{i}.#{i}".to_f, :temp => "#{i+1}#{i}.#{i}".to_f, :brix => "#{i+1}#{i}.#{i}", :reading_date => Time.now-i.days)
-  end
+  batch.batch_readings.create(:ph => "3.#{rand(7..9)}".to_f.round(1), :temp => "#{rand(68..77)}".to_f.round(1), :brix => "7.#{rand(0..2)}".to_f.round(1), :reading_date => Time.now-rand(10..12).days)
+  batch.batch_readings.create(:ph => "3.#{rand(5..7)}".to_f.round(1), :temp => "#{rand(68..77)}".to_f.round(1), :brix => "6.#{rand(8..9)}".to_f.round(1), :reading_date => Time.now-rand(8..9).days)
+  batch.batch_readings.create(:ph => "3.#{rand(3..5)}".to_f.round(1), :temp => "#{rand(68..77)}".to_f.round(1), :brix => "6.#{rand(6..8)}".to_f.round(1), :reading_date => Time.now-rand(6..7).days)
+  batch.batch_readings.create(:ph => "3.#{rand(2..3)}".to_f.round(1), :temp => "#{rand(68..77)}".to_f.round(1), :brix => "6.#{rand(3..6)}".to_f.round(1), :reading_date => Time.now-rand(3..5).days)
+  batch.batch_readings.create(:ph => "3.#{rand(0..2)}".to_f.round(1), :temp => "#{rand(68..77)}".to_f.round(1), :brix => "6.#{rand(0..2)}".to_f.round(1), :reading_date => Time.now-rand(0..2).days)
 end

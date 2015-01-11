@@ -1,15 +1,20 @@
 angular
   .module('AngularUpstart', [
     'ngRoute',
-    'templates'
+    'templates',
+    'AngularUpstart.directives'
   ]).config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'brewery.html',
+        templateUrl: 'batches.html',
         controller: 'BreweryCtrl'
       })
       .when('/batches', {
-        templateUrl: 'brewery.html',
+        templateUrl: 'batches.html',
+        controller: 'BatchesCtrl'
+      })
+      .when('/batches/:batchId', {
+        templateUrl: 'batch.html',
         controller: 'BatchCtrl'
       });
     $locationProvider.html5Mode(true);

@@ -1,4 +1,4 @@
-class FlavorController < ApplicationController
+class Api::FlavorController < ApplicationController
   def index
     @flavors = Flavor.all
   end

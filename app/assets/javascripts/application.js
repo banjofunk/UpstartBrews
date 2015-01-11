@@ -17,4 +17,5 @@
 //= require angular-route
 //= require angular-rails-templates
 //= require_tree ../templates
+//= require_tree ./jquery-ui-1.11.2.custom
 //= require_tree .

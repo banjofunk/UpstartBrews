@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :batches
-  resources :batch_readings
-  resources :flavors
+  namespace :api do
+    resources :batches
+    resources :batch_readings
+    resources :flavors
+    resources :fermenters
+    match 'fermenters/sort' => 'fermenters#sort', :via => :post
+  end
 
   root 'application#index'
   get '*path' => 'application#index'

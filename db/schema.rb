@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20141210183543) do
 
   create_table "fermenters", force: true do |t|
     t.integer  "flavor_id"
+    t.integer  "position"
     t.integer  "capacity"
     t.datetime "created_at"
     t.datetime "updated_at"

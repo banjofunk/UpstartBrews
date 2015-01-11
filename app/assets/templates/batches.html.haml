@@ -1,0 +1,44 @@
+:css
+  .form-control{
+    width:99%;
+    text-align:center;
+  }
+  td, th{
+    height:51px;
+    text-align:center;
+  }
+  td button {
+    width:90px;
+  }
+  .show-reading{
+    padding-top:7px;
+    padding-right:2px;
+    width: 101px;
+  }
+  .edit-reading{
+    width:101px;
+  }
+%br
+.row
+  .col-md-12{:style => 'text-align: center;'}
+    %h1{style: 'color:white; font-size:48px'} Batches
+%br
+.row
+  .col-md-1
+  .col-md-10
+    #batches{'ng-include' => "'partials/batches.html'"}
+
+%modal{:title => '{{selected_batch.flavor.name}}', :visible => "showModal"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h2.modal-title{style: 'display:inline;'}
+      {{selected_batch.flavor.name}}
+    %span
+      %b
+        brewed: {{selected_batch.brew_date}}
+  .modal-body
+    #readings{'ng-include' => "'partials/readings.html'"}
+    %br
+    %h3 notes
+
+

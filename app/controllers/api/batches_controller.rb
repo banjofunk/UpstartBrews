@@ -1,8 +1,12 @@
-class BatchesController < ApplicationController
+class Api::BatchesController < ApplicationController
   before_action :set_batch, only: [:show, :edit, :update, :destroy]
 
   def index
-    @batches = Batch.all
+    if params['show_all']
+      @batches = Batch.all
+    else
+      @batches = Fermenter.order('position ASC').map {|v| v.batches.order('brew_date DESC').first}
+    end
   end
 
   def show
