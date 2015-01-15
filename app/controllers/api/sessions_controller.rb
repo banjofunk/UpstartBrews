@@ -1,8 +1,8 @@
 class Api::SessionsController < Devise::SessionsController
   protect_from_forgery with: :null_session, :if => Proc.new { |c| c.request.format == 'application/vnd.radd.v1' }
+  prepend_before_filter :require_no_authentication, :only => [:create ]
 
   def create
-    byebug
     warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
     render :status => 200, :json => { :success => true, :info => "Logged in", :user => current_user }
   end
