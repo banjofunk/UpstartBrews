@@ -1,11 +1,25 @@
 Rails.application.routes.draw do
 
-  namespace :api do
+  devise_for :users #, :path => 'users/', :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register" }
+  namespace :api, defaults: {format: :json} do
     resources :batches
     resources :batch_readings
     resources :flavors
     resources :fermenters
     match 'fermenters/sort' => 'fermenters#sort', :via => :post
+
+    devise_scope :user do
+      match '/sessions' => 'sessions#create', :via => :post
+      match '/sessions' => 'sessions#destroy', :via => :delete
+    end
+
+    resources :record
+
+    resources :users, only: [:create]
+    match '/users' => 'users#show', :via => :get
+    match '/users' => 'users#update', :via => :put
+    match '/users' => 'users#destroy', :via => :delete
+
   end
 
   root 'application#index'

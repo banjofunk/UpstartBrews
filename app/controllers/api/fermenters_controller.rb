@@ -1,5 +1,6 @@
 class Api::FermentersController < ApplicationController
 
+
   def sort
     sort = params['sort']
     sort.each_with_index do |ferm_id, idx|

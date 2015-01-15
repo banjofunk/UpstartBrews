@@ -1,10 +1,4 @@
 angular.module('AngularUpstart')
-  .controller('BreweryCtrl', function ($scope, $http) {
-    $http.get('/api/batches.json').
-      success(function(data, status, headers, config) {
-        $scope.batches = data;
-      })
-  })
   .controller('BatchesCtrl', function ($scope, $http) {
     $scope.selected_batch = {};
     $http.get('/api/batches.json').

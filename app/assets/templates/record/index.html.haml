@@ -1,0 +1,4 @@
+.well
+  %p Welcome, {{user.email}}
+  %p{"ng-repeat" => "record in records"} {{record.data}}
+  %a.btn.btn-primary{"ng-click" => "logout()"} Logout

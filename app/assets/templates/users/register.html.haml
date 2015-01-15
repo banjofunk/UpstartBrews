@@ -1,0 +1,17 @@
+:css
+  body {
+      background-color: #f5f5f5;
+  }
+%form.auth-form{:name => "registrationForm"}
+  %h2.auth-form-heading Sign up
+  %br/
+  .alert.alert-warning{"ng-show" => "authReason"}
+    {{authReason}}
+  .alert.alert-error{"ng-show" => "authError"}
+    {{authError}}
+  %input.input-block-level{:autofocus => "", "ng-model" => "user.email", :placeholder => "Email address", :required => "", :type => "text"}/
+  %input.input-block-level{"ng-model" => "user.password", :placeholder => "Password", :required => "", :type => "password"}/
+  %input.input-block-level{"ng-model" => "user.confirm_password", :placeholder => "Confirm Password", :required => "", :type => "password"}/
+  %br/
+  %br/
+  %a.btn.btn-large.btn-primary{"ng-click" => "register(user)", "ng-disabled" => "registrationForm.$invalid", :type => "submit"} Sign up

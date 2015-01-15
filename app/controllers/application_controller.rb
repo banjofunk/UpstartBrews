@@ -24,4 +24,8 @@ class ApplicationController < ActionController::Base
     super || form_authenticity_token == request.headers['X-XSRF-TOKEN']
   end
 
+  rescue_from CanCan::AccessDenied do |exception|
+    render :text => "not authorized", :status => 403, :layout => false
+  end
+
 end
