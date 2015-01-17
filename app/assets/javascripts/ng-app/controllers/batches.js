@@ -1,10 +1,14 @@
 angular.module('AngularUpstart')
-  .controller('BatchesCtrl', function ($scope, $http) {
+  .controller('BatchesCtrl', function ($scope, $http, Ability) {
     $scope.selected_batch = {};
     $http.get('/api/batches.json').
       success(function(data, status, headers, config) {
         $scope.batches = data;
       })
+
+    $scope.canCan = function(action, subject){
+      return Ability.canCan(action, subject)
+    }
 
     $scope.showModal = false;
     $scope.toggleModal = function(batchId){

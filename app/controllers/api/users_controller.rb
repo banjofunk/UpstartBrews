@@ -4,6 +4,11 @@ class Api::UsersController < Api::BaseController
     render :json => {:info => "Current User", :user => current_user}, :status => 200
   end
 
+  def ability
+    ability = Ability.new(current_user).as_json
+    render :json => ability
+  end
+
   def create
     @user = User.create(user_params)
     if @user.valid?

@@ -4,6 +4,7 @@ angular
     'templates',
     'AngularUpstart.directives',
     'sessionService',
+    'abilityService',
     'recordService'
   ])
   .config(function ($routeProvider, $locationProvider) {

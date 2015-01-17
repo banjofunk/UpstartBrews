@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :record
 
     resources :users, only: [:create]
+    match 'users/ability' => 'users#ability', :via => :get
     match '/users' => 'users#show', :via => :get
     match '/users' => 'users#update', :via => :put
     match '/users' => 'users#destroy', :via => :delete
