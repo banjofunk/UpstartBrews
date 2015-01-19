@@ -13,7 +13,8 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'bower-rails'
 gem 'angular-rails-templates'
 gem 'devise', '~> 3.2'
-gem 'cancan'
+gem 'cancancan', '~> 1.7'
+gem 'role_model'
 
 gem "therubyracer"
 gem "less-rails"

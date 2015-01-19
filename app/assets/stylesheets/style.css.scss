@@ -1,5 +1,35 @@
 body {
   background:#333 !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+
+td, th{
+  height:51px;
+  text-align:center;
+}
+
+td button {
+  width:90px;
+}
+
+nav {
+  position:absolute;
+  top:-20px;
+}
+
+.form-control{
+  width:99%;
+  text-align:center;
+}
+
+.show-reading{
+  padding-top:7px;
+  padding-right:2px;
+  width: 101px;
+}
+.edit-reading{
+  width:101px;
 }
 
 .batches_container{

@@ -1,25 +1,5 @@
-:css
-  .form-control{
-    width:99%;
-    text-align:center;
-  }
-  td, th{
-    height:51px;
-    text-align:center;
-  }
-  td button {
-    width:90px;
-  }
-  .show-reading{
-    padding-top:7px;
-    padding-right:2px;
-    width: 101px;
-  }
-  .edit-reading{
-    width:101px;
-  }
-
 %div{'ng-show' => "canCan('manage', 'Batch')"}
+  #navbar{'ng-include' => "'navbar/show.html'"}
   %br
   .row
     .col-md-12{:style => 'text-align: center;'}

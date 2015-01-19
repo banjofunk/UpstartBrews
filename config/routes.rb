@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     resources :flavors
     resources :fermenters
     match 'fermenters/sort' => 'fermenters#sort', :via => :post
+    match '/admin/users' => 'admin#users', :via => :get
+    match '/admin/users' => 'admin#update_user', :via => :put
+    match '/admin/users/:id' => 'admin#delete_user', :via => :delete
 
     devise_scope :user do
       match '/sessions' => 'sessions#create', :via => :post
@@ -17,6 +20,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:create]
     match 'users/ability' => 'users#ability', :via => :get
+    match 'users/roles' => 'users#roles', :via => :get
     match '/users' => 'users#show', :via => :get
     match '/users' => 'users#update', :via => :put
     match '/users' => 'users#destroy', :via => :delete

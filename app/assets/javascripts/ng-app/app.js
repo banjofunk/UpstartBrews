@@ -4,17 +4,16 @@ angular
     'templates',
     'AngularUpstart.directives',
     'sessionService',
-    'abilityService',
-    'recordService'
+    'abilityService'
   ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', { templateUrl: 'batches.html', controller: 'BatchesCtrl' })
       .when('/batches', { templateUrl: 'batches.html', controller: 'BatchesCtrl' })
       .when('/batches/:batchId', { templateUrl: 'batch.html', controller: 'BatchCtrl' })
-      .when('/record', {templateUrl:'record/index.html', controller:'RecordCtrl'})
       .when('/users/login', {templateUrl:'users/login.html', controller:'UsersCtrl'})
       .when('/users/register', {templateUrl:'users/register.html', controller:'UsersCtrl'})
+      .when('/admin', {templateUrl:'admin/admin.html', controller:'AdminCtrl'})
       .otherwise({ redirectTo: '/batches' });
     $locationProvider.html5Mode(true);
   })
@@ -28,6 +27,10 @@ angular
         'responseError': function (response) {
             if(response.status === 403) {
               $location.path('/users/login');
+              return response
+            }
+            if(response.status === 500 && response.data.error == "You are not authorized to access this page.") {
+              $location.path('/');
               return response
             }
             return $q.reject(response);

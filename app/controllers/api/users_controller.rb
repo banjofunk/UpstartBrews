@@ -6,7 +6,11 @@ class Api::UsersController < Api::BaseController
 
   def ability
     ability = Ability.new(current_user).as_json
-    render :json => ability
+    render :json => {:ability => ability, :roles => current_user.roles}
+  end
+
+  def roles
+    render :json => current_user.roles
   end
 
   def create

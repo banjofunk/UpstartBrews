@@ -1,12 +1,13 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
+  def initialize(current_user)
     can :create, User
     can :view, Batch
-    if user
-      can :poop, User
-      can :manage, User
+    if current_user
+      can :manage, :all if current_user.has_role?(:admin)
+      can :manage, User, :id => current_user.id
+      can :manage, :admin if current_user.has_role?(:admin)
       can :manage, Batch
       can :manage, BatchReading
     end

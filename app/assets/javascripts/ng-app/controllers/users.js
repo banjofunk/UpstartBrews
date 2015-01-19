@@ -15,8 +15,8 @@ angular.module('AngularUpstart')
         });
     };
 
-    $scope.logout = function(user) {
-
+    $scope.logout = function() {
+      Session.logout();
     };
 
     $scope.register = function(user) {
@@ -24,7 +24,6 @@ angular.module('AngularUpstart')
 
         Session.register(user.email, user.password, user.confirm_password)
             .then(function(response) {
-               console.log(response);
             }, function(response) {
                 var errors = '';
                 $.each(response.data.errors, function(index, value) {

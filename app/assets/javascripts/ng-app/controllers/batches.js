@@ -1,8 +1,8 @@
 angular.module('AngularUpstart')
   .controller('BatchesCtrl', function ($scope, $http, Ability) {
     $scope.selected_batch = {};
-    $http.get('/api/batches.json').
-      success(function(data, status, headers, config) {
+    $http.get('/api/batches.json')
+      .success(function(data, status, headers, config) {
         $scope.batches = data;
       })
 

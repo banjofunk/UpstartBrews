@@ -1,0 +1,36 @@
+%div{'ng-show' => "hasRole('admin')"}
+  #navbar{'ng-include' => "'navbar/show.html'"}
+  %br
+  .row
+    .col-md-12{:style => 'text-align: center;'}
+      %h1{style: 'color:white; font-size:48px'} Admin
+      %br
+  .row
+  %br
+    .col-md-3
+    .col-md-6
+      .well
+        .row.text-center
+          %h3
+            Users
+          %table.table
+            %thead
+              %tr
+                %th
+                  email
+                %th{"ng-repeat" => "role in all_roles"}
+                  {{role}}
+                %th
+            %tbody
+              %tr{"ng-repeat" => "user in users"}
+                %form{:role => "form"}
+                  %td
+                    {{user.email}}
+                  %td{"ng-repeat" => "role in all_roles"}
+                    %input{:type => 'checkbox',
+                           :name => '{{role}}',
+                           'ng-click' => "updateRoles(user, $event)",
+                           'ng-checked' => "user.roles.indexOf(role) > -1"}
+                      &nbsp;{{role}}
+                  %td
+                    %span.glyphicon.glyphicon-remove{'confirmed-click'=>'deleteUser(user)', "ng-confirm-click"=>"Are you sure you want to delete {{user.email}}?"}
