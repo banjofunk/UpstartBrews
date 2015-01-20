@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :batches
     resources :batch_readings
+    resources :comments
     resources :flavors
     resources :fermenters
     match 'fermenters/sort' => 'fermenters#sort', :via => :post

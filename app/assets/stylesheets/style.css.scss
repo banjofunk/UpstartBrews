@@ -18,20 +18,6 @@ nav {
   top:-20px;
 }
 
-.form-control{
-  width:99%;
-  text-align:center;
-}
-
-.show-reading{
-  padding-top:7px;
-  padding-right:2px;
-  width: 101px;
-}
-.edit-reading{
-  width:101px;
-}
-
 .batches_container{
   width:1000px;
   margin: 0 auto;
@@ -65,5 +51,96 @@ nav {
       line-height:2px;
       margin-bottom:-5px;
     }
+  }
+}
+
+.readings-container {
+  padding: 25px;
+  padding-top:0;
+
+  .form-control{
+    width:99%;
+    text-align:center;
+  }
+
+  .show-reading{
+    padding-top:7px;
+    padding-right:2px;
+    width: 88px;
+  }
+  .edit-reading{
+    width:101px;
+  }
+
+  h3 {
+    border:0 solid #efefef;
+    border-bottom-width:1px;
+    padding-bottom:10px;
+  }
+}
+
+.comments-container {
+  padding: 25px;
+  padding-top:0;
+
+  .comment-text{
+    background:#fff0 !important;
+    border:none;
+    border-bottom:1px solid #ddd;
+    text-align: left;
+    padding-bottom: 10px;
+    color:#555;
+  }
+
+  li.ui-state-default:last-child{
+    border-bottom:none;
+  }
+
+  .btn,.form-control,.well {
+    border-radius:3px;
+    box-shadow:0 0 0;
+  }
+
+  .form-control {
+    border-color:#d7d7d7;
+  }
+
+  .btn-primary {
+    border-color:transparent;
+  }
+
+  .btn-primary, .list-group-item.active:focus {
+    background-color:#4285f4;
+  }
+
+  .btn-plus {
+    background-color:#ffffff;
+    border-width:1px;
+    border-color:#dddddd;
+    box-shadow:1px 1px 0 #999999;
+    border-radius:3px;color:#666666;
+    text-shadow:0 0 1px #bbbbbb;
+  }
+
+  hr {
+    border-color:#ececec;
+  }
+
+  button {
+    outline: 0;
+  }
+
+  .btn span{
+    color:#666666;
+  }
+
+  .list-group-item:first-child,.list-group-item:last-child {
+    border-radius:0;
+  }
+
+  h3 {
+    border:0 solid #efefef;
+    border-bottom-width:1px;
+    padding-bottom:10px;
   }
 }

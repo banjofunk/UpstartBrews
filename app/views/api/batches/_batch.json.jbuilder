@@ -15,3 +15,7 @@ json.batch_reading_days_ago ((Time.now - batch.batch_readings.order("reading_dat
 json.batch_readings batch.batch_readings.order("reading_date ASC") do |batch_reading|
   json.partial! 'batch_batch_reading', batch_reading: batch_reading
 end
+
+json.comments batch.comments.order("created_at ASC") do |comment|
+  json.partial! 'api/comments/comment.json', comment: comment
+end

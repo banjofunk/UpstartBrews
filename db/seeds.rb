@@ -11,6 +11,10 @@ berry = Flavor.create(:name => 'berry black')
 mint = Flavor.create(:name => 'mint green')
 rose = Flavor.create(:name => 'rose bud')
 
+admin = User.create(:email => 'admin@bcj.com', :password => 'testeroo', :password_confirmation => 'testeroo', :roles => [:admin])
+brewer = User.create(:email => 'brewer@bcj.com', :password => 'testeroo', :password_confirmation => 'testeroo', :roles => [:brewer])
+sales = User.create(:email => 'sales@bcj.com', :password => 'testeroo', :password_confirmation => 'testeroo', :roles => [:sales])
+
 ferm_1 = Fermenter.create(:flavor_id => lemon.id,:capacity => 250, :position => 1)
 ferm_2 = Fermenter.create(:flavor_id => berry.id,:capacity => 250, :position => 2)
 ferm_3 = Fermenter.create(:flavor_id => mint.id,:capacity => 250, :position => 3)
@@ -50,4 +54,9 @@ Batch.all.each do |batch|
   batch.batch_readings.create(:ph => "3.#{rand(3..5)}".to_f.round(1), :temp => "#{rand(68..77)}".to_f.round(1), :brix => "6.#{rand(6..8)}".to_f.round(1), :reading_date => Time.now-rand(6..7).days)
   batch.batch_readings.create(:ph => "3.#{rand(2..3)}".to_f.round(1), :temp => "#{rand(68..77)}".to_f.round(1), :brix => "6.#{rand(3..6)}".to_f.round(1), :reading_date => Time.now-rand(3..5).days)
   batch.batch_readings.create(:ph => "3.#{rand(0..2)}".to_f.round(1), :temp => "#{rand(68..77)}".to_f.round(1), :brix => "6.#{rand(0..2)}".to_f.round(1), :reading_date => Time.now-rand(0..2).days)
+
+  batch.comments.create(:user_id => admin.id, :text => "this tastes funky")
+  batch.comments.create(:user_id => brewer.id, :text => "nah, it'll be fine")
+  batch.comments.create(:user_id => admin.id, :text => "theres a fuck ton of fruit flies...")
+  batch.comments.create(:user_id => sales.id, :text => "whatever. sell it to whole foods.")
 end
