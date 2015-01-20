@@ -1,36 +1,32 @@
 Rails.application.routes.draw do
 
-  devise_for :users #, :path => 'users/', :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register" }
+  devise_for :users
+  devise_scope :user do
+    post '/sessions' => 'sessions#create'
+    delete '/sessions' => 'sessions#destroy'
+  end
+
   namespace :api, defaults: {format: :json} do
+    resource :users, only: [:create, :show, :update, :destroy] do
+      get 'ability' => 'users#ability'
+      get 'roles' => 'users#roles'
+    end
+    resource :admin, only: [] do
+      get 'users' => 'admin#users'
+      put 'users' => 'admin#update_user'
+      put 'users/:id' => 'admin#delete_user'
+    end
+    resources :fermenters, only: [] do
+      post 'sort' => 'fermenters#sort'
+    end
     resources :batches do
       member do
         put :add_comment
       end
     end
-
+    resources :flavors
     resources :batch_readings
     resources :comments
-    resources :flavors
-    resources :fermenters
-    match 'fermenters/sort' => 'fermenters#sort', :via => :post
-    match '/admin/users' => 'admin#users', :via => :get
-    match '/admin/users' => 'admin#update_user', :via => :put
-    match '/admin/users/:id' => 'admin#delete_user', :via => :delete
-
-    devise_scope :user do
-      match '/sessions' => 'sessions#create', :via => :post
-      match '/sessions' => 'sessions#destroy', :via => :delete
-    end
-
-    resources :record
-
-    resources :users, only: [:create]
-    match 'users/ability' => 'users#ability', :via => :get
-    match 'users/roles' => 'users#roles', :via => :get
-    match '/users' => 'users#show', :via => :get
-    match '/users' => 'users#update', :via => :put
-    match '/users' => 'users#destroy', :via => :delete
-
   end
 
   root 'application#index'

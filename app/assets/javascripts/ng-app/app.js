@@ -40,7 +40,6 @@ angular
   }])
   .controller('AppCtrl', function($scope,$route,$location, Ability){
     $scope.$on("authLoginSuccess",function(){
-      console.log('authLoginSuccess');
       Ability.currentAbility = null;
       Ability.currentRoles = null;
       Ability.requestCurrentAbility();
