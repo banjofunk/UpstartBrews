@@ -5,8 +5,8 @@ json.flavor do |flavor|
   flavor.abv batch.flavor.name.split(/\s+/).map(&:first).join.upcase
   flavor.color "Flavor::#{batch.flavor.name.gsub(' ','_').upcase}".constantize
 end
-json.created_at batch.created_at.to_s.split(' ')[0]
-json.brew_date batch.brew_date.to_s.split(' ')[0]
+json.created_at batch.created_at.strftime("%m/%d/%Y")
+json.brew_date batch.brew_date.strftime("%m/%d/%Y")
 json.days_ago ((Time.now - batch.brew_date)/(60*60*24)).round
 json.last_ph batch.batch_readings.order("reading_date DESC").first.ph.to_f.to_s
 json.last_brix batch.batch_readings.order("reading_date DESC").first.brix.to_f.to_s

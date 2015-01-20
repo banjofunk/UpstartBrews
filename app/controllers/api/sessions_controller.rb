@@ -1,6 +1,6 @@
 class Api::SessionsController < Devise::SessionsController
   protect_from_forgery with: :null_session, :if => Proc.new { |c| c.request.format == 'application/vnd.radd.v1' }
-  prepend_before_filter :require_no_authentication, :only => [:create ]
+  prepend_before_filter :require_no_authentication, :only => [:create]
 
   def create
     warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")

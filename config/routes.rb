@@ -2,7 +2,12 @@ Rails.application.routes.draw do
 
   devise_for :users #, :path => 'users/', :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register" }
   namespace :api, defaults: {format: :json} do
-    resources :batches
+    resources :batches do
+      member do
+        put :add_comment
+      end
+    end
+
     resources :batch_readings
     resources :comments
     resources :flavors

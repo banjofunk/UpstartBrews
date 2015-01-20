@@ -1,6 +1,7 @@
 angular.module('AngularUpstart')
-  .controller('BatchesCtrl', function ($scope, $http, Ability) {
+  .controller('BatchesCtrl', function ($scope, $http, Ability, $rootScope) {
     $scope.selected_batch = {};
+    $scope.details_category = "readings";
     $http.get('/api/batches.json')
       .success(function(data, status, headers, config) {
         $scope.batches = data;
@@ -27,6 +28,10 @@ angular.module('AngularUpstart')
         error(function(data, status, headers, config) {
           alert('there was an error');
         });
+    }
+
+    $scope.detailsNav = function(category) {
+      $scope.details_category = category
     }
 
     $scope.newReading = function(reading){

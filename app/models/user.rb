@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
   ROLES = [:admin, :brewer, :sales]
   roles ROLES
 
+  def short_name
+    "#{self.first_name.capitalize} #{self.last_name.first.capitalize}."
+  end
+
 end

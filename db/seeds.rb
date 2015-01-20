@@ -11,9 +11,9 @@ berry = Flavor.create(:name => 'berry black')
 mint = Flavor.create(:name => 'mint green')
 rose = Flavor.create(:name => 'rose bud')
 
-admin = User.create(:email => 'admin@bcj.com', :password => 'testeroo', :password_confirmation => 'testeroo', :roles => [:admin])
-brewer = User.create(:email => 'brewer@bcj.com', :password => 'testeroo', :password_confirmation => 'testeroo', :roles => [:brewer])
-sales = User.create(:email => 'sales@bcj.com', :password => 'testeroo', :password_confirmation => 'testeroo', :roles => [:sales])
+admin = User.create(:email => 'admin@bcj.com', :first_name => "Brad", :last_name => "Minn", :password => 'testeroo', :password_confirmation => 'testeroo', :roles => [:admin])
+brewer = User.create(:email => 'brewer@bcj.com', :first_name => "Stew", :last_name => "Burr", :password => 'testeroo', :password_confirmation => 'testeroo', :roles => [:brewer])
+sales = User.create(:email => 'sales@bcj.com', :first_name => "Saul", :last_name => "Zimmern", :password => 'testeroo', :password_confirmation => 'testeroo', :roles => [:sales])
 
 ferm_1 = Fermenter.create(:flavor_id => lemon.id,:capacity => 250, :position => 1)
 ferm_2 = Fermenter.create(:flavor_id => berry.id,:capacity => 250, :position => 2)

@@ -1,21 +1,20 @@
-.comments-container
+.comments-container{'ng-controller' => "CommentsCtrl"}
   .row
+    %br
     .col-md-12
-      %h3 Comments
-      .text-center
-        %ul#sortable.list-unstyled
-          %li{"ng-repeat" => "comment in selected_batch.comments"}
-            %strong.pull-left.primary-font {{comment.user}}
-            %small.pull-right.text-muted
-              %span.glyphicon.glyphicon-time>
-              &nbsp;{{comment.created_at}}
-            %br
-            .comment-text {{comment.text}}
-        %hr{"data-brackets-id" => "12673"}/
-        %form{:role => "form"}
-          .input-group
-            %input#userComment.form-control.input-sm.chat-input{:placeholder => "Add your comment here...", :type => "text", "ng-model"=>"comment.text"}/
-            %span.input-group-btn{"ng-click"=>"newComment(comment)"}
-              %a.btn.btn-primary.btn-sm{:href => "#"}
-                %span.glyphicon.glyphicon-comment
-                Add Comment
+    .well.text-center
+      %ul.list-unstyled
+        %li{"ng-repeat" => "comment in selected_batch.comments"}
+          %strong.pull-left.primary-font {{comment.user}}
+          %small.pull-right.text-muted
+            %span.glyphicon.glyphicon-time>
+            &nbsp;{{comment.created_at}}
+          %br
+          .comment-text {{comment.text}}
+      %hr
+      %form{:role => "form"}
+        .input-group
+          %input#userComment.form-control.input-lg.chat-input{:placeholder => "Your comment here...", :type => "text", "ng-model"=>"comment.text"}/
+          %span.input-group-btn
+            %a.btn.btn-primary.btn-lg{:href => "#", "ng-click"=>"newComment(comment, selected_batch)"}
+              Add Comment

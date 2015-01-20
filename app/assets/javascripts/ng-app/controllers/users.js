@@ -1,17 +1,18 @@
 angular.module('AngularUpstart')
-  .controller('UsersCtrl', function ($scope, Session) {
+  .controller('UsersCtrl', function ($scope, Session, Ability) {
     $scope.login = function(user) {
         $scope.authError = null;
 
         Session.login(user.email, user.password)
-        .then(function(response) {
+        .success(function(response) {
             if (!response) {
                 $scope.authError = 'Credentials are not valid';
             } else {
                 $scope.authError = 'Success!';
             }
-        }, function(response) {
-            $scope.authError = 'Server offline, please try later';
+        })
+        .error(function(response) {
+            $scope.authError = response.data.error || 'Server offline, please try later';
         });
     };
 
@@ -22,7 +23,7 @@ angular.module('AngularUpstart')
     $scope.register = function(user) {
         $scope.authError = null;
 
-        Session.register(user.email, user.password, user.confirm_password)
+        Session.register(user.first_name, user.last_name, user.email, user.password, user.confirm_password)
             .then(function(response) {
             }, function(response) {
                 var errors = '';

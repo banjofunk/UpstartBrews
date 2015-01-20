@@ -1,5 +1,5 @@
 class Api::BatchesController < ApplicationController
-  before_action :set_batch, only: [:show, :edit, :update, :destroy]
+  before_action :set_batch, only: [:show, :edit, :update, :destroy, :add_comment]
   load_and_authorize_resource
 
 
@@ -16,6 +16,11 @@ class Api::BatchesController < ApplicationController
 
   def new
     @batch = Batch.new
+  end
+
+  def add_comment
+    comment = @batch.comments.create(:user => current_user, :text => params[:text])
+    render :partial => "api/comments/comment.json", :locals => { :comment => comment }
   end
 
   def edit

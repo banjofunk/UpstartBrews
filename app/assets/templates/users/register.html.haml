@@ -43,6 +43,18 @@
             %form.auth-form{:name => "registrationForm"}
               .row
                 .col-md-2
+                  %label{:for => 'first_name'}
+                    %span.pull-right first&nbsp;name:
+                .col-md-10.text-left
+                  %input.input-block-level.form-control.new_user{:autofocus => "", "ng-model" => "user.first_name", :placeholder => "Joe", :required => "required", :type => "text", :style => 'text-align:left;'}
+              .row
+                .col-md-2
+                  %label{:for => 'last_name'}
+                    %span.pull-right last&nbsp;name:
+                .col-md-10.text-left
+                  %input.input-block-level.form-control.new_user{:autofocus => "", "ng-model" => "user.last_name", :placeholder => "Schmoe", :required => "required", :type => "text", :style => 'text-align:left;'}
+              .row
+                .col-md-2
                   %label{:for => 'email'}
                     %span.pull-right email:
                 .col-md-10.text-left

@@ -92,6 +92,13 @@ nav {
     color:#555;
   }
 
+  li {
+    margin-top:10px;
+    &:first-child {
+      margin-top:0px;
+    }
+  }
+
   li.ui-state-default:last-child{
     border-bottom:none;
   }

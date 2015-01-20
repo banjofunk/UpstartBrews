@@ -19,7 +19,21 @@
         %b
           brewed: {{selected_batch.brew_date}}
     .modal-body
-      #readings{'ng-include' => "'partials/readings.html'"}
-      #comments{'ng-include' => "'partials/comments.html'"}
+
+      %ul.nav.nav-tabs
+        %li{:role => "batch_details", 'ng-click' => 'detailsNav("readings")', 'ng-class' => '{active: details_category=="readings"}'}
+          %a{:href => "#"} Readings
+        %li{:role => "batch_details", 'ng-click' => 'detailsNav("packaging")', 'ng-class' => '{active: details_category=="packaging"}'}
+          %a{:href => "#"} Packaging
+        %li{:role => "batch_details", 'ng-click' => 'detailsNav("comments")', 'ng-class' => '{active: details_category=="comments"}'}
+          %a{:href => "#"} Comments
+
+
+      .batch-details{'ng-show' => 'details_category == "readings"'}
+        #readings{'ng-include' => "'partials/readings.html'"}
+      .batch-details{'ng-show' => 'details_category == "packaging"'}
+        #packaging{'ng-include' => "'partials/packaging.html'"}
+      .batch-details{'ng-show' => 'details_category == "comments"'}
+        #comments{'ng-include' => "'partials/comments.html'"}
 
 

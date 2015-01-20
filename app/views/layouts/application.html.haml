@@ -6,7 +6,7 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  %body{"ng-app" => "AngularUpstart"}
+  %body{"ng-app" => "AngularUpstart", "ng-controller" => 'AppCtrl'}
     %span.notice= notice
     %span.alert= alert
     = yield

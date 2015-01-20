@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150119155728) do
+ActiveRecord::Schema.define(version: 20150120180418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "aerations", force: true do |t|
+    t.integer  "batch_id"
+    t.datetime "started"
+    t.datetime "stopped"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "batch_readings", force: true do |t|
     t.integer  "batch_id"
@@ -31,6 +39,14 @@ ActiveRecord::Schema.define(version: 20150119155728) do
     t.integer  "fermenter_id"
     t.integer  "state"
     t.datetime "brew_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "circulations", force: true do |t|
+    t.integer  "batch_id"
+    t.datetime "started"
+    t.datetime "stopped"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -61,6 +77,8 @@ ActiveRecord::Schema.define(version: 20150119155728) do
   end
 
   create_table "users", force: true do |t|
+    t.string   "first_name",             default: "", null: false
+    t.string   "last_name",              default: "", null: false
     t.integer  "roles_mask",             default: 0
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -82,5 +100,13 @@ ActiveRecord::Schema.define(version: 20150119155728) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "ventilations", force: true do |t|
+    t.integer  "batch_id"
+    t.datetime "started"
+    t.datetime "stopped"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
