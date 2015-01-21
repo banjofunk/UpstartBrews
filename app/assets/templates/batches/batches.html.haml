@@ -10,9 +10,9 @@
     .col-md-10
       #batches{'ng-include' => "'batches/_batches.html'"}
 
-  %modal{:title => '{{selected_batch.flavor.name}}', :visible => "showModal"}
+  %modal{:title => '{{selected_batch.flavor.name}}', :visible => "$parent.showModal"}
     .modal-header
-      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button", 'ng-click' => 'hideModal()'} ×
       %h2.modal-title{style: 'display:inline;'}
         {{selected_batch.flavor.name}}
       %span
