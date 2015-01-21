@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  devise_scope :user do
-    post '/sessions' => 'sessions#create'
-    delete '/sessions' => 'sessions#destroy'
-  end
 
   namespace :api, defaults: {format: :json} do
+    devise_scope :user do
+      post '/sessions' => 'sessions#create'
+      delete '/sessions' => 'sessions#destroy'
+    end
     resource :users, only: [:create, :show, :update, :destroy] do
       get 'ability' => 'users#ability'
       get 'roles' => 'users#roles'
@@ -14,11 +14,9 @@ Rails.application.routes.draw do
     resource :admin, only: [] do
       get 'users' => 'admin#users'
       put 'users' => 'admin#update_user'
-      put 'users/:id' => 'admin#delete_user'
+      delete 'users/:id' => 'admin#delete_user'
     end
-    resources :fermenters, only: [] do
-      post 'sort' => 'fermenters#sort'
-    end
+    match 'fermenters/sort' => 'fermenters#sort', :via => 'post'
     resources :batches do
       member do
         put :add_comment

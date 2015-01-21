@@ -1,3 +1,3 @@
 json.array! @batches do |batch|
-  json.partial! 'batch', batch: batch
+  json.partial! '/api/batches/batch', batch: batch
 end

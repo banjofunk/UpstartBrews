@@ -20,6 +20,10 @@ angular.module('AngularUpstart')
       $scope.showModal = !$scope.showModal;
     };
 
+    $scope.hideModal = function() {
+      $scope.showModal = false;
+    }
+
     $scope.postSort = function(sort){
       $http.post('/api/fermenters/sort', { sort: sort }).
         success(function(data, status, headers, config) {

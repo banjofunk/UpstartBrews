@@ -13,7 +13,7 @@ json.last_brix batch.batch_readings.order("reading_date DESC").first.brix.to_f.t
 json.batch_reading_days_ago ((Time.now - batch.batch_readings.order("reading_date DESC").first.reading_date)/(60*60*24)).round
 
 json.batch_readings batch.batch_readings.order("reading_date ASC") do |batch_reading|
-  json.partial! 'batch_batch_reading', batch_reading: batch_reading
+  json.partial! 'api/batches/batch_batch_reading', batch_reading: batch_reading
 end
 
 json.comments batch.comments.order("created_at ASC") do |comment|

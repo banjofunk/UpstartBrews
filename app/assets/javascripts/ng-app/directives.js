@@ -57,6 +57,7 @@ angular.module('AngularUpstart.directives', [])
         $(element).on('hidden.bs.modal', function(){
           scope.$apply(function(){
             scope.$parent[attrs.visible] = false;
+            scope.hideModal();
           });
         });
       }
