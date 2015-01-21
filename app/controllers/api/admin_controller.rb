@@ -2,7 +2,7 @@ class Api::AdminController < Api::BaseController
 
   def users
     authorize!(:manage, :admin)
-    @users = User.all.order(:email)
+    @users = User.active.order(:email)
   end
 
   def update_user
@@ -16,7 +16,8 @@ class Api::AdminController < Api::BaseController
   def delete_user
     authorize!(:manage, :admin)
     user = User.find(params[:id])
-    user.delete
+    user.active = false
+    user.save
     render :json => {:success => true}
   end
 

@@ -1,4 +1,4 @@
-%div{'ng-show' => "canCan('manage', 'Batch')"}
+%div{'ng-if' => "canCan('manage', 'Batch')"}
   #navbar{'ng-include' => "'navbar/show.html'"}
   %br
   .row
@@ -8,7 +8,7 @@
   .row
     .col-md-1
     .col-md-10
-      #batches{'ng-include' => "'partials/batches.html'"}
+      #batches{'ng-include' => "'batches/_batches.html'"}
 
   %modal{:title => '{{selected_batch.flavor.name}}', :visible => "showModal"}
     .modal-header
@@ -30,10 +30,10 @@
 
 
       .batch-details{'ng-show' => 'details_category == "readings"'}
-        #readings{'ng-include' => "'partials/readings.html'"}
+        #readings{'ng-include' => "'batches/_readings.html'"}
       .batch-details{'ng-show' => 'details_category == "packaging"'}
-        #packaging{'ng-include' => "'partials/packaging.html'"}
+        #packaging{'ng-include' => "'batches/_packaging.html'"}
       .batch-details{'ng-show' => 'details_category == "comments"'}
-        #comments{'ng-include' => "'partials/comments.html'"}
+        #comments{'ng-include' => "'batches/_comments.html'"}
 
 

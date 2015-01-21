@@ -8,13 +8,13 @@ angular
   ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
-      .when('/', { templateUrl: 'batches.html', controller: 'BatchesCtrl' })
-      .when('/batches', { templateUrl: 'batches.html', controller: 'BatchesCtrl' })
-      .when('/batches/:batchId', { templateUrl: 'batch.html', controller: 'BatchCtrl' })
+      .when('/', { templateUrl: 'batches/batches.html', controller: 'BatchesCtrl' })
+      .when('/batches', { templateUrl: 'batches/batches.html', controller: 'BatchesCtrl' })
+      .when('/batches/:batchId', { templateUrl: 'batches/batch.html', controller: 'BatchCtrl' })
       .when('/users/login', {templateUrl:'users/login.html', controller:'UsersCtrl'})
       .when('/users/register', {templateUrl:'users/register.html', controller:'UsersCtrl'})
       .when('/admin', {templateUrl:'admin/admin.html', controller:'AdminCtrl'})
-      .otherwise({ redirectTo: '/batches' });
+      .otherwise({ redirectTo: '/' });
     $locationProvider.html5Mode(true);
   })
   .config(['$httpProvider', function($httpProvider){
