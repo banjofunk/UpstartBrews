@@ -1,5 +1,6 @@
 angular.module('AngularUpstart')
-  .controller('AdminCtrl', function ($scope, Session, $http, Ability) {
+  .controller('AdminCtrl', function ($scope, Session, $http, Ability, Alert) {
+    $scope.errors = [];
     $http.get('/api/admin/users.json')
       .success(function(data, status, headers, config) {
         $scope.users = data.users;
@@ -23,7 +24,7 @@ angular.module('AngularUpstart')
           return true
         }).
         error(function(data, status, headers, config) {
-          alert('there was an error');
+          Alert.add("error", 'sorry, you are not authorized to update user roles', 4000);
         });
 
     }
@@ -37,7 +38,7 @@ angular.module('AngularUpstart')
           return true
         }).
         error(function(data, status, headers, config) {
-          alert('there was an error');
+          Alert.add("error", 'sorry, you are not authorized to delete users', 4000);
         });
     }
 

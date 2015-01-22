@@ -16,6 +16,14 @@ td button {
 nav {
   position:absolute;
   top:-20px;
+  margin-bottom:0;
+}
+.alert.alert-danger {
+  position:relative;
+  top:-30px;
+  text-align:center;
+  margin:10px;
+  margin-top:0;
 }
 
 .batches_container{

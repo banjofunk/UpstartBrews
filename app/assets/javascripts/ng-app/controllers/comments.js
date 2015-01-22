@@ -1,5 +1,6 @@
 angular.module('AngularUpstart')
   .controller('CommentsCtrl', function ($scope, $location, Session, Ability, $http) {
+    $scope.errors = [];
 
     $scope.newComment = function(comment, batch) {
       $http.put('/api/batches/' + batch.id + '/add_comment', {
@@ -11,7 +12,7 @@ angular.module('AngularUpstart')
           return true
         }).
         error(function(data, status, headers, config) {
-          alert('there was an error');
+          $scope.errors.push('sorry, you are not authorized to add a comment');
         });
     };
 

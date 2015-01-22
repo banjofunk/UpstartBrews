@@ -1,5 +1,7 @@
-%div{'ng-if' => "canCan('manage', 'Batch')"}
-  #navbar{'ng-include' => "'navbar/show.html'"}
+#navbar{'ng-include' => "'navbar/show.html'"}
+%alerts
+
+%div{'ng-if' => "canCan('read', 'Batch')"}
   %br
   .row
     .col-md-12{:style => 'text-align: center;'}

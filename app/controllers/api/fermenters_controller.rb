@@ -1,5 +1,5 @@
 class Api::FermentersController < ApplicationController
-
+  load_and_authorize_resource
 
   def sort
     sort = params['sort']

@@ -1,5 +1,6 @@
 angular.module('AngularUpstart')
-  .controller('BatchesCtrl', function ($scope, $http, Ability, $rootScope) {
+  .controller('BatchesCtrl', function ($scope, $http, Ability, Alert) {
+    $scope.errors = [];
     $scope.selected_batch = {};
     $scope.details_category = "readings";
     $http.get('/api/batches.json')
@@ -30,7 +31,7 @@ angular.module('AngularUpstart')
           return true
         }).
         error(function(data, status, headers, config) {
-          alert('there was an error');
+          Alert.add("error", 'sorry, you are not authorized to re-order the tanks', 4000);
         });
     }
 
@@ -50,7 +51,7 @@ angular.module('AngularUpstart')
           $scope.selected_batch.batch_readings.push(data)
         }).
         error(function(data, status, headers, config) {
-          alert('there was an error');
+          Alert.add("error", 'sorry, you are not authorized to create new readings', 4000);
         });
     }
 
@@ -66,7 +67,7 @@ angular.module('AngularUpstart')
           return true
         }).
         error(function(data, status, headers, config) {
-          alert('there was an error');
+          Alert.add("error", 'sorry, you are not authorized to edit readings', 4000);
         });
 
     }
@@ -77,7 +78,7 @@ angular.module('AngularUpstart')
           $scope.selected_batch.batch_readings.pop(data)
         }).
         error(function(data, status, headers, config) {
-          alert('there was an error');
+          Alert.add("error", 'sorry, you are not authorized to delete readings', 4000);
         });
     }
 

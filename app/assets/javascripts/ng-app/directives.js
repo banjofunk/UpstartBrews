@@ -4,15 +4,20 @@
  */
 angular.module('AngularUpstart.directives', [])
   .directive('uiSortable', function() {
-    return function(scope, element, attrs){
-      element.sortable({
-        grid: [ 3, 3 ],
-        update: function(event, ui){
-          var sort = element.sortable('toArray');
-          scope.postSort(sort)
+    return {
+      restrict: 'C',
+      link: function(scope, element, attrs){
+        if(scope.canCan('manage', 'Batch')){
+          element.sortable({
+            grid: [ 3, 3 ],
+            update: function(event, ui){
+              var sort = element.sortable('toArray');
+              scope.postSort(sort)
+            }
+          })
         }
-      });
-    };
+      }
+    }
   })
   .directive('toggleEdit', [
     function(){
@@ -24,6 +29,15 @@ angular.module('AngularUpstart.directives', [])
             $(event.target).parents('tr').children('td').children('.show-reading').toggle();
           });
         }
+      };
+  }])
+  .directive('alerts', [
+    function(){
+      return {
+        restrict: 'E',
+        template: "<div class='alert alert-danger' role='alert' ng-repeat='alert in alerts' type='alert.type'>" +
+        "{{alert.msg}}" +
+        "<span class='glyphicon glyphicon-remove pull-right' style='cursor: pointer;' ng-click='alert.close()'></span></div>"
       };
   }])
   .directive('modal', function () {

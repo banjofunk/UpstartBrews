@@ -4,7 +4,8 @@ angular
     'templates',
     'AngularUpstart.directives',
     'sessionService',
-    'abilityService'
+    'abilityService',
+    'alertService'
   ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -26,8 +27,7 @@ angular
         },
         'responseError': function (response) {
             if(response.status === 403) {
-              $location.path('/users/login');
-              return response
+              return $q.reject(response);
             }
             if(response.status === 500 && response.data.error == "You are not authorized to access this page.") {
               $location.path('/');

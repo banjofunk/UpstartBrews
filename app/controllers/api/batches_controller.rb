@@ -1,6 +1,6 @@
 class Api::BatchesController < ApplicationController
   before_action :set_batch, only: [:show, :edit, :update, :destroy, :add_comment]
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:add_comment]
 
 
   def index

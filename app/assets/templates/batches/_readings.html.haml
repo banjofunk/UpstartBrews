@@ -37,7 +37,7 @@
               .edit-reading{:style => 'display:none;'}
                 %input.form-control.edit_reading{:placeholder => "temp", "ng-model"=>"reading.temp"}
             %td
-              .show-reading
+              .show-reading{'ng-if' => 'canCan("manage", "BatchReading")'}
                 %a.toggle-edit
                   %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-pencil"}
                 &nbsp;&nbsp;|&nbsp;&nbsp;
@@ -47,7 +47,7 @@
                 %a.toggle-edit{'ng-click'=>'editReading(reading)'}
                   %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-ok-circle"}
 
-          %tr
+          %tr{'ng-if' => 'canCan("manage", "BatchReading")'}
             %form{:role => "form"}
               %td
               %td

@@ -5,10 +5,16 @@ angular.module('abilityService', [])
           if(service.currentAbility){
             var can, ability;
             ability = service.currentAbility
-            if (ability['manage']['all'] || ability['manage'][subject] || ability[action]['all'] ) {
+            can = false
+
+            // admin or manager
+            if (ability['manage']['all'] || ability['manage'][subject]) {
               can = true
-            } else {
-              can = ability[action][subject] || false
+            }
+
+            // specific action
+            if (ability[action] && (ability[action]['all'] || ability[action][subject])) {
+              can = true
             }
             return can
           }else{

@@ -3,13 +3,26 @@ class Ability
 
   def initialize(current_user)
     can :create, User
-    can :view, Batch
     if current_user
-      can :manage, :all if current_user.has_role?(:admin)
+      can :read, Batch
       can :manage, User, :id => current_user.id
-      can :manage, :admin if current_user.has_role?(:admin)
-      can :manage, Batch
-      can :manage, BatchReading
+
+      if current_user.has_role?(:admin)
+        can :manage, :all
+        can :manage, :admin
+      end
+
+      if current_user.has_role?(:brewer)
+        can :manage, Fermenter
+        can :manage, Batch
+        can :manage, BatchReading
+      end
+
+      if current_user.has_role?(:sales)
+        can :read, Fermenter
+        can :read, Batch
+        can :read, BatchReading
+      end
     end
   end
 
