@@ -12,8 +12,8 @@
             %th
             %th
               %form{:role => "form"}
-                %button{:type=>"submit", :class=>"btn btn-primary", "ng-click"=>"startProcess('ventilation')", 'ng-show'=>'!selected_batch.ventilating'} Start
-                %button{:type=>"submit", :class=>"btn btn-danger", "ng-click"=>"stopProcess('ventilation')", 'ng-show'=>'selected_batch.ventilating'} Stop
+                %button{:type=>"submit", :class=>"btn btn-primary", "ng-click"=>"startProcess(selected_batch.id, 'ventilation')", 'ng-show'=>'!selected_batch.ventilation_on'} Start
+                %button{:type=>"submit", :class=>"btn btn-danger", "ng-click"=>"v=selected_batch.ventilation;stopProcess(v[v.length-1])", 'ng-show'=>'selected_batch.ventilation_on'} Stop
           %tr
             %th
               started
@@ -23,33 +23,30 @@
               duration
             %th
         %tbody
-          %tr{"ng-repeat" => "ventilation in selected_batch.ventilations"}
+          %tr{"ng-repeat" => "ventilation in selected_batch.ventilation"}
             %td
-              .show-ventilation
+              .show-process
                 {{ventilation.started}}
-              .edit-ventilation{:style => 'display:none;'}
+              .edit-process{:style => 'display:none;'}
                 %input.form-control.edit_ventilation{:placeholder => "started", "ng-model"=>"ventilation.started"}
             %td
-              .show-ventilation
+              .show-process
                 {{ventilation.stopped || "ventilating..."}}
-              .edit-ventilation{:style => 'display:none;'}
+              .edit-process{:style => 'display:none;'}
                 %input.form-control.edit_ventilation{:placeholder => "stopped", "ng-model"=>"ventilation.stopped"}
             %td
-              .show-ventilation
-                {{ventilation.duration}}
-              .edit-ventilation{:style => 'display:none;'}
-                %input.form-control.edit_ventilation{:placeholder => "stopped", "ng-model"=>"ventilation.duration"}
+              {{ventilation.duration}}
             %td
-              .show-ventilation
-                %a.toggle-edit
+              .show-process
+                %a.toggle-process
                   %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-pencil"}
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                %a{'confirmed-click'=>'removeventilation(ventilation.id)', "ng-confirm-click"=>"Are you sure you want to delete?"}
+                %a{'confirmed-click'=>'removeProcess(ventilation)', "ng-confirm-click"=>"Are you sure you want to delete?"}
                   %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-remove-circle"}
-              .edit-ventilation{:style => 'display:none;'}
-                %a.toggle-edit{'ng-click'=>'editventilation(ventilation)'}
+              .edit-process{:style => 'display:none;'}
+                %a.toggle-process{'ng-click'=>'editProcess(ventilation)'}
                   %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-ok-circle"}
-          %tr{"ng-show"=>"!selected_batch.ventilations.length"}
+          %tr{"ng-show"=>"!selected_batch.ventilation.length"}
             %td
             %td
               No ventilation so far...
@@ -66,8 +63,8 @@
             %th
             %th
               %form{:role => "form"}
-                %button{:type=>"submit", :class=>"btn btn-primary", "ng-click"=>"startProcess('circulation')", 'ng-show'=>'!circulating'} Start
-                %button{:type=>"submit", :class=>"btn btn-danger", "ng-click"=>"stopProcess('circulation')", 'ng-show'=>'circulating'} Stop
+                %button{:type=>"submit", :class=>"btn btn-primary", "ng-click"=>"startProcess(selected_batch.id, 'circulation')", 'ng-show'=>'!selected_batch.circulation_on'} Start
+                %button{:type=>"submit", :class=>"btn btn-danger", "ng-click"=>"c=selected_batch.circulation;stopProcess(c[c.length-1])", 'ng-show'=>'selected_batch.circulation_on'} Stop
           %tr
             %th
               started
@@ -77,33 +74,30 @@
               duration
             %th
         %tbody
-          %tr{"ng-repeat" => "circulation in selected_batch.circulations"}
+          %tr{"ng-repeat" => "circulation in selected_batch.circulation"}
             %td
-              .show-circulation
+              .show-process
                 {{circulation.started}}
-              .edit-circulation{:style => 'display:none;'}
+              .edit-process{:style => 'display:none;'}
                 %input.form-control.edit_circulation{:placeholder => "started", "ng-model"=>"circulation.started"}
             %td
-              .show-circulation
+              .show-process
                 {{circulation.stopped || "circulating..."}}
-              .edit-circulation{:style => 'display:none;'}
+              .edit-process{:style => 'display:none;'}
                 %input.form-control.edit_circulation{:placeholder => "stopped", "ng-model"=>"circulation.stopped"}
             %td
-              .show-circulation
-                {{circulation.duration}}
-              .edit-circulation{:style => 'display:none;'}
-                %input.form-control.edit_circulation{:placeholder => "stopped", "ng-model"=>"circulation.duration"}
+              {{circulation.duration}}
             %td
-              .show-circulation
-                %a.toggle-edit
+              .show-process
+                %a.toggle-process
                   %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-pencil"}
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                %a{'confirmed-click'=>'removecirculation(circulation.id)', "ng-confirm-click"=>"Are you sure you want to delete?"}
+                %a{'confirmed-click'=>'removeProcess(circulation)', "ng-confirm-click"=>"Are you sure you want to delete?"}
                   %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-remove-circle"}
-              .edit-circulation{:style => 'display:none;'}
-                %a.toggle-edit{'ng-click'=>'editcirculation(circulation)'}
+              .edit-process{:style => 'display:none;'}
+                %a.toggle-process{'ng-click'=>'editProcess(circulation)'}
                   %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-ok-circle"}
-          %tr{"ng-show"=>"!selected_batch.circulations.length"}
+          %tr{"ng-show"=>"!selected_batch.circulation.length"}
             %td
             %td
               No circulation so far...
@@ -120,8 +114,8 @@
             %th
             %th
               %form{:role => "form"}
-                %button{:type=>"submit", :class=>"btn btn-primary", "ng-click"=>"startProcess('aeration')", 'ng-show'=>'!aerating'} Start
-                %button{:type=>"submit", :class=>"btn btn-danger", "ng-click"=>"stopProcess('aeration')", 'ng-show'=>'aerating'} Stop
+                %button{:type=>"submit", :class=>"btn btn-primary", "ng-click"=>"startProcess(selected_batch.id, 'aeration')", 'ng-show'=>'!selected_batch.aeration_on'} Start
+                %button{:type=>"submit", :class=>"btn btn-danger", "ng-click"=>"a=selected_batch.aeration;stopProcess(a[a.length-1])", 'ng-show'=>'selected_batch.aeration_on'} Stop
           %tr
             %th
               started
@@ -131,33 +125,30 @@
               duration
             %th
         %tbody
-          %tr{"ng-repeat" => "aeration in selected_batch.aerations"}
+          %tr{"ng-repeat" => "aeration in selected_batch.aeration"}
             %td
-              .show-aeration
+              .show-process
                 {{aeration.started}}
-              .edit-aeration{:style => 'display:none;'}
+              .edit-process{:style => 'display:none;'}
                 %input.form-control.edit_aeration{:placeholder => "started", "ng-model"=>"aeration.started"}
             %td
-              .show-aeration
+              .show-process
                 {{aeration.stopped || "aerating..."}}
-              .edit-aeration{:style => 'display:none;'}
+              .edit-process{:style => 'display:none;'}
                 %input.form-control.edit_aeration{:placeholder => "stopped", "ng-model"=>"aeration.stopped"}
             %td
-              .show-aeration
-                {{aeration.duration}}
-              .edit-aeration{:style => 'display:none;'}
-                %input.form-control.edit_aeration{:placeholder => "stopped", "ng-model"=>"aeration.duration"}
+              {{aeration.duration}}
             %td
-              .show-aeration
-                %a.toggle-edit
+              .show-process
+                %a.toggle-process
                   %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-pencil"}
                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                %a{'confirmed-click'=>'removeaeration(aeration.id)', "ng-confirm-click"=>"Are you sure you want to delete?"}
+                %a{'confirmed-click'=>'removeProcess(aeration)', "ng-confirm-click"=>"Are you sure you want to delete?"}
                   %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-remove-circle"}
-              .edit-aeration{:style => 'display:none;'}
-                %a.toggle-edit{'ng-click'=>'editaeration(aeration)'}
+              .edit-process{:style => 'display:none;'}
+                %a.toggle-process{'ng-click'=>'editProcess(aeration)'}
                   %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-ok-circle"}
-          %tr{"ng-show"=>"!selected_batch.aerations.length"}
+          %tr{"ng-show"=>"!selected_batch.aeration.length"}
             %td
             %td
               No aeration so far...

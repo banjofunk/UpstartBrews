@@ -64,9 +64,17 @@ nav {
 
 .fermentation-container {
   table {
-    td, th{
-      height:30px;
-      text-align:center;
+    tr{
+      td, th{
+        height:40px;
+        margin-left:10px;
+        text-align:center;
+        padding-top:10px;
+        input {
+          height:30px;
+          width:150px;
+        }
+      }
     }
   }
 }

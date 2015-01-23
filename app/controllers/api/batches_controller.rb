@@ -1,6 +1,6 @@
 class Api::BatchesController < ApplicationController
   include ActionView::Helpers::DateHelper
-  before_action :set_batch, only: [:show, :edit, :update, :destroy, :add_comment, :start_process, :end_process]
+  before_action :set_batch, only: [:show, :edit, :update, :destroy, :add_comment]
   load_and_authorize_resource :except => [:add_comment]
 
 
@@ -36,13 +36,6 @@ class Api::BatchesController < ApplicationController
   def add_comment
     comment = @batch.comments.create(:user => current_user, :text => params[:text])
     render :partial => "api/comments/comment.json", :locals => { :comment => comment }
-  end
-
-  def start_batch_process
-    console.log(params[:process])
-  end
-
-  def end_batch_process
   end
 
   private

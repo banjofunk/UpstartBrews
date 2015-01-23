@@ -35,7 +35,11 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    render :text => "not authorized", :status => 403, :layout => false
+    if current_user
+      render :text => "not authorized", :status => 403, :layout => false
+    else
+      render :text => "sign in", :status => 403, :layout => false
+    end
   end
 
 end

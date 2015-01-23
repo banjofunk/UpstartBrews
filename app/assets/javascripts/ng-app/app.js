@@ -20,13 +20,20 @@ angular
   })
   .config(['$httpProvider', function($httpProvider){
     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
-    $httpProvider.interceptors.push(function ($q, $location) {
+    $httpProvider.interceptors.push(function ($q, $location, Alert) {
       return {
         'response': function (response) {
           return response;
         },
         'responseError': function (response) {
             if(response.status === 403) {
+              if (response.data == "not authorized") {
+                Alert.add('error', 'sorry, you are not authorized to view this page', 8000)
+                $location.path('/');
+              } else if (response.data == 'sign in') {
+                Alert.add('error', 'Please sign in.', 8000)
+                $location.path('/users/login');
+              }
               return $q.reject(response);
             }
             if(response.status === 500 && response.data.error == "You are not authorized to access this page.") {

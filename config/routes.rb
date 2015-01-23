@@ -20,8 +20,12 @@ Rails.application.routes.draw do
     resources :batches do
       member do
         put :add_comment
-        post :start_process
-        post :end_process
+        resource :batch_processes, only: [:delete] do
+          post :start_batch_process
+          post :end_batch_process
+          delete ':process_id' => 'batch_processes#destroy'
+          put ':process_id' => 'batch_processes#update'
+        end
       end
     end
     resources :flavors

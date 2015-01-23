@@ -31,6 +31,18 @@ angular.module('AngularUpstart.directives', [])
         }
       };
   }])
+  .directive('toggleProcess', [
+    function(){
+      return {
+        restrict: 'C',
+        link: function (scope, element, attr) {
+          element.bind('click',function (event) {
+            $(event.target).parents('tr').children('td').children('.edit-process').toggle();
+            $(event.target).parents('tr').children('td').children('.show-process').toggle();
+          });
+        }
+      };
+  }])
   .directive('alerts', [
     function(){
       return {

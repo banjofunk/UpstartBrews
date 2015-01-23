@@ -18,7 +18,7 @@ class Api::BatchReadingsController < ApplicationController
   end
 
   def create
-    params[:batch_reading][:reading_date] = Time.now
+    params[:batch_reading][:reading_date] = Time.current
     @batch_reading = BatchReading.new(params[:batch_reading])
     @batch_reading.save
     render :partial => "api/batch_readings/batch_reading.json", :locals => { :batch_reading => @batch_reading }
