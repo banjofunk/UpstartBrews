@@ -44,4 +44,12 @@ angular
       Ability.currentRoles = null;
       Ability.requestCurrentAbility();
     });
+
+    $scope.canCan = function(action, subject){
+      return Ability.canCan(action, subject)
+    }
+
+    $scope.hasRole = function(role){
+      return Ability.hasRole(role)
+    };
   })

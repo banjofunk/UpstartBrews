@@ -19,3 +19,17 @@ end
 json.comments batch.comments.order("created_at ASC") do |comment|
   json.partial! 'api/comments/comment.json', comment: comment
 end
+
+json.ventilating batch.ventilations.where(:stopped => nil).where.not(:started => nil).count > 0
+json.ventilations batch.ventilations.order("created_at ASC") do |ventilation|
+  json.partial! 'api/fermentation/ventilation.json', ventilation: ventilation
+end
+json.circulating batch.circulations.where(:stopped => nil).where.not(:started => nil).count > 0
+json.circulations batch.circulations.order("created_at ASC") do |circulation|
+  json.partial! 'api/fermentation/circulation.json', circulation: circulation
+end
+
+json.aerating batch.aerations.where(:stopped => nil).where.not(:started => nil).count > 0
+json.aerations batch.aerations.order("created_at ASC") do |aeration|
+  json.partial! 'api/fermentation/aeration.json', aeration: aeration
+end

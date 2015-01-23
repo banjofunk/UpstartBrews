@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     resources :batches do
       member do
         put :add_comment
+        post :start_process
+        post :end_process
       end
     end
     resources :flavors

@@ -7,10 +7,6 @@ angular.module('AngularUpstart')
         $scope.all_roles = data.all_roles;
       })
 
-    $scope.hasRole = function(role){
-      return Ability.hasRole(role)
-    };
-
     $scope.updateRoles = function(user, $event) {
       var index = user.roles.indexOf($event.target.name);
       if (index == -1){

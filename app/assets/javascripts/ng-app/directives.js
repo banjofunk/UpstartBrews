@@ -65,6 +65,8 @@ angular.module('AngularUpstart.directives', [])
         $(element).on('shown.bs.modal', function(){
           scope.$apply(function(){
             scope.$parent[attrs.visible] = true;
+            $('.modal .modal-body').css('overflow-y', 'auto');
+            $('.modal .modal-body').css('max-height', $(window).height() * 0.8);
           });
         });
 

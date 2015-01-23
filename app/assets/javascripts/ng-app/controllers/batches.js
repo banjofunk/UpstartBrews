@@ -8,10 +8,6 @@ angular.module('AngularUpstart')
         $scope.batches = data;
       })
 
-    $scope.canCan = function(action, subject){
-      return Ability.canCan(action, subject)
-    }
-
     $scope.showModal = false;
     $scope.toggleModal = function(batchId){
       $http.get('/api/batches/' + batchId + '.json').
@@ -20,7 +16,6 @@ angular.module('AngularUpstart')
         })
       $scope.showModal = !$scope.showModal;
     };
-
     $scope.hideModal = function() {
       $scope.showModal = false;
     }
@@ -37,49 +32,6 @@ angular.module('AngularUpstart')
 
     $scope.detailsNav = function(category) {
       $scope.details_category = category
-    }
-
-    $scope.newReading = function(reading){
-      $http.post('/api/batch_readings', {
-        ph: reading.ph,
-        brix: reading.brix,
-        temp: reading.temp,
-        batch_id: $scope.selected_batch.id
-      }).
-        success(function(data, status, headers, config) {
-          $('.new_reading').val('');
-          $scope.selected_batch.batch_readings.push(data)
-        }).
-        error(function(data, status, headers, config) {
-          Alert.add("error", 'sorry, you are not authorized to create new readings', 4000);
-        });
-    }
-
-    $scope.showEdit = true;
-    $scope.editReading = function(reading) {
-      $http.put('/api/batch_readings/' + reading.id, {
-        ph: reading.ph,
-        brix: reading.brix,
-        temp: reading.temp,
-        reading_date: reading.reading_date
-      }).
-        success(function(data, status, headers, config) {
-          return true
-        }).
-        error(function(data, status, headers, config) {
-          Alert.add("error", 'sorry, you are not authorized to edit readings', 4000);
-        });
-
-    }
-
-    $scope.removeReading = function(reading_id){
-      $http.delete('/api/batch_readings/' + reading_id, {}).
-        success(function(data, status, headers, config) {
-          $scope.selected_batch.batch_readings.pop(data)
-        }).
-        error(function(data, status, headers, config) {
-          Alert.add("error", 'sorry, you are not authorized to delete readings', 4000);
-        });
     }
 
     $scope.addBatch = function(){
