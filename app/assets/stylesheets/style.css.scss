@@ -4,6 +4,10 @@ body {
   margin:0 !important;
 }
 
+.modal-dialog{
+  width:600px;
+}
+
 td, th{
   height:51px;
   text-align:center;
@@ -63,19 +67,16 @@ nav {
 }
 
 .fermentation-container {
-  table {
-    tr{
-      td, th{
-        height:40px;
-        margin-left:10px;
-        text-align:center;
-        padding-top:10px;
-        input {
-          height:30px;
-          width:150px;
-        }
-      }
-    }
+  td, th{
+    height:40px;
+    text-align:center;
+  }
+  .show-process{
+    padding-top:7px 2px 0 14px;
+    width: 135px;
+  }
+  .edit-process{
+    width:155px;
   }
 }
 

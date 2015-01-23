@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     end
     match 'fermenters/sort' => 'fermenters#sort', :via => 'post'
     resources :batches do
+      resources :batch_readings
+      resources :comments
       member do
         put :add_comment
         resource :batch_processes, only: [:delete] do
@@ -28,9 +30,7 @@ Rails.application.routes.draw do
         end
       end
     end
-    resources :flavors
-    resources :batch_readings
-    resources :comments
+    resources :flavors, only: [:index]
   end
 
   root 'application#index'

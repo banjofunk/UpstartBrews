@@ -1,6 +1,15 @@
 angular.module('AngularUpstart')
-  .controller('CommentsCtrl', function ($scope, $location, Session, Ability, $http) {
-    $scope.errors = [];
+  .controller('CommentsCtrl', function ($scope, $location, Session, Ability, $http, Alert) {
+
+    $scope.$watch('details_category', function(newValue, oldValue) {
+      if(newValue == "comments"){
+        $http.get('/api/batches/' + $scope.selected_batch.id + '/comments')
+          .success(function(data, status, headers, config) {
+            $scope.selected_batch.comments = data;
+          })
+      }
+    });
+
 
     $scope.newComment = function(comment, batch) {
       $http.put('/api/batches/' + batch.id + '/add_comment', {
@@ -12,7 +21,7 @@ angular.module('AngularUpstart')
           return true
         }).
         error(function(data, status, headers, config) {
-          $scope.errors.push('sorry, you are not authorized to add a comment');
+          Alert.add("error", 'sorry, you are not authorized to add a comment', 4000);
         });
     };
 

@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150120180418) do
+ActiveRecord::Schema.define(version: 20150123211315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "batch_processes", force: true do |t|
     t.integer  "batch_id"
-    t.string   "process_type"
+    t.integer  "process_type_id"
     t.datetime "started"
     t.datetime "stopped"
     t.datetime "created_at"
@@ -64,6 +64,27 @@ ActiveRecord::Schema.define(version: 20150120180418) do
   end
 
   create_table "flavors", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "inventories", force: true do |t|
+    t.integer  "package_type_id"
+    t.integer  "batch_id"
+    t.integer  "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "package_types", force: true do |t|
+    t.string   "name"
+    t.string   "capacity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "process_types", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"

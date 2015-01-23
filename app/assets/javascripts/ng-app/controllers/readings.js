@@ -1,8 +1,17 @@
 angular.module('AngularUpstart')
   .controller('ReadingsCtrl', function ($scope, $http, Ability, Alert) {
 
+    $scope.$watch('details_category', function(newValue, oldValue) {
+      if(newValue == "readings"){
+        $http.get('/api/batches/' + $scope.selected_batch.id + '/batch_readings')
+          .success(function(data, status, headers, config) {
+            $scope.selected_batch.batch_readings = data;
+          })
+      }
+    });
+
     $scope.newReading = function(reading){
-      $http.post('/api/batch_readings', {
+      $http.post('/api/batches/' + $scope.selected_batch.id + '/batch_readings', {
         ph: reading.ph,
         brix: reading.brix,
         temp: reading.temp,
@@ -19,7 +28,7 @@ angular.module('AngularUpstart')
 
     $scope.showEdit = true;
     $scope.editReading = function(reading) {
-      $http.put('/api/batch_readings/' + reading.id, {
+      $http.put('/api/batches/' + $scope.selected_batch.id + '/batch_readings/' + reading.id, {
         ph: reading.ph,
         brix: reading.brix,
         temp: reading.temp,
@@ -35,7 +44,7 @@ angular.module('AngularUpstart')
     }
 
     $scope.removeReading = function(reading_id){
-      $http.delete('/api/batch_readings/' + reading_id, {}).
+      $http.delete('/api/batches/' + $scope.selected_batch.id + '/batch_readings/' + reading_id, {}).
         success(function(data, status, headers, config) {
           $scope.selected_batch.batch_readings.pop(data)
         }).

@@ -4,7 +4,8 @@ class Api::BatchProcessesController < ApplicationController
 
   def start_batch_process
     params.permit!
-    batch_process = BatchProcess.create(:batch_id => params[:batch_id], :process_type => params[:process_type], :started => Time.current)
+    process_type_id = ProcessType.find_by_name(params[:process_type]).id
+    batch_process = BatchProcess.create(:batch_id => params[:batch_id], :process_type_id => process_type_id, :started => Time.current)
     render :partial => "api/batches/process.json", :locals => { :batch_process => batch_process }
   end
 

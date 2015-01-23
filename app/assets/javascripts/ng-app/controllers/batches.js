@@ -2,7 +2,6 @@ angular.module('AngularUpstart')
   .controller('BatchesCtrl', function ($scope, $http, Ability, Alert) {
     $scope.errors = [];
     $scope.selected_batch = {};
-    $scope.details_category = "readings";
     $http.get('/api/batches.json')
       .success(function(data, status, headers, config) {
         $scope.batches = data;
@@ -12,7 +11,9 @@ angular.module('AngularUpstart')
     $scope.toggleModal = function(batchId){
       $http.get('/api/batches/' + batchId + '.json').
         success(function(data, status, headers, config) {
+
           $scope.selected_batch = data;
+          $scope.details_category = "readings";
         })
       $scope.showModal = !$scope.showModal;
     };
