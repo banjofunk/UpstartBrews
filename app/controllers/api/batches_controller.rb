@@ -38,11 +38,11 @@ class Api::BatchesController < ApplicationController
     render :partial => "api/comments/comment.json", :locals => { :comment => comment }
   end
 
-  def start_process
-    create_process = "@batch.#{params[:process]}"
+  def start_batch_process
+    console.log(params[:process])
   end
 
-  def end_process
+  def end_batch_process
   end
 
   private

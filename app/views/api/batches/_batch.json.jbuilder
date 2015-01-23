@@ -20,16 +20,17 @@ json.comments batch.comments.order("created_at ASC") do |comment|
   json.partial! 'api/comments/comment.json', comment: comment
 end
 
-json.ventilating batch.ventilations.where(:stopped => nil).where.not(:started => nil).count > 0
-json.ventilations batch.ventilations.order("created_at ASC") do |ventilation|
-  json.partial! 'api/fermentation/ventilation.json', ventilation: ventilation
-end
-json.circulating batch.circulations.where(:stopped => nil).where.not(:started => nil).count > 0
-json.circulations batch.circulations.order("created_at ASC") do |circulation|
-  json.partial! 'api/fermentation/circulation.json', circulation: circulation
+json.aerating batch.batch_processes.where(:process_type => 'aeration').where(:stopped => nil).where.not(:started => nil).count > 0
+json.aerations batch.batch_processes.where(:process_type => 'aeration').order("created_at ASC") do |batch_process|
+  json.partial! 'api/batches/process.json', batch_process: batch_process
 end
 
-json.aerating batch.aerations.where(:stopped => nil).where.not(:started => nil).count > 0
-json.aerations batch.aerations.order("created_at ASC") do |aeration|
-  json.partial! 'api/fermentation/aeration.json', aeration: aeration
+json.circulating batch.batch_processes.where(:process_type => 'circulation').where(:stopped => nil).where.not(:started => nil).count > 0
+json.circulations batch.batch_processes.where(:process_type => 'circulation').order("created_at ASC") do |batch_process|
+  json.partial! 'api/batches/process.json', batch_process: batch_process
+end
+
+json.ventilating batch.batch_processes.where(:process_type => 'ventilation').where(:stopped => nil).where.not(:started => nil).count > 0
+json.ventilations batch.batch_processes.where(:process_type => 'ventilation').order("created_at ASC") do |batch_process|
+  json.partial! 'api/batches/process.json', batch_process: batch_process
 end

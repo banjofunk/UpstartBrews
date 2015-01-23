@@ -60,14 +60,14 @@ Batch.all.each do |batch|
   batch.comments.create(:user_id => admin.id, :text => "theres a fuck ton of fruit flies...")
   batch.comments.create(:user_id => sales.id, :text => "whatever. sell it to whole foods.")
 
-  batch.circulations.create(:started => batch.brew_date + 4.days, :stopped => Time.now - 1.day)
-  batch.ventilations.create(:started => batch.brew_date + 2.days, :stopped => Time.now - 1.day)
+  batch.batch_processes.create(:process_type => 'circulation', :started => batch.brew_date + 4.days, :stopped => Time.now - 1.day)
+  batch.batch_processes.create(:process_type => 'ventilation', :started => batch.brew_date + 2.days, :stopped => Time.now - 1.day)
 end
 first_batch = Batch.order('brew_date ASC').first
-first_batch.aerations.create(:started => Time.now - 6.hours, :stopped => Time.now - 2.hours)
+first_batch.batch_processes.create(:process_type => 'aeration', :started => Time.now - 6.hours, :stopped => Time.now - 2.hours)
 
 last_batch = Batch.order('brew_date ASC').last
-last_batch.circulations.create(:started => last_batch.brew_date + 4.days)
+last_batch.batch_processes.create(:process_type => 'circulation', :started => last_batch.brew_date + 4.days)
 
 
 

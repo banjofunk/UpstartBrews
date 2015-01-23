@@ -16,8 +16,9 @@ ActiveRecord::Schema.define(version: 20150120180418) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "aerations", force: true do |t|
+  create_table "batch_processes", force: true do |t|
     t.integer  "batch_id"
+    t.string   "process_type"
     t.datetime "started"
     t.datetime "stopped"
     t.datetime "created_at"
@@ -39,14 +40,6 @@ ActiveRecord::Schema.define(version: 20150120180418) do
     t.integer  "fermenter_id"
     t.integer  "state"
     t.datetime "brew_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "circulations", force: true do |t|
-    t.integer  "batch_id"
-    t.datetime "started"
-    t.datetime "stopped"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -101,13 +94,5 @@ ActiveRecord::Schema.define(version: 20150120180418) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "ventilations", force: true do |t|
-    t.integer  "batch_id"
-    t.datetime "started"
-    t.datetime "stopped"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
 end
