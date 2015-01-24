@@ -1,7 +1,6 @@
 class Api::BatchProcessesController < ApplicationController
   before_filter :determine_scope, :only => [:index, :end_batch_process]
 
-
   def start_batch_process
     params.permit!
     process_type_id = ProcessType.find_by_name(params[:process_type]).id
@@ -11,7 +10,7 @@ class Api::BatchProcessesController < ApplicationController
 
   def end_batch_process
     params.permit!
-    batch_process = @scope.find(params[:process_id])
+    batch_process = @scope.current.kind(params[:kind]).last
     batch_process.stopped = Time.current
     batch_process.save
     current_batch_processes = @scope.kind(params[:kind]).current
@@ -19,16 +18,12 @@ class Api::BatchProcessesController < ApplicationController
     render :partial => "api/batches/process.json", :locals => { :batch_process => batch_process }
   end
 
-
   def index
-    @batch_processes = @scope.all
+    @batch_processes = @scope.joins(:process_type).order('process_types.name DESC')
   end
 
   def edit
     @batch_process = BatchProcess.find(params[:id])
-  end
-
-  def update
   end
 
   def create
@@ -47,7 +42,7 @@ class Api::BatchProcessesController < ApplicationController
   end
 
   def destroy
-    @batch_process = BatchProcess.find(params[:process_id])
+    @batch_process = BatchProcess.find(params[:id])
     @batch_process.destroy
     render :partial => "api/batches/process.json", :locals => { :batch_process => @batch_process }
   end
@@ -61,6 +56,5 @@ class Api::BatchProcessesController < ApplicationController
       Batch
     end
   end
-
 
 end

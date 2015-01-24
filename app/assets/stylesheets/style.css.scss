@@ -5,7 +5,7 @@ body {
 }
 
 .modal-dialog{
-  width:600px;
+  width:700px;
 }
 
 td, th{
@@ -67,22 +67,52 @@ nav {
 }
 
 .fermentation-container {
-  td, th{
-    height:40px;
-    text-align:center;
+  .process-actions {
+    button {
+      width:130px;
+      margin-left:20px;
+    }
+  }
+
+  table {
+    margin:0 auto;
+    max-width:500px;
+
+    td, th{
+      height:40px;
+      text-align:center;
+    }
   }
   .show-process{
-    padding-top:7px 2px 0 14px;
+    padding:7px 2px 0 14px;
     width: 135px;
+    height:33px;
   }
-  .edit-process{
-    width:155px;
+  .process-times {
+    width: 145px;
+  }
+  .process-small {
+    width: 80px;
+  }
+  .process-duration {
+    width: 145px;
   }
 }
 
 .readings-container {
   padding: 25px;
   padding-top:0;
+
+  table {
+    margin:0 auto;
+    max-width:400px;
+  }
+
+  h3 {
+    border:0 solid #efefef;
+    border-bottom-width:1px;
+    padding-bottom:10px;
+  }
 
   .form-control{
     width:99%;
@@ -96,12 +126,6 @@ nav {
   }
   .edit-reading{
     width:101px;
-  }
-
-  h3 {
-    border:0 solid #efefef;
-    border-bottom-width:1px;
-    padding-bottom:10px;
   }
 }
 

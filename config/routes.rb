@@ -20,14 +20,11 @@ Rails.application.routes.draw do
     resources :batches do
       resources :batch_readings
       resources :comments
+      resources :batch_processes
+      match 'batch_processes/start_batch_process' => 'batch_processes#start_batch_process', :via => 'post'
+      match 'batch_processes/end_batch_process' => 'batch_processes#end_batch_process', :via => 'post'
       member do
         put :add_comment
-        resource :batch_processes, only: [:delete] do
-          post :start_batch_process
-          post :end_batch_process
-          delete ':process_id' => 'batch_processes#destroy'
-          put ':process_id' => 'batch_processes#update'
-        end
       end
     end
     resources :flavors, only: [:index]

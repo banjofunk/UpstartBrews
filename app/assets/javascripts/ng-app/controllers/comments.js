@@ -10,7 +10,6 @@ angular.module('AngularUpstart')
       }
     });
 
-
     $scope.newComment = function(comment, batch) {
       $http.put('/api/batches/' + batch.id + '/add_comment', {
         text: comment.text
