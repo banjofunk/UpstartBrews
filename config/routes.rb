@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       end
     end
     resources :flavors, only: [:index]
+    resources :inventories
   end
 
   root 'application#index'

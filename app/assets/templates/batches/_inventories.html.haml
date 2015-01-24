@@ -1,0 +1,15 @@
+.inventories-container{'ng-controller' => "InventoriesCtrl"}
+  .row
+    %br
+    .col-md-12
+      %div{"ng-repeat" => "type in selected_batch.package_types"}
+        %span {{type}}
+
+        %div{"ng-repeat" => "inventory in selected_batch.inventories", "ng-if"=>"inventory.package_type == type"}
+          %strong.pull-left.primary-font {{inventory.user}}
+          %span {{inventory.id}}
+          %span {{inventory.package_type}}
+          %span {{inventory.package_capacity}}
+          %span {{inventory.batch_id}}
+          %span {{inventory.flavor}}
+          %span {{inventory.quantity}}

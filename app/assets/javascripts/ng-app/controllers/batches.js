@@ -13,7 +13,7 @@ angular.module('AngularUpstart')
       $http.get('/api/batches/' + batchId + '.json').
         success(function(data, status, headers, config) {
           $scope.selected_batch = data;
-          $scope.details_category = "readings";
+          $scope.details_category = "packaging";
         })
       $scope.showModal = !$scope.showModal;
     };
