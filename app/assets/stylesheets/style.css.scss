@@ -30,6 +30,10 @@ nav {
   margin-top:0;
 }
 
+.table-fade{
+  display:none;
+}
+
 .batches_container{
   width:1000px;
   margin: 0 auto;
@@ -67,6 +71,7 @@ nav {
 }
 
 .fermentation-container {
+  min-height:350px;
   .process-actions {
     button {
       width:130px;
@@ -102,6 +107,7 @@ nav {
 .readings-container {
   padding: 25px;
   padding-top:0;
+  min-height:350px;
 
   table {
     margin:0 auto;
@@ -132,6 +138,7 @@ nav {
 .comments-container {
   padding: 25px;
   padding-top:0;
+  min-height:350px;
 
   .comment-text{
     background:#fff0 !important;

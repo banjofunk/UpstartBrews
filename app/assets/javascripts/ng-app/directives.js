@@ -31,6 +31,20 @@ angular.module('AngularUpstart.directives', [])
         }
       };
   }])
+  .directive('fadeIn', [
+    function(){
+      return {
+        restrict: 'C',
+        link: function (scope, element, attr) {
+
+          scope.$watch('details_category', function(value){
+            $(element).hide();
+            $(element).fadeIn(500);
+          });
+
+        }
+      };
+  }])
   .directive('toggleProcess', [
     function(){
       return {
@@ -68,10 +82,11 @@ angular.module('AngularUpstart.directives', [])
         scope.title = attrs.title;
 
         scope.$watch(attrs.visible, function(value){
-          if(value == true)
+          if(value == true){
             $(element).modal('show');
-          else
+          } else {
             $(element).modal('hide');
+          }
         });
 
         $(element).on('shown.bs.modal', function(){
