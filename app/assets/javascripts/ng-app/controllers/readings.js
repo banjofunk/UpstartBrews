@@ -22,7 +22,7 @@ angular.module('AngularUpstart')
           $scope.selected_batch.batch_readings.push(data)
         }).
         error(function(data, status, headers, config) {
-          Alert.add("error", 'sorry, you are not authorized to create new readings', 4000);
+          Alert.add("danger", 'sorry, you are not authorized to create new readings', 4000);
         });
     }
 
@@ -38,7 +38,7 @@ angular.module('AngularUpstart')
           return true
         }).
         error(function(data, status, headers, config) {
-          Alert.add("error", 'sorry, you are not authorized to edit readings', 4000);
+          Alert.add("danger", 'sorry, you are not authorized to edit readings', 4000);
         });
 
     }
@@ -49,7 +49,7 @@ angular.module('AngularUpstart')
           $scope.selected_batch.batch_readings.pop(data)
         }).
         error(function(data, status, headers, config) {
-          Alert.add("error", 'sorry, you are not authorized to delete readings', 4000);
+          Alert.add("danger", 'sorry, you are not authorized to delete readings', 4000);
         });
     }
 

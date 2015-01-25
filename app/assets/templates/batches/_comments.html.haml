@@ -16,5 +16,5 @@
         .input-group
           %input#userComment.form-control.input-lg.chat-input{:placeholder => "Your comment here...", :type => "text", "ng-model"=>"comment.text"}/
           %span.input-group-btn
-            %a.btn.btn-primary.btn-lg{:href => "#", "ng-click"=>"newComment(comment, selected_batch)"}
+            %button.btn.btn-primary.btn-lg{"ng-click"=>"newComment(comment, selected_batch)", :type => "submit"}
               Add Comment

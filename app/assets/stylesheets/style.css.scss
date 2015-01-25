@@ -71,7 +71,7 @@ nav {
 }
 
 .fermentation-container {
-  min-height:350px;
+  min-height:360px;
   .process-actions {
     button {
       width:130px;
@@ -107,7 +107,7 @@ nav {
 .readings-container {
   padding: 25px;
   padding-top:0;
-  min-height:350px;
+  min-height:360px;
 
   table {
     margin:0 auto;
@@ -135,10 +135,45 @@ nav {
   }
 }
 
+.inventories-container {
+  min-height:360px;
+  h1 {
+    margin:0;
+  }
+  table.inventory-table {
+    td {
+      vertical-align:middle;
+
+      a button{
+        width:60px;
+        font-size:14px;
+        margin:0 15px;
+      }
+      span.glyphicon {
+        font-size:20px;
+      }
+    }
+  }
+
+  .edit-actions {
+    margin-right:20px;
+  }
+
+  .inventory-img-container {
+    height:60px;
+    width:100px;
+    img {
+      display:block;
+      height:100%;
+      margin:auto;
+    }
+  }
+}
+
 .comments-container {
   padding: 25px;
   padding-top:0;
-  min-height:350px;
+  min-height:360px;
 
   .comment-text{
     background:#fff0 !important;

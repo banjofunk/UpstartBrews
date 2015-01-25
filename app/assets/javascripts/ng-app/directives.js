@@ -31,15 +31,17 @@ angular.module('AngularUpstart.directives', [])
         }
       };
   }])
-  .directive('fadeIn', [
-    function(){
+  .directive('fadeIn', ['$timeout',
+    function($timeout){
       return {
         restrict: 'C',
         link: function (scope, element, attr) {
 
           scope.$watch('details_category', function(value){
             $(element).hide();
-            $(element).fadeIn(500);
+            $timeout( function(){
+              $(element).fadeIn(300);
+            }, 300);
           });
 
         }
@@ -61,8 +63,9 @@ angular.module('AngularUpstart.directives', [])
     function(){
       return {
         restrict: 'E',
-        template: "<div class='alert alert-danger' role='alert' ng-repeat='alert in alerts' type='alert.type'>" +
+        template: "<div class='alert alert-{{alert.type}} text-center' role='alert' ng-repeat='alert in alerts' type='alert.type'>" +
         "{{alert.msg}}" +
+
         "<span class='glyphicon glyphicon-remove pull-right' style='cursor: pointer;' ng-click='alert.close()'></span></div>"
       };
   }])
@@ -120,4 +123,17 @@ angular.module('AngularUpstart.directives', [])
         }
       };
   }])
+  .directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+      element.bind("keydown keypress", function (event) {
+        if(event.which === 13) {
+          scope.$apply(function (){
+            scope.$eval(attrs.ngEnter);
+          });
+
+          event.preventDefault();
+        }
+      });
+    };
+});
 

@@ -47,15 +47,16 @@
                 %a.toggle-edit{'ng-click'=>'editReading(reading)'}
                   %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-ok-circle"}
 
-          %tr{'ng-if' => 'canCan("manage", "BatchReading")'}
+          .new_reading_container{'ng-if' => 'canCan("manage", "BatchReading")'}
             %form{:role => "form"}
-              %td
-              %td
-                %input#brix.form-control.new_reading{:placeholder => "brix", "ng-model"=>"reading.brix"}
-              %td
-                %input#ph.form-control.new_reading{:placeholder => "ph", "ng-model"=>"reading.ph"}
-              %td
-                %input#temp.form-control.new_reading{:placeholder => "temp", "ng-model"=>"reading.temp"}
-              %td
-                %button{:type=>"submit", :class=>"btn btn-primary", "ng-click"=>"newReading(reading)"}
-                  %span{:class=>"glyphicon glyphicon-plus"}
+              %tr
+                %td
+                %td
+                  %input#brix.form-control.new_reading{:placeholder => "brix", "ng-model"=>"reading.brix"}
+                %td
+                  %input#ph.form-control.new_reading{:placeholder => "ph", "ng-model"=>"reading.ph"}
+                %td
+                  %input#temp.form-control.new_reading{:placeholder => "temp", "ng-model"=>"reading.temp"}
+                %td
+                  %button{:type=>"submit", :class=>"btn btn-primary", "ng-click"=>"newReading(reading)"}
+                    %span{:class=>"glyphicon glyphicon-plus"}

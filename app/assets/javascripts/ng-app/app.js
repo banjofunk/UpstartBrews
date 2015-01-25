@@ -28,15 +28,16 @@ angular
         'responseError': function (response) {
             if(response.status === 403) {
               if (response.data == "not authorized") {
-                Alert.add('error', 'sorry, you are not authorized to view this page', 8000)
+                Alert.add('danger', 'sorry, you are not authorized to view this page', 8000)
                 $location.path('/');
               } else if (response.data == 'sign in') {
-                Alert.add('error', 'Please sign in.', 8000)
+                Alert.add('danger', 'Please sign in.', 8000)
                 $location.path('/users/login');
               }
               return $q.reject(response);
             }
             if(response.status === 500 && response.data.error == "You are not authorized to access this page.") {
+              Alert.add('danger', 'sorry, you are not authorized to view this page', 4000)
               $location.path('/');
               return response
             }

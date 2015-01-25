@@ -1,18 +1,17 @@
 angular.module('AngularUpstart')
-  .controller('UsersCtrl', function ($scope, Session, Ability) {
+  .controller('UsersCtrl', function ($scope, Session, Ability, Alert) {
     $scope.login = function(user) {
         $scope.authError = null;
 
         Session.login(user.email, user.password)
         .success(function(response) {
-            if (!response) {
-                $scope.authError = 'Credentials are not valid';
-            } else {
-                $scope.authError = 'Success!';
-            }
+          if(response.error) {
+            Alert.add('danger', response.error, 4000)
+            return response
+          }
         })
         .error(function(response) {
-            $scope.authError = response.data.error || 'Server offline, please try later';
+            Alert.add('danger', (response.error || 'Server offline, please try later'), 4000);
         });
     };
 

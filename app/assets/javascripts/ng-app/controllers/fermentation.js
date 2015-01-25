@@ -18,7 +18,7 @@ angular.module('AngularUpstart')
           $scope.$parent.selected_batch.batch_processes.push(data)
         }).
         error(function(data, status, headers, config) {
-          Alert.add("error", 'sorry, you are not authorized to start fermentation processes', 4000);
+          Alert.add("danger", 'sorry, you are not authorized to start fermentation processes', 4000);
         });
     }
 
@@ -35,7 +35,7 @@ angular.module('AngularUpstart')
           }
         }).
         error(function(data, status, headers, config) {
-          Alert.add("error", 'sorry, you are not authorized to start fermentation processes', 4000);
+          Alert.add("danger", 'sorry, you are not authorized to start fermentation processes', 4000);
         });
     }
 
@@ -46,7 +46,7 @@ angular.module('AngularUpstart')
           $scope.selected_batch.batch_processes.splice(index, 1)
         }).
         error(function(data, status, headers, config) {
-          Alert.add("error", 'sorry, you are not authorized to delete readings', 4000);
+          Alert.add("danger", 'sorry, you are not authorized to delete readings', 4000);
         });
     }
 
@@ -65,7 +65,7 @@ angular.module('AngularUpstart')
           return true
         })
         .error(function(data, status, headers, config) {
-          Alert.add("error", 'sorry, you are not authorized to edit processes', 4000);
+          Alert.add("danger", 'sorry, you are not authorized to edit processes', 4000);
         });
     }
 

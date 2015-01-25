@@ -20,7 +20,7 @@ angular.module('AngularUpstart')
           return true
         }).
         error(function(data, status, headers, config) {
-          Alert.add("error", 'sorry, you are not authorized to add a comment', 4000);
+          Alert.add("danger", 'sorry, you are not authorized to add a comment', 4000);
         });
     };
 

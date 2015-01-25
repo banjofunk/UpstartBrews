@@ -6,4 +6,14 @@ class Batch < ActiveRecord::Base
   has_many :inventories
   has_many :comments, :as => :commentable
 
+  after_create :create_inventories
+
+  private
+
+  def create_inventories
+    PackageType.all.each do |package|
+      Inventory.create_or_update_from_hash(:batch_id => self.id, :package_type_id => package.id, :quantity => 0)
+    end
+  end
+
 end

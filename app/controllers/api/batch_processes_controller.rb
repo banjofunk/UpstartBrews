@@ -1,4 +1,6 @@
 class Api::BatchProcessesController < ApplicationController
+  load_and_authorize_resource
+
   before_filter :determine_scope, :only => [:index, :end_batch_process]
 
   def start_batch_process
@@ -19,7 +21,12 @@ class Api::BatchProcessesController < ApplicationController
   end
 
   def index
-    @batch_processes = @scope.joins(:process_type).order('process_types.name DESC')
+    if can? :manage, BatchProcess
+      @batch_processes = @scope.joins(:process_type).order('process_types.name DESC')
+    else
+      @batch_processes = @scope.secured.joins(:process_type).order('process_types.name DESC')
+    end
+
   end
 
   def edit

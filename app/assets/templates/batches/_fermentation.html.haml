@@ -3,7 +3,7 @@
     .row
       %br
       .col-md-12
-        .process-actions
+        .process-actions{'ng-if'=>'canCan("manage", "BatchProcess")'}
           %ul.list-unstyled
             %li.pull-left{"ng-repeat" => "(process, currentlyOn) in selected_batch.all_processes"}
               %form{:role => "form"}

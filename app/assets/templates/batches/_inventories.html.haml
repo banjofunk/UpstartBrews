@@ -1,15 +1,30 @@
-.inventories-container{'ng-controller' => "InventoriesCtrl"}
+.inventories-container{'ng-controller' => 'InventoriesCtrl'}
+  %br
   .row
-    %br
     .col-md-12
-      %div{"ng-repeat" => "type in selected_batch.package_types"}
-        %span {{type}}
+      %table.table.inventory-table.fade-in
+        %tbody
+          %tr{'ng-repeat' => 'inventory in selected_batch.inventories'}
+            %td
+              .inventory-img-container
+                %img{'src'=>'{{inventory.package_img}}'}
+            %td.text-left
+              .show-package
+                %h1
+                  {{inventory.quantity}} {{inventory.package_name}}s
+              .edit-package{style: 'display:none;'}
+                %input.form-control.edit_package{placeholder: 'quantity', 'ng-model'=>'inventory.quantity'}
+            %td
+              .edit-actions
+                .show-package{'ng-if' => 'canCan("manage", "Batchpackage")'}
+                  %a{href: '#', 'ng-click'=>'increaseQty(inventory)'}
+                    %span.glyphicon.glyphicon-chevron-up
+                  %a{href: '#', 'ng-click'=>'increaseQty(inventory)'}
+                    %button.btn.btn-primary.btn-sm{type: 'button'} edit
+                  %a{href: '#', 'ng-click'=>'increaseQty(inventory)'}
+                    %span.glyphicon.glyphicon-chevron-down
 
-        %div{"ng-repeat" => "inventory in selected_batch.inventories", "ng-if"=>"inventory.package_type == type"}
-          %strong.pull-left.primary-font {{inventory.user}}
-          %span {{inventory.id}}
-          %span {{inventory.package_type}}
-          %span {{inventory.package_capacity}}
-          %span {{inventory.batch_id}}
-          %span {{inventory.flavor}}
-          %span {{inventory.quantity}}
+
+                .edit-package{style: 'display:none;'}
+                  %a.toggle-edit{'ng-click'=>'editPackage(inventory)'}
+                    %span.glyphicon.glyphicon-ok-circle

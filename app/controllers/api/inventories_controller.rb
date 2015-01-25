@@ -22,7 +22,7 @@ class Api::InventoriesController < ApplicationController
   end
 
   def create
-    @inventory = Inventory.new(params)
+    @inventory = Inventory.create_or_update_from_hash(params)
   end
 
   def update

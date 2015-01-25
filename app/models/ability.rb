@@ -16,12 +16,14 @@ class Ability
         can :manage, Fermenter
         can :manage, Batch
         can :manage, BatchReading
+        can :manage, BatchProcess
       end
 
       if current_user.has_role?(:sales)
         can :read, Fermenter
         can :read, Batch
         can :read, BatchReading
+        can :read, BatchProcess
       end
     end
   end
