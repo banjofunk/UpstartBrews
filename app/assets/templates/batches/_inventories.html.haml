@@ -9,22 +9,21 @@
               .inventory-img-container
                 %img{'src'=>'{{inventory.package_img}}'}
             %td.text-left
-              .show-package
+              .show-toggle
                 %h1
-                  {{inventory.quantity}} {{inventory.package_name}}s
-              .edit-package{style: 'display:none;'}
-                %input.form-control.edit_package{placeholder: 'quantity', 'ng-model'=>'inventory.quantity'}
+                  {{inventory.quantity}} {{inventory.package_name}}
+              .edit-toggle{style: 'display:none;'}
+                %input.form-control.edit_package{type: 'number', placeholder: 'quantity', 'ng-model'=>'inventory.quantity'}
             %td
-              .edit-actions
-                .show-package{'ng-if' => 'canCan("manage", "Batchpackage")'}
-                  %a{href: '#', 'ng-click'=>'increaseQty(inventory)'}
-                    %span.glyphicon.glyphicon-chevron-up
-                  %a{href: '#', 'ng-click'=>'increaseQty(inventory)'}
-                    %button.btn.btn-primary.btn-sm{type: 'button'} edit
-                  %a{href: '#', 'ng-click'=>'increaseQty(inventory)'}
-                    %span.glyphicon.glyphicon-chevron-down
+              .show-toggle{'ng-if' => 'canCan("manage", "Batchpackage")'}
+                %a{href: '#', 'ng-click'=>'increaseQty(inventory)'}
+                  %span.glyphicon.glyphicon-chevron-up
+                %a.toggle-edit
+                  %button.btn.btn-primary.btn-sm{type: 'button'} edit
+                %a{href: '#', 'ng-click'=>'decreaseQty(inventory)'}
+                  %span.glyphicon.glyphicon-chevron-down
 
 
-                .edit-package{style: 'display:none;'}
-                  %a.toggle-edit{'ng-click'=>'editPackage(inventory)'}
-                    %span.glyphicon.glyphicon-ok-circle
+              .edit-toggle{style: 'display:none;'}
+                %a.toggle-edit{'ng-click'=>'editQty(inventory)'}
+                  %span.glyphicon.glyphicon-ok-circle

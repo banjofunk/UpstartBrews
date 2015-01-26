@@ -25,8 +25,8 @@ angular.module('AngularUpstart.directives', [])
         restrict: 'C',
         link: function (scope, element, attr) {
           element.bind('click',function (event) {
-            $(event.target).parents('tr').children('td').children('.edit-reading').toggle();
-            $(event.target).parents('tr').children('td').children('.show-reading').toggle();
+            $(event.target).parents('tr').children('td').children('.edit-toggle').toggle();
+            $(event.target).parents('tr').children('td').children('.show-toggle').toggle();
           });
         }
       };
@@ -44,18 +44,6 @@ angular.module('AngularUpstart.directives', [])
             }, 300);
           });
 
-        }
-      };
-  }])
-  .directive('toggleProcess', [
-    function(){
-      return {
-        restrict: 'C',
-        link: function (scope, element, attr) {
-          element.bind('click',function (event) {
-            $(event.target).parents('tr').children('td').children('.edit-process').toggle();
-            $(event.target).parents('tr').children('td').children('.show-process').toggle();
-          });
         }
       };
   }])

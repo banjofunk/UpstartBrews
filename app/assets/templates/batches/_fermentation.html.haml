@@ -28,30 +28,30 @@
           %tbody
             %tr{"ng-repeat" => "process in selected_batch.batch_processes"}
               %td
-                .show-process.process-small
+                .show-toggle.process-small
                   {{process.type}}
               %td
-                .show-process.process-times
+                .show-toggle.process-times
                   {{process.started}}
-                .edit-process{:style => 'display:none;'}
+                .edit-toggle{:style => 'display:none;'}
                   %input.form-control.edit_process{:placeholder => "started", "ng-model"=>"process.started"}
               %td
-                .show-process.process-times
+                .show-toggle.process-times
                   {{process.stopped || process.type + " is on..."}}
-                .edit-process{:style => 'display:none;'}
+                .edit-toggle{:style => 'display:none;'}
                   %input.form-control.edit_process{:placeholder => "stopped", "ng-model"=>"process.stopped"}
               %td
                 .process-duration
                   {{process.duration}}
               %td
-                .show-process.process-small
-                  %a.toggle-process
+                .show-toggle.process-small
+                  %a.toggle-edit
                     %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-pencil"}
                   &nbsp;&nbsp;|&nbsp;&nbsp;
                   %a{'confirmed-click'=>'removeProcess(process)', "ng-confirm-click"=>"Are you sure you want to delete?"}
                     %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-remove-circle"}
-                .edit-process.process-small{:style => 'display:none;'}
-                  %a.toggle-process{'ng-click'=>'editProcess(process)'}
+                .edit-toggle.process-small{:style => 'display:none;'}
+                  %a.toggle-edit{'ng-click'=>'editProcess(process)'}
                     %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-ok-circle"}
             %tr{"ng-show"=>"!selected_batch.batch_processes.length"}
               %td

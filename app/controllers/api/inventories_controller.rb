@@ -28,6 +28,13 @@ class Api::InventoriesController < ApplicationController
   def update
   end
 
+  def update_quantity
+    @inventory = Inventory.find(params[:inventory_id])
+    @inventory.quantity = params[:quantity]
+    @inventory.save
+    render :partial => "api/inventories/inventory.json", :locals => { :inventory => @inventory }
+  end
+
   def destroy
     @inventory.destroy
   end
@@ -46,6 +53,12 @@ class Api::InventoriesController < ApplicationController
 
   def set_inventory
     @inventory = Inventory.find(params[:id])
+  end
+
+  private
+
+  def batch_reading_params
+    params.require(:batch_reading).permit(:id, :batch_id, :quantity, :package_type_id)
   end
 
 end

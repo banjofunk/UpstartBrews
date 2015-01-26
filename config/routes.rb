@@ -28,7 +28,9 @@ Rails.application.routes.draw do
       end
     end
     resources :flavors, only: [:index]
-    resources :inventories
+    resources :inventories do
+      put :update_quantity
+    end
   end
 
   root 'application#index'
