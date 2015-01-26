@@ -2,6 +2,7 @@ class Inventory < ActiveRecord::Base
   belongs_to :batch
   belongs_to :package_type
 
+  scope :by_package_type, lambda { joins(:package_type).order('package_types.sort_order') }
   scope :kind, lambda { |type| joins(:package_type).where("package_types.name = ?", type) }
 
   def flavor

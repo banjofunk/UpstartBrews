@@ -4,6 +4,12 @@ body {
   margin:0 !important;
 }
 
+ input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .modal-dialog{
   width:700px;
 }
@@ -88,10 +94,11 @@ nav {
       text-align:center;
     }
   }
-  .show-process{
-    padding:7px 2px 0 14px;
-    width: 135px;
-    height:33px;
+
+  .show-toggle{
+    padding-top:7px;
+    padding-right:2px;
+    height:34px;
   }
   .process-times {
     width: 145px;
@@ -111,7 +118,10 @@ nav {
 
   table {
     margin:0 auto;
-    max-width:400px;
+    max-width:500px;
+    td.date-column {
+      width:120px;
+    }
   }
 
   h3 {
@@ -125,13 +135,9 @@ nav {
     text-align:center;
   }
 
-  .show-reading{
+  .show-toggle{
     padding-top:7px;
-    padding-right:2px;
-    width: 88px;
-  }
-  .edit-reading{
-    width:101px;
+    padding-right:1px;
   }
 }
 

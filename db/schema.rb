@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20150123211315) do
   create_table "package_types", force: true do |t|
     t.string   "name"
     t.string   "capacity"
+    t.integer  "sort_order"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

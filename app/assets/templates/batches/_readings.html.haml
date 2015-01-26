@@ -16,7 +16,7 @@
 
         %tbody
           %tr{"ng-repeat" => "reading in selected_batch.batch_readings", 'data-reading-id' => '{{reading.id}}'}
-            %td
+            %td.date-column
               .show-toggle
                 {{reading.reading_date}}
               .edit-toggle{:style => 'display:none;'}

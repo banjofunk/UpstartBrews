@@ -4,11 +4,7 @@ class Api::InventoriesController < ApplicationController
 
 
   def index
-    @inventories = @scope.all
-    @types = {}
-    PackageType.all.map(&:name).sort.each do |type|
-      @types[type] = @inventories.kind(type).first.try(:quantity) || 0
-    end
+    @inventories = @scope.by_package_type
   end
 
   def show

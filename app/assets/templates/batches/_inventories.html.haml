@@ -8,12 +8,16 @@
             %td
               .inventory-img-container
                 %img{'src'=>'{{inventory.package_img}}'}
-            %td.text-left
+            %td.text-right{style:'width:101px;'}
               .show-toggle
-                %h1
-                  {{inventory.quantity}} {{inventory.package_name}}
+                %h1{style: 'padding-right:3px;'}
+                  {{inventory.quantity}}
               .edit-toggle{style: 'display:none;'}
-                %input.form-control.edit_package{type: 'number', placeholder: 'quantity', 'ng-model'=>'inventory.quantity'}
+                %input.form-control.edit_package.text-right{type: 'number', placeholder: '0', 'ng-model'=>'inventory.quantity', style:'width:85px; height:53px; display:inline; font-size:36px; padding:0px 2px 2px 0px; font-weight: 500;'}
+            %td.text-left
+              .package_name
+                %h1
+                  {{inventory.package_name}}
             %td
               .show-toggle{'ng-if' => 'canCan("manage", "Batchpackage")'}
                 %a{href: '#', 'ng-click'=>'increaseQty(inventory)'}

@@ -59,6 +59,9 @@ angular.module('AngularUpstart')
     }
 
     $scope.editQty = function(inventory) {
+      if(!inventory.quantity) {
+        inventory.quantity = 0
+      }
       $scope.update_queue.push(inventory.id)
     }
 

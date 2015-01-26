@@ -19,6 +19,12 @@ admin = User.create(:email => 'admin@bcj.com', :first_name => "Brad", :last_name
 brewer = User.create(:email => 'brewer@bcj.com', :first_name => "Stew", :last_name => "Burr", :password => 'testeroo', :password_confirmation => 'testeroo', :roles => [:brewer])
 sales = User.create(:email => 'sales@bcj.com', :first_name => "Saul", :last_name => "Zimmern", :password => 'testeroo', :password_confirmation => 'testeroo', :roles => [:sales])
 
+pkg4 = PackageType.create(:name => 'half_keg', :capacity => '15.5 gallons', :sort_order => 1)
+pkg3 = PackageType.create(:name => 'sixth_keg', :capacity => '5 gallons', :sort_order => 2)
+pkg2 = PackageType.create(:name => 'growler', :capacity => '64 oz', :sort_order => 3)
+pkg4 = PackageType.create(:name => 'case', :capacity => '12 bottles', :sort_order => 4)
+pkg1 = PackageType.create(:name => 'bottle', :capacity => '16 oz', :sort_order => 5)
+
 ferm_1 = Fermenter.create(:flavor_id => lemon.id,:capacity => 250, :position => 1)
 ferm_2 = Fermenter.create(:flavor_id => berry.id,:capacity => 250, :position => 2)
 ferm_3 = Fermenter.create(:flavor_id => mint.id,:capacity => 250, :position => 3)
@@ -91,10 +97,6 @@ finished_batch.comments.create(:user_id => brewer.id, :text => "tastes amazing. 
 finished_batch.comments.create(:user_id => admin.id, :text => "Nice man! glad to hear it", :created_at => Time.current-7.days)
 finished_batch.comments.create(:user_id => brewer.id, :text => "pumping over to the bright tank. woot!", :created_at => Time.current-6.days)
 
-pkg1 = PackageType.create(:name => 'bottle', :capacity => '16 oz')
-pkg2 = PackageType.create(:name => 'growler', :capacity => '64 oz')
-pkg3 = PackageType.create(:name => '1/6 barrel', :capacity => '5 gallons')
-pkg4 = PackageType.create(:name => '1/2 barrel', :capacity => '15.5 gallons')
 
 
 
