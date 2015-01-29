@@ -23,11 +23,13 @@ Rails.application.routes.draw do
       resources :batch_processes
       match 'batch_processes/start_batch_process' => 'batch_processes#start_batch_process', :via => 'post'
       match 'batch_processes/end_batch_process' => 'batch_processes#end_batch_process', :via => 'post'
+      put :set_inventories
       member do
         put :add_comment
       end
     end
     resources :flavors, only: [:index]
+
     resources :inventories do
       put :update_quantity
     end

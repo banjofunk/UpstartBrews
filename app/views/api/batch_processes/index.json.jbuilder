@@ -1,7 +1,8 @@
 json.all_processes do
-  ProcessType.all.map(&:name).each do |type|
-    currently_on = @batch_processes.kind(type).current.count > 0
-    json.set!(type, currently_on)
+  json.array! ProcessType.all.each do |type|
+    json.name type.name
+    json.currently_on @batch_processes.kind(type.name).current.count > 0
+    json.order type.sort_order
   end
 end
 json.batch_processes do

@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20150123211315) do
   create_table "batches", force: true do |t|
     t.integer  "flavor_id"
     t.integer  "fermenter_id"
-    t.integer  "state"
+    t.integer  "state",        default: 0, null: false
     t.datetime "brew_date"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20150123211315) do
 
   create_table "fermenters", force: true do |t|
     t.integer  "flavor_id"
+    t.integer  "state",      default: 0, null: false
     t.integer  "position"
     t.integer  "capacity"
     t.datetime "created_at"
@@ -73,6 +74,7 @@ ActiveRecord::Schema.define(version: 20150123211315) do
     t.integer  "package_type_id"
     t.integer  "batch_id"
     t.integer  "quantity"
+    t.integer  "state",           default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -87,6 +89,7 @@ ActiveRecord::Schema.define(version: 20150123211315) do
 
   create_table "process_types", force: true do |t|
     t.string   "name"
+    t.integer  "sort_order"
     t.boolean  "secure",     default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"

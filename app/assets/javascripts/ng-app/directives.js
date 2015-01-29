@@ -40,8 +40,8 @@ angular.module('AngularUpstart.directives', [])
           scope.$watch('details_category', function(value){
             $(element).hide();
             $timeout( function(){
-              $(element).fadeIn(300);
-            }, 300);
+              $(element).fadeIn(200);
+            }, 100);
           });
 
         }

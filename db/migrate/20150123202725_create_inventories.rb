@@ -4,6 +4,7 @@ class CreateInventories < ActiveRecord::Migration
       t.integer :package_type_id
       t.integer :batch_id
       t.integer :quantity
+      t.integer :state, null: false, default: 0
       t.timestamps
     end
   end

@@ -15,7 +15,7 @@
   %modal{:title=>'{{selected_batch.flavor.name}}', :visible=>"$parent.showModal"}
     .modal-header
       %button.close{"aria-hidden"=>"true", "data-dismiss"=>"modal", :type=>"button", 'ng-click'=>'hideModal()'} ×
-      %h2.modal-title{style: 'display:inline;'}
+      %h2.modal-title{style: 'display:inline; color:{{selected_batch.flavor.color.secondary}}; '}
         {{selected_batch.flavor.name}}
       %span
         %b
@@ -23,20 +23,28 @@
     .modal-body
 
       %ul.nav.nav-tabs
-        %li{:role=>"batch_details", 'ng-click'=>'detailsNav("fermentation")', 'ng-class'=>'{active: details_category=="fermentation"}'}
-          %a{:href=>"#"} Fermentation
+        %li{:role=>"batch_details", 'ng-click'=>'detailsNav("overview")', 'ng-class'=>'{active: details_category=="overview"}'}
+          %a{:href=>"#"} Overview
         %li{:role=>"batch_details", 'ng-click'=>'detailsNav("readings")', 'ng-class'=>'{active: details_category=="readings"}'}
           %a{:href=>"#"} Readings
+        %li{:role=>"batch_details", 'ng-click'=>'detailsNav("fermentation")', 'ng-class'=>'{active: details_category=="fermentation"}'}
+          %a{:href=>"#"} Process
+        %li{:role=>"batch_details", 'ng-click'=>'detailsNav("settings")', 'ng-class'=>'{active: details_category=="settings"}'}
+          %a{:href=>"#"} Settings
         %li{:role=>"batch_details", 'ng-click'=>'detailsNav("packaging")', 'ng-class'=>'{active: details_category=="packaging"}'}
           %a{:href=>"#"} Packaging
         %li{:role=>"batch_details", 'ng-click'=>'detailsNav("comments")', 'ng-class'=>'{active: details_category=="comments"}'}
           %a{:href=>"#"} Comments
 
 
+      .batch-details{'ng-show'=>'details_category == "overview"'}
+        #overview{'ng-include'=>"'batches/_overview.html'"}
       .batch-details{'ng-show'=>'details_category == "fermentation"'}
         #fermentation{'ng-include'=>"'batches/_fermentation.html'"}
       .batch-details{'ng-show'=>'details_category == "readings"'}
         #readings{'ng-include'=>"'batches/_readings.html'"}
+      .batch-details{'ng-show'=>'details_category == "settings"'}
+        #settings{'ng-include'=>"'batches/_settings.html'"}
       .batch-details{'ng-show'=>'details_category == "packaging"'}
         #packaging{'ng-include'=>"'batches/_inventories.html'"}
       .batch-details{'ng-show'=>'details_category == "comments"'}

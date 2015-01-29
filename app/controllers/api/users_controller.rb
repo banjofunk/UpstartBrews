@@ -1,12 +1,18 @@
 class Api::UsersController < Api::BaseController
+  skip_authorize_resource :only => [:show ]
 
   def show
     render :json => {:info => "Current User", :user => current_user}, :status => 200
   end
 
   def ability
-    ability = Ability.new(current_user).as_json
-    render :json => {:ability => ability, :roles => current_user.roles}
+    if current_user
+      ability = Ability.new(current_user).as_json
+      render :json => {:ability => ability, :roles => current_user.roles}
+    else
+      ability = Ability.new().as_json
+      render :json => {:ability => ability, :roles => []}
+    end
   end
 
   def roles

@@ -5,10 +5,10 @@
       .col-md-12
         .process-actions{'ng-if'=>'canCan("manage", "BatchProcess")'}
           %ul.list-unstyled
-            %li.pull-left{"ng-repeat" => "(process, currentlyOn) in selected_batch.all_processes"}
+            %li.pull-left{"ng-repeat" => "process in selected_batch.all_processes | orderBy:order"}
               %form{:role => "form"}
-                %button{:type=>"submit", :class=>"btn btn-success", "ng-click"=>"startProcess(selected_batch.id, process)", 'ng-show'=>'!currentlyOn'} start {{process}}
-                %button{:type=>"submit", :class=>"btn btn-danger", "ng-click"=>"stopProcess(process)", 'ng-show'=>'currentlyOn'} stop {{process}}
+                %button{:type=>"submit", :class=>"btn btn-success", "ng-click"=>"startProcess(process)", 'ng-show'=>'!process.currently_on'} start {{process.name}}
+                %button{:type=>"submit", :class=>"btn btn-danger", "ng-click"=>"stopProcess(process.name)", 'ng-show'=>'process.currently_on'} stop {{process.name}}
           .clearfix
       %br
     .row
@@ -39,7 +39,7 @@
                 .show-toggle.process-times
                   {{process.stopped || process.type + " is on..."}}
                 .edit-toggle{:style => 'display:none;'}
-                  %input.form-control.edit_process{:placeholder => "stopped", "ng-model"=>"process.stopped"}
+                  %input.form-control.edit_process{:placeholder => "stopped", "ng-model"=>"process.stopped", 'ng-if'=>'process.stopped'}
               %td
                 .process-duration
                   {{process.duration}}

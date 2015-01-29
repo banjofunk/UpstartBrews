@@ -8,6 +8,23 @@ class Batch < ActiveRecord::Base
 
   after_create :create_inventories
 
+  # scope :brewing, lambda { where(:state => BREWING)}
+  # scope :fermenting, lambda { where(:state => FERMENTING)}
+  # scope :carbonating, lambda { where(:state => CARBONATING)}
+  # scope :bottling, lambda { where(:state => BOTTLING)}
+  # scope :packaged, lambda { where(:state => PACKAGED)}
+
+  STATES = ['brewing', 'fermenting', 'carbonating', 'bottling', 'packaged']
+  STATES.to_enum.with_index(0).each { |v, idx| self.const_set(v.to_s.upcase, idx) }
+
+  def state_name
+    STATES[self.state]
+  end
+
+  def inventory_set
+    self.inventories.estimated.count == 0
+  end
+
   private
 
   def create_inventories

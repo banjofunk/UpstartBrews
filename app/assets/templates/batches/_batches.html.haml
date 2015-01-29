@@ -1,28 +1,62 @@
 .batches_container.ui-sortable{"ng-model"=>"batches"}
   .batch_container.well.pull-left{"ng-repeat" => "batch in batches", :id => "{{batch.fermenter}}"}
-    .batch_header.row
-      .col-md-4
-        &#35;{{batch.fermenter}}
-      .col-md-8
-        %span.details
-          %a{href:"#", 'ng-click' => 'toggleModal(batch.id);'}
-            details
-    .flavor_container.row{style: 'background-color:{{batch.flavor.color}};'}
-      .col-md-6
-        %h2
-          {{batch.flavor.abv}}
-      .col-md-6
-        %span.days
-          %b
-            {{batch.days_ago}}
-        %span
-          %b
-            days
-    .row
-      %br
-      .col-md-12
-        %span
-          br:
-          %b {{batch.last_brix}}
-          , ph:
-          %b {{batch.last_ph}}
+    .full_batch{'ng-if'=>'batch.full'}
+      .batch_header.row
+        .col-md-4
+          %span
+            %b
+              &#35;{{batch.fermenter}}
+        .col-md-8
+          %button.btn.btn-xs.btn-primary.details{'ng-click' => 'toggleModal(batch.id);'}
+            %span
+              details
+      .flavor_container.row{style: 'background-color:{{batch.flavor.color.primary}};border:2px solid {{batch.flavor.color.secondary}}; '}
+        .col-md-6
+          %h2
+            {{batch.flavor.abv}}
+        .col-md-6
+          %span.days
+            %b
+              {{batch.days_ago}}
+          %span
+            %b
+              days
+      .row.last-reading
+        .col-md-12
+          %span
+            br:
+            %b {{batch.last_brix}}
+            , ph:
+            %b {{batch.last_ph}}
+
+    .other_batch{'ng-if'=>'!batch.full'}
+      .batch_header.row
+        .col-md-4
+          %span
+            %b
+              &#35;{{batch.fermenter}}
+        .col-md-8
+          .btn-group
+            %button.btn.btn-xs.btn-default.dropdown-toggle.actions{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button", style: 'border:1px solid {{batch.flavor.color.secondary}};'}
+              %span
+                actions
+            %ul.dropdown-menu{:role => "menu"}
+              %li.text-center{style: 'background-color:#9CC5E7'}
+                %a{:href => "#"} Brew
+              %li.text-center{style: 'background-color:#8AD38A;'}
+                %a{:href => "#"} Clean
+
+
+      .row{style: 'border:2px solid {{batch.flavor.color.secondary}}; margin-top:15px;'}
+        .other_status
+          .text-center
+            %h2{style: 'color:{{batch.flavor.color.primary}};'}
+              {{batch.fermenter_state}}
+
+      .row.last-reading
+        .col-md-12.text-center
+          %span
+            %a
+              %b
+                comments
+

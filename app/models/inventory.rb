@@ -4,6 +4,11 @@ class Inventory < ActiveRecord::Base
 
   scope :by_package_type, lambda { joins(:package_type).order('package_types.sort_order') }
   scope :kind, lambda { |type| joins(:package_type).where("package_types.name = ?", type) }
+  scope :estimated, lambda { where(:state => Inventory::ESTIMATED)}
+
+
+  STATES = ['estimated', 'active']
+  STATES.to_enum.with_index(0).each { |v, idx| self.const_set(v.to_s.upcase, idx) }
 
   def flavor
     self.batch.flavor.name

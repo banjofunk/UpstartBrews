@@ -1,5 +1,5 @@
 body {
-  background:#333 !important;
+  background:#2F3033 !important;
   padding:0 !important;
   margin:0 !important;
 }
@@ -28,6 +28,7 @@ nav {
   top:-20px;
   margin-bottom:0;
 }
+
 .alert.alert-danger {
   position:relative;
   top:-30px;
@@ -40,6 +41,33 @@ nav {
   display:none;
 }
 
+.sign-in-container {
+  .form_container input{
+    font-size: 18px;
+    margin-bottom:12px;
+    height: 40px;
+  }
+  .form_container label{
+    font-size: 16px;
+    text-align: right;
+  }
+  .form_container button{
+    font-size: 18px;
+    width: 100px;
+    height: 40px;
+  }
+  .sign-up{
+    text-align: left;
+    margin-left:-12px;
+  }
+  .sign-in-header {
+    padding-top:0px;
+    line-height:1px;
+    margin-top:-20px;
+    margin-bottom:20px;
+  }
+}
+
 .batches_container{
   width:1000px;
   margin: 0 auto;
@@ -49,6 +77,15 @@ nav {
   .row{
     border-radius:5px;
   }
+  .other_status{
+    height:63px;
+    padding-top:12px;
+
+    h2 {
+      margin:0;
+    }
+  }
+
   .batch_container {
     height:155px;
     width: 145px;
@@ -57,16 +94,72 @@ nav {
       margin-top:-15px;
       margin-bottom:15px;
       .details {
-        font-size:18px;
+        width:74px;
+        background-color:#9CC5E7;
+        border: 1px solid #074171;
+        padding:0 0 2px 0;
+        letter-spacing:.5px;
+        span {
+          color:black;
+          font-size:15px;
+          font-weight:500;
+        }
+      }
+      .actions {
+        width:74px;
+        padding:0 0 2px 0;
+        letter-spacing:.5px;
+        span {
+          color:black;
+          font-size:15px;
+          font-weight:500;
+        }
+        &:hover, &:active, &:visited {
+          background-color:white;
+        }
+      }
+      .dropdown-menu{
+        position:absolute;
+        top: -8px;
+        height: 156px;
+        left: -65px;
+        min-width:100px;
+        width: 146px;
+        padding:0;
+
+        li {
+          font-size: 30px;
+          border-bottom: solid 2px black;
+          a {
+            height:78px;
+            padding-top:17px;
+          }
+          a:hover {
+            background-color:rgba(0, 0, 0, .1)
+          }
+        }
+        li:first-child {
+          border-top-left-radius:4px;
+          border-top-right-radius:4px;
+        }
+        li:last-child {
+          border-bottom-left-radius:4px;
+          border-bottom-right-radius:4px;
+          border-bottom:none;
+        }
       }
     }
+    .last-reading {
+      margin-top:10px;
+    }
   }
+
   .flavor_container {
     padding:12px 2px 10px 2px;
     text-align:center;
     h2 {
       display:inline;
-      color:#333333;
+      color:#333;
     }
     span.days {
       font-size:22px;
@@ -79,9 +172,10 @@ nav {
 .fermentation-container {
   min-height:360px;
   .process-actions {
+    margin-bottom:10px;
     button {
-      width:130px;
-      margin-left:20px;
+      width:149px;
+      margin-left:15px;
     }
   }
 
@@ -165,6 +259,12 @@ nav {
 
   .edit-actions {
     margin-right:20px;
+  }
+  .inventories-actions {
+    button {
+      width:80%;
+      margin-top:15px;
+    }
   }
 
   .inventory-img-container {

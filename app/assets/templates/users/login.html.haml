@@ -1,67 +1,43 @@
-:css
-  .form_container input{
-    font-size: 18px;
-    margin-bottom:12px;
-    height: 40px;
-  }
-  .form_container label{
-    font-size: 16px;
-    text-align: right;
-  }
-  .form_container button{
-    font-size: 18px;
-    width: 100px;
-    height: 40px;
-  }
-  .sign-up{
-    text-align: left;
-    margin-left:-12px;
-  }
-  .sign-in-header {
-    padding-top:0px;
-    line-height:1px;
-    margin-top:-20px;
-    margin-bottom:20px;
-  }
-.row
-  %br
-  %br
-  %alerts
-  .col-md-3{:style => 'text-align: center;'}
-  .col-md-6{:style => 'text-align: center;'}
-    .well
-      .row
-        .col-md-12.sign-in-header
-          .alert.alert-warning{"ng-show" => "authReason"}
-            {{authReason}}
-          .alert.alert-error{"ng-show" => "authError"}
-            {{authError}}
-          %br/
-          %h1 Sign in
-      .row
-        .col-md-3
-        .col-md-6
-          .form_container
-            %form.auth-form{:name => "loginForm"}
-              .row
-                .col-md-2
-                  %label{:for => 'email'}
-                    %span.pull-right email:
-                .col-md-10
-                  %input.input-block-level.form-control.new_user{:autofocus => "", "ng-model" => "user.email", :placeholder => "someone@example.com", :required => "required", :type => "text", :style => 'text-align:left;'}
-              .row
-                .col-md-2
-                  %label{:for => 'password'}
-                    %span.pull-right password:
-                .col-md-10
-                  %input#password.input-block-level.form-control.new_user{:placeholder => "password", :type => 'password', "ng-model"=>"user.password", :required => 'required', :style => 'text-align:left;'}
-              .row
-                .col-md-2
-                .col-md-10
-                  %button.pull-left.btn-large.btn-primary{"ng-click" => "login(user)", "ng-disabled" => "loginForm.$invalid", :type => "submit"}
-                    %span submit
-                  .clearfix
-              .row
-                .col-md-2
-                .col-md-10.sign-up
-                  %a.btn.btn-link{:href => "/users/register"} sign up
+.sign-in-container
+  .row
+    %br
+    %br
+    %alerts
+    .col-md-3{:style => 'text-align: center;'}
+    .col-md-6{:style => 'text-align: center;'}
+      .well
+        .row
+          .col-md-12.sign-in-header
+            .alert.alert-warning{"ng-show" => "authReason"}
+              {{authReason}}
+            .alert.alert-error{"ng-show" => "authError"}
+              {{authError}}
+            %br/
+            %h1 Sign in
+        .row
+          .col-md-3
+          .col-md-6
+            .form_container
+              %form.auth-form{:name => "loginForm"}
+                .row
+                  .col-md-2
+                    %label{:for => 'email'}
+                      %span.pull-right email:
+                  .col-md-10
+                    %input.input-block-level.form-control.new_user{:autofocus => "", "ng-model" => "user.email", :placeholder => "someone@example.com", :required => "required", :type => "text", :style => 'text-align:left;'}
+                .row
+                  .col-md-2
+                    %label{:for => 'password'}
+                      %span.pull-right password:
+                  .col-md-10
+                    %input#password.input-block-level.form-control.new_user{:placeholder => "password", :type => 'password', "ng-model"=>"user.password", :required => 'required', :style => 'text-align:left;'}
+                .row
+                  .col-md-2
+                  .col-md-10
+                    %button.pull-left.btn-large.btn-primary{"ng-click" => "login(user)", "ng-disabled" => "loginForm.$invalid", :type => "submit"}
+                      %span submit
+                    .clearfix
+                .row
+                  .col-md-2
+                  .col-md-10.sign-up
+                    %a.btn.btn-link{:href => "/users/register"} sign up

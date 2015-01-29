@@ -65,6 +65,19 @@ angular.module('AngularUpstart')
       $scope.update_queue.push(inventory.id)
     }
 
+    $scope.setInventories = function() {
+      id = $scope.selected_batch.id
+    $http.put('/api/batches/' + id + '/set_inventories', {})
+      .success(function(data, status, headers, config) {
+        $scope.selected_batch.inventory_set = data.inventory_set
+        return true
+      })
+      .error(function(data, status, headers, config) {
+        Alert.add("danger", 'sorry, you are not authorized to set inventories', 4000);
+      });
+
+    }
+
     $scope.$watch('update_queue.length', debounceSaveUpdates)
 
   });

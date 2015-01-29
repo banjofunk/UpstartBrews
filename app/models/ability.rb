@@ -1,7 +1,7 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(current_user)
+  def initialize(current_user=nil)
     can :create, User
     if current_user
       can :read, Batch

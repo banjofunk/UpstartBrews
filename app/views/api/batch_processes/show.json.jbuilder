@@ -1,0 +1,1 @@
+json.partial! 'batch_process', batch_process: @batch_process

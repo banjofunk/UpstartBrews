@@ -11,11 +11,17 @@ angular.module('AngularUpstart')
       }
     });
 
-    $scope.startProcess = function(batchId, processType) {
-      $http.post('/api/batches/' + batchId + '/batch_processes/start_batch_process', { batch_id: batchId, process_type: processType }).
+    $scope.startProcess = function(process) {
+      $http.post('/api/batches/' + $scope.selected_batch.id + '/batch_processes/start_batch_process', { batch_id: $scope.selected_batch.id, process_type: process.name }).
         success(function(data, status, headers, config) {
-          $scope.$parent.selected_batch.all_processes[data.type] = true
-          $scope.$parent.selected_batch.batch_processes.push(data)
+          var all_proc = $scope.selected_batch.all_processes
+          for(var i = 0, len = all_proc.length; i < len; i++) {
+            if (all_proc[i].name === data.type) {
+              all_proc[i].currently_on = true
+              break;
+            }
+          }
+          $scope.selected_batch.batch_processes.push(data)
         }).
         error(function(data, status, headers, config) {
           Alert.add("danger", 'sorry, you are not authorized to start fermentation processes', 4000);
@@ -25,7 +31,13 @@ angular.module('AngularUpstart')
     $scope.stopProcess = function(process) {
       $http.post('/api/batches/' + $scope.selected_batch.id + '/batch_processes/end_batch_process', { kind: process }).
         success(function(data, status, headers, config) {
-          $scope.$parent.selected_batch.all_processes[data.type] = false
+          var all_proc = $scope.selected_batch.all_processes
+          for(var i = 0, len = all_proc.length; i < len; i++) {
+            if (all_proc[i].name === data.type) {
+              all_proc[i].currently_on = false
+              break;
+            }
+          }
           var processes = $scope.selected_batch.batch_processes
           for(var i = 0, len = processes.length; i < len; i++) {
             if (processes[i].id === data.id) {
@@ -42,6 +54,13 @@ angular.module('AngularUpstart')
     $scope.removeProcess = function(process){
       $http.delete('/api/batches/' + process.batch_id + '/batch_processes/' + process.id, {}).
         success(function(data, status, headers, config) {
+          var all_proc = $scope.selected_batch.all_processes
+          for(var i = 0, len = all_proc.length; i < len; i++) {
+            if (all_proc[i].name === process.type) {
+              all_proc[i].currently_on = data
+              break;
+            }
+          }
           var index = $scope.selected_batch.batch_processes.indexOf(process)
           $scope.selected_batch.batch_processes.splice(index, 1)
         }).

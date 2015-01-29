@@ -38,6 +38,15 @@ class Api::BatchesController < ApplicationController
     render :partial => "api/comments/comment.json", :locals => { :comment => comment }
   end
 
+  def set_inventories
+    batch = Batch.find(params[:batch_id])
+     batch.inventories.each do |inventory|
+      inventory.state = Inventory::ACTIVE
+      inventory.save
+    end
+    render :partial => "api/batches/batch.json", :locals => { :batch => batch }
+  end
+
   private
 
   def set_batch

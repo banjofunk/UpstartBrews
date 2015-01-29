@@ -3,7 +3,7 @@ class CreateBatches < ActiveRecord::Migration
     create_table :batches do |t|
         t.integer :flavor_id
         t.integer :fermenter_id
-        t.integer :state
+        t.integer :state, null: false, :default => 0
         t.datetime :brew_date
         t.timestamps
     end
