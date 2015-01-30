@@ -217,6 +217,9 @@ nav {
     background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
     background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
   }
+  .toggle-container {
+    height:45px;
+  }
   .edit_flavor {
     display:inline;
     width:124px;
@@ -319,6 +322,29 @@ nav {
 }
 
 .settings-container {
+  .processes {
+    input {
+      width: 144px;
+    }
+    td {
+      width: 98px;
+    }
+    .show-toggle{
+      padding-top:7px;
+      padding-right:2px;
+      height:34px;
+    }
+    .process-times {
+      width: 145px;
+    }
+    .process-small {
+      width: 98px;
+    }
+    .process-duration {
+      width: 145px;
+    }
+  }
+
   min-height:360px;
   h3 {
     margin:0px;
@@ -351,6 +377,15 @@ nav {
       td.quantity {
         width:67px;
       }
+      .show-quantity {
+        margin-right:3px;
+      }
+
+    }
+  }
+  .processes {
+    li {
+      margin-right:42px;
     }
   }
 }

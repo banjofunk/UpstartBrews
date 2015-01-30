@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20150130192449) do
   create_table "process_types", force: true do |t|
     t.string   "name"
     t.integer  "sort_order"
+    t.integer  "category"
     t.boolean  "secure",     default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"

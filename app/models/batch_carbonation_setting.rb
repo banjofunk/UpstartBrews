@@ -3,7 +3,7 @@ class BatchCarbonationSetting < ActiveRecord::Base
 
   scope :kind, lambda { |short_name| where(:kind => (KINDS.select {|kind| kind[:short_name] == short_name}).first.try(:[], :kind_id)) }
   KINDS = [
-            {:kind_id=>0, :short_name=>'batch_gallons', :desc=>'Gallons to bright:', :unit => 'gallons'},
+            {:kind_id=>0, :short_name=>'batch_gallons', :desc=>'gallons to bright', :unit => 'gallons'},
             {:kind_id=>1, :short_name=>'bright_purge', :desc=>'purged head for', :unit => 'seconds'},
             {:kind_id=>2, :short_name=>'bright_head', :desc=>'head pressure', :unit => 'psi'},
             {:kind_id=>3, :short_name=>'bright_stone', :desc=>'stone pressure', :unit => 'psi'}

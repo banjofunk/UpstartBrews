@@ -3,26 +3,12 @@ class Api::BatchProcessesController < ApplicationController
 
   before_filter :determine_scope, :only => [:index, :end_batch_process]
 
-  def start_batch_process
-    params.permit!
-    process_type_id = ProcessType.find_by_name(params[:process_type]).id
-    @batch_process = BatchProcess.create(:batch_id => params[:batch_id], :process_type_id => process_type_id, :started => Time.current)
-    render :show
-  end
-
-  def end_batch_process
-    params.permit!
-    @batch_process = @scope.current.kind(params[:kind]).last
-    @batch_process.stopped = Time.current
-    @batch_process.save
-    render :show
-  end
-
   def index
+    @process_types = ProcessType.category(params[:category])
     if can? :manage, BatchProcess
-      @batch_processes = @scope.joins(:process_type).order_kind
+      @batch_processes = @scope.category(params[:category]).joins(:process_type).order_kind
     else
-      @batch_processes = @scope.secured.joins(:process_type).order_kind
+      @batch_processes = @scope.category(params[:category]).secured.joins(:process_type).order_kind
     end
 
   end
@@ -55,6 +41,21 @@ class Api::BatchProcessesController < ApplicationController
     @batch_process.destroy
     currently_on = Batch.find(params[:batch_id]).batch_processes.kind(@batch_process.process_type.name).current.count > 0
     render :json => currently_on
+  end
+
+  def start_batch_process
+    params.permit!
+    process_type_id = ProcessType.find_by_name(params[:process_type]).id
+    @batch_process = BatchProcess.create(:batch_id => params[:batch_id], :process_type_id => process_type_id, :started => Time.current)
+    render :show
+  end
+
+  def end_batch_process
+    params.permit!
+    @batch_process = @scope.current.kind(params[:kind]).last
+    @batch_process.stopped = Time.current
+    @batch_process.save
+    render :show
   end
 
   protected

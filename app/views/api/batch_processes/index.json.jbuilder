@@ -1,5 +1,5 @@
 json.all_processes do
-  json.array! ProcessType.all.each do |type|
+  json.array! @process_types.each do |type|
     json.name type.name
     json.currently_on @batch_processes.kind(type.name).current.count > 0
     json.order type.sort_order
