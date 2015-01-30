@@ -16,14 +16,20 @@ Rails.application.routes.draw do
       put 'users' => 'admin#update_user'
       delete 'users/:id' => 'admin#delete_user'
     end
-    match 'fermenters/sort' => 'fermenters#sort', :via => 'post'
     resources :fermenters, only: [] do
       post :set_fermenter_state
     end
+    match 'fermenters/sort' => 'fermenters#sort', :via => 'post'
     resources :batches do
       resources :batch_readings
       resources :comments
       resources :batch_processes
+      resources :batch_bottle_settings do
+        put :update_quantity
+      end
+      resources :batch_carbonation_settings do
+        put :update_quantity
+      end
       match 'batch_processes/start_batch_process' => 'batch_processes#start_batch_process', :via => 'post'
       match 'batch_processes/end_batch_process' => 'batch_processes#end_batch_process', :via => 'post'
       put :set_inventories

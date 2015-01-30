@@ -5,6 +5,7 @@ class CreateBatches < ActiveRecord::Migration
         t.integer :fermenter_id
         t.integer :state, null: false, :default => 0
         t.datetime :brew_date
+        t.datetime :expiration_date
         t.timestamps
     end
   end

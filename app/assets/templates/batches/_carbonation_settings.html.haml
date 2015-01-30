@@ -1,0 +1,31 @@
+.settings-container{'ng-controller' => "CarbonationSettingsCtrl"}
+  %br
+  .row
+    .col-md-12
+      %table.table.settings-table.fade-in
+        %tbody
+          %tr.toggle-container{'ng-repeat' => 'carb_setting in selected_batch.carbonation_settings'}
+            %td.text-right
+              %h3{style: 'padding-right:3px;'}
+                {{carb_setting.kind.desc}}
+            %td.text-center.quantity
+              .show-toggle
+                %h3
+                  {{carb_setting.quantity}}
+              .edit-toggle{style: 'display:none;'}
+                %input.form-control.text-center{type: 'number', placeholder: '0', 'ng-model'=>'carb_setting.quantity'}
+            %td.text-left
+              %h3
+                {{carb_setting.kind.unit}}
+            %td
+              .show-toggle{'ng-if' => 'canCan("manage", "Batchpackage")'}
+                %a{href: '#', 'ng-click'=>'increaseQty(carb_setting)'}
+                  %span.glyphicon.glyphicon-chevron-up
+                %a.toggle-edit
+                  %button.btn.btn-primary.btn-sm{type: 'button'} edit
+                %a{href: '#', 'ng-click'=>'decreaseQty(carb_setting)'}
+                  %span.glyphicon.glyphicon-chevron-down
+              .edit-toggle{style: 'display:none;'}
+                %a.toggle-edit{'ng-click'=>'editQty(carb_setting)'}
+                  %span.glyphicon.glyphicon-ok-circle
+

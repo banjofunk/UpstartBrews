@@ -29,10 +29,12 @@
           %a{:href=>"#"} Readings
         %li{:role=>"batch_details", 'ng-click'=>'detailsNav("fermentation")', 'ng-class'=>'{active: details_category=="fermentation"}'}
           %a{:href=>"#"} Processes
-        %li{:role=>"batch_details", 'ng-click'=>'detailsNav("settings")', 'ng-class'=>'{active: details_category=="settings"}'}
-          %a{:href=>"#"} Equipment Settings
-        %li{:role=>"batch_details", 'ng-click'=>'detailsNav("packaging")', 'ng-class'=>'{active: details_category=="packaging"}'}
-          %a{:href=>"#"} Packaging
+        %li{:role=>"batch_details", 'ng-click'=>'detailsNav("carb_settings")', 'ng-class'=>'{active: details_category=="carb_settings"}'}
+          %a{:href=>"#"} CO2
+        %li{:role=>"batch_details", 'ng-click'=>'detailsNav("bottle_settings")', 'ng-class'=>'{active: details_category=="bottle_settings"}'}
+          %a{:href=>"#"} Bottling
+        %li{:role=>"batch_details", 'ng-click'=>'detailsNav("inventory")', 'ng-class'=>'{active: details_category=="inventory"}'}
+          %a{:href=>"#"} Inventory
         %li{:role=>"batch_details", 'ng-click'=>'detailsNav("comments")', 'ng-class'=>'{active: details_category=="comments"}'}
           %a{:href=>"#"} Comments
 
@@ -43,10 +45,12 @@
         #fermentation{'ng-include'=>"'batches/_fermentation.html'"}
       .batch-details{'ng-show'=>'details_category == "readings"'}
         #readings{'ng-include'=>"'batches/_readings.html'"}
-      .batch-details{'ng-show'=>'details_category == "settings"'}
-        #settings{'ng-include'=>"'batches/_settings.html'"}
-      .batch-details{'ng-show'=>'details_category == "packaging"'}
-        #packaging{'ng-include'=>"'batches/_inventories.html'"}
+      .batch-details{'ng-show'=>'details_category == "carb_settings"'}
+        #settings{'ng-include'=>"'batches/_carbonation_settings.html'"}
+      .batch-details{'ng-show'=>'details_category == "bottle_settings"'}
+        #settings{'ng-include'=>"'batches/_bottle_settings.html'"}
+      .batch-details{'ng-show'=>'details_category == "inventory"'}
+        #inventory{'ng-include'=>"'batches/_inventories.html'"}
       .batch-details{'ng-show'=>'details_category == "comments"'}
         #comments{'ng-include'=>"'batches/_comments.html'"}
 

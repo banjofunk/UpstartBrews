@@ -318,6 +318,43 @@ nav {
   }
 }
 
+.settings-container {
+  min-height:360px;
+  h3 {
+    margin:0px;
+    font-size:20px;
+  }
+  table.settings-table {
+    margin:0 auto;
+    tr {
+      td {
+        height:50px;
+        vertical-align:middle;
+
+        a button{
+          width:60px;
+          font-size:14px;
+          margin:0 15px;
+        }
+        span.glyphicon {
+          font-size:20px;
+        }
+        input{
+          width:50px;
+          height:30px;
+          display:inline;
+          font-size:20px;
+          padding:0px 2px 2px 0px;
+          font-weight: 500;
+        }
+      }
+      td.quantity {
+        width:67px;
+      }
+    }
+  }
+}
+
 .inventories-container {
   min-height:360px;
   h1 {

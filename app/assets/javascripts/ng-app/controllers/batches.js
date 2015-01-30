@@ -87,6 +87,7 @@ angular.module('AngularUpstart')
         success(function(data, status, headers, config) {
           index = $scope.batches.indexOf(batch)
           $scope.batches[index] = data
+          $scope.showModal = false
           return true
         }).
         error(function(data, status, headers, config) {

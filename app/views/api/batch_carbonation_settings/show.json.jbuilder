@@ -1,0 +1,1 @@
+json.partial! 'batch_carbonation_setting', batch: @batch_carbonation_setting

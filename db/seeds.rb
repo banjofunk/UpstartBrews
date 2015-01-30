@@ -41,11 +41,9 @@ ferm_12 = Fermenter.create(:flavor_id => rose.id,:capacity => 250, :position => 
 
 #lemon
 Batch.create(:flavor_id => lemon.id, :fermenter_id => ferm_1.id, :state => 1, :brew_date => (Time.current-rand(1..20).days))
-Batch.create(:flavor_id => lemon.id, :fermenter_id => ferm_9.id, :state => 1, :brew_date => (Time.current-rand(1..20).days))
 Batch.create(:flavor_id => lemon.id, :fermenter_id => ferm_5.id, :state => 1, :brew_date => (Time.current-rand(1..20).days))
 
 #berry
-Batch.create(:flavor_id => berry.id, :fermenter_id => ferm_2.id, :state => 1, :brew_date => (Time.current-rand(1..20).days))
 Batch.create(:flavor_id => berry.id, :fermenter_id => ferm_10.id, :state => 1, :brew_date => (Time.current-rand(1..20).days))
 Batch.create(:flavor_id => berry.id, :fermenter_id => ferm_6.id, :state => 1, :brew_date => (Time.current-rand(1..20).days))
 
@@ -55,7 +53,6 @@ Batch.create(:flavor_id => mint.id, :fermenter_id => ferm_11.id, :state => 1, :b
 Batch.create(:flavor_id => mint.id, :fermenter_id => ferm_7.id, :state => 1, :brew_date => (Time.current-rand(1..20).days))
 
 #rose
-# Batch.create(:flavor_id => rose.id, :fermenter_id => ferm_4.id, :state => 1, :brew_date => (Time.current-rand(1..20).days))
 Batch.create(:flavor_id => rose.id, :fermenter_id => ferm_12.id, :state => 1, :brew_date => (Time.current-rand(1..20).days))
 Batch.create(:flavor_id => rose.id, :fermenter_id => ferm_8.id, :state => 1, :brew_date => (Time.current-rand(1..20).days))
 
@@ -66,10 +63,12 @@ Batch.all.each do |batch|
   batch.batch_readings.create(:ph => "3.#{rand(2..3)}".to_f.round(1), :temp => "#{rand(68..77)}".to_f.round(1), :brix => "6.#{rand(3..6)}".to_f.round(1), :reading_date => Time.current-rand(3..5).days)
   batch.batch_readings.create(:ph => "3.#{rand(0..2)}".to_f.round(1), :temp => "#{rand(68..77)}".to_f.round(1), :brix => "6.#{rand(0..2)}".to_f.round(1), :reading_date => Time.current-rand(0..2).days)
 
-  batch.comments.create(:user_id => admin.id, :text => "this tastes funky")
-  batch.comments.create(:user_id => brewer.id, :text => "nah, it'll be fine")
-  batch.comments.create(:user_id => admin.id, :text => "theres a fuck ton of fruit flies...")
-  batch.comments.create(:user_id => sales.id, :text => "whatever. sell it to whole foods.")
+  batch.comments.create(:user_id => admin.id, :text => "the brewery smells amazing after cookin this one up!", :created_at => Time.current-21.days)
+  batch.comments.create(:user_id => brewer.id, :text => "tests are moving along. still to sweet to taste", :created_at => Time.current-12.days)
+  batch.comments.create(:user_id => brewer.id, :text => "tastes amazing. still sweet, but it'll be a good batch", :created_at => Time.current-8.days)
+  batch.comments.create(:user_id => admin.id, :text => "Nice man! glad to hear it", :created_at => Time.current-7.days)
+  batch.comments.create(:user_id => brewer.id, :text => "pumping over to the bright tank. woot!", :created_at => Time.current-6.days)
+  batch.comments.create(:user_id => sales.id, :text => "Good. we need to sell it to whole foods.")
 
   batch.batch_processes.create(:process_type => circulation, :started => batch.brew_date + 4.days, :stopped => Time.current - 1.day)
   batch.batch_processes.create(:process_type => ventilation, :started => batch.brew_date + 2.days, :stopped => Time.current - 1.day)
@@ -97,6 +96,15 @@ finished_batch.comments.create(:user_id => brewer.id, :text => "tests are moving
 finished_batch.comments.create(:user_id => brewer.id, :text => "tastes amazing. still sweet, but it'll be a good batch", :created_at => Time.current-8.days)
 finished_batch.comments.create(:user_id => admin.id, :text => "Nice man! glad to hear it", :created_at => Time.current-7.days)
 finished_batch.comments.create(:user_id => brewer.id, :text => "pumping over to the bright tank. woot!", :created_at => Time.current-6.days)
+
+BatchCarbonationSetting::KINDS.each do |kind_hash|
+  finished_batch.batch_carbonation_settings.create_or_update_from_hash(:kind => kind_hash[:kind_id], :quantity => rand(1..27), :unit => kind_hash[:unit])
+end
+
+BatchBottleSetting::KINDS.each do |kind_hash|
+  finished_batch.batch_bottle_settings.create_or_update_from_hash(:kind => kind_hash[:kind_id], :quantity => rand(1..27), :unit => kind_hash[:unit])
+end
+
 
 
 

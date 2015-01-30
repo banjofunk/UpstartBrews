@@ -1,0 +1,31 @@
+.settings-container{'ng-controller' => "BottleSettingsCtrl"}
+  %br
+  .row
+    .col-md-12
+      %table.table.settings-table.fade-in
+        %tbody
+          %tr.toggle-container{'ng-repeat' => 'bottle_setting in selected_batch.bottle_settings'}
+            %td.text-right
+              %h3{style: 'padding-right:3px;'}
+                {{bottle_setting.kind.desc}}
+            %td.text-center.quantity
+              .show-toggle
+                %h3
+                  {{bottle_setting.quantity}}
+              .edit-toggle{style: 'display:none;'}
+                %input.form-control.text-center{type: 'number', placeholder: '0', 'ng-model'=>'bottle_setting.quantity'}
+            %td.text-left
+              %h3
+                {{bottle_setting.kind.unit}}
+            %td
+              .show-toggle{'ng-if' => 'canCan("manage", "Batchpackage")'}
+                %a{href: '#', 'ng-click'=>'increaseQty(bottle_setting)'}
+                  %span.glyphicon.glyphicon-chevron-up
+                %a.toggle-edit
+                  %button.btn.btn-primary.btn-sm{type: 'button'} edit
+                %a{href: '#', 'ng-click'=>'decreaseQty(bottle_setting)'}
+                  %span.glyphicon.glyphicon-chevron-down
+              .edit-toggle{style: 'display:none;'}
+                %a.toggle-edit{'ng-click'=>'editQty(bottle_setting)'}
+                  %span.glyphicon.glyphicon-ok-circle
+

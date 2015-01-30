@@ -3,7 +3,7 @@ angular.module('AngularUpstart')
     $scope.update_queue = [];
 
     $scope.$watch('details_category', function(newValue, oldValue) {
-      if(newValue == "packaging"){
+      if(newValue == "inventory"){
         $http.get('/api/inventories', {params: {batch_id: $scope.selected_batch.id}})
           .success(function(data, status, headers, config) {
             $scope.selected_batch.inventories = data;
