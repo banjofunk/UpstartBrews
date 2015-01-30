@@ -4,7 +4,7 @@
     .col-md-12
       %table.table.inventory-table.fade-in
         %tbody
-          %tr{'ng-repeat' => 'inventory in selected_batch.inventories'}
+          %tr.toggle-container{'ng-repeat' => 'inventory in selected_batch.inventories'}
             %td
               .inventory-img-container
                 %img{'src'=>'{{inventory.package_img}}'}

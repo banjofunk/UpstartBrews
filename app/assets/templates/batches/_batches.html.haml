@@ -1,13 +1,13 @@
 .batches_container.ui-sortable{"ng-model"=>"batches"}
-  .batch_container.well.pull-left{"ng-repeat" => "batch in batches", :id => "{{batch.fermenter}}"}
-    .full_batch{'ng-if'=>'batch.full'}
+  .batch_container.well.pull-left{"ng-repeat" => "batch in batches", :id => "{{batch.fermenter.id}}"}
+    .full_batch{'ng-if'=>'isFull(batch)'}
       .batch_header.row
         .col-md-4
           %span
             %b
-              &#35;{{batch.fermenter}}
+              &#35;{{batch.fermenter.id}}
         .col-md-8
-          %button.btn.btn-xs.btn-primary.details{'ng-click' => 'toggleModal(batch.id);'}
+          %button.btn.btn-xs.btn-primary.details{'ng-click' => 'toggleModal(batch);'}
             %span
               details
       .flavor_container.row{style: 'background-color:{{batch.flavor.color.primary}};border:2px solid {{batch.flavor.color.secondary}}; '}
@@ -29,34 +29,34 @@
             , ph:
             %b {{batch.last_ph}}
 
-    .other_batch{'ng-if'=>'!batch.full'}
+    .other_batch{'ng-if'=>'!isFull(batch)'}
       .batch_header.row
         .col-md-4
           %span
             %b
-              &#35;{{batch.fermenter}}
+              &#35;{{batch.fermenter.id}}
         .col-md-8
           .btn-group
             %button.btn.btn-xs.btn-default.dropdown-toggle.actions{"aria-expanded" => "false", "data-toggle" => "dropdown", :type => "button", style: 'border:1px solid {{batch.flavor.color.secondary}};'}
               %span
                 actions
             %ul.dropdown-menu{:role => "menu"}
-              %li.text-center{style: 'background-color:#9CC5E7'}
-                %a{:href => "#"} Brew
-              %li.text-center{style: 'background-color:#8AD38A;'}
+              %li.text-center.toggle-brew-view{style: 'background-color:#9CC5E7'}
+                %a Brew
+              %li.text-center{'ng-if'=>'!isClean(batch.fermenter)', style: 'background-color:#8AD38A;', 'ng-click'=>'changeFermenterState(batch, "clean")'}
                 %a{:href => "#"} Clean
+              %li.text-center{'ng-if'=>'isClean(batch.fermenter)', style: 'background-color:#DE5753;', 'ng-click'=>'changeFermenterState(batch, "dirty")'}
+                %a{:href => "#"} Dirty
 
 
       .row{style: 'border:2px solid {{batch.flavor.color.secondary}}; margin-top:15px;'}
         .other_status
           .text-center
             %h2{style: 'color:{{batch.flavor.color.primary}};'}
-              {{batch.fermenter_state}}
+              {{batch.fermenter.state}}
 
-      .row.last-reading
-        .col-md-12.text-center
+    .brew_batch{'ng-if'=>'!isFull(batch)', style:'display:none;'}
+      %ul.list-unstyled
+        %li.text-center{'ng-repeat'=>'flavor in flavors', style:'background-color: {{flavor.color.primary}};', 'ng-click'=>'addBatch(flavor, batch)'}
           %span
-            %a
-              %b
-                comments
-
+            {{flavor.abv}}

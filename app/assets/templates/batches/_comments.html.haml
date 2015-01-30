@@ -11,6 +11,11 @@
             &nbsp;{{comment.created_at}}
           %br
           .comment-text {{comment.text}}
+
+        %li{"ng-show"=>"!selected_batch.comments.length"}
+          %span
+            No comments so far...
+
       %hr
       %form{:role => "form"}
         .input-group

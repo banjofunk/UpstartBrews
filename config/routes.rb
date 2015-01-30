@@ -17,6 +17,9 @@ Rails.application.routes.draw do
       delete 'users/:id' => 'admin#delete_user'
     end
     match 'fermenters/sort' => 'fermenters#sort', :via => 'post'
+    resources :fermenters, only: [] do
+      post :set_fermenter_state
+    end
     resources :batches do
       resources :batch_readings
       resources :comments
@@ -24,6 +27,7 @@ Rails.application.routes.draw do
       match 'batch_processes/start_batch_process' => 'batch_processes#start_batch_process', :via => 'post'
       match 'batch_processes/end_batch_process' => 'batch_processes#end_batch_process', :via => 'post'
       put :set_inventories
+      post :clean_fermenter
       member do
         put :add_comment
       end

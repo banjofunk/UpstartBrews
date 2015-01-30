@@ -1,6 +1,50 @@
 .overview-container{'ng-controller' => "OverviewsCtrl"}
+  %br
   .row
-    %br
     .col-md-12
-      %h1 Overview
+      %form{:role => "form"}
+        .row
+          .col-md-3.text-right
+            %span.overview-label
+              fermenter:
+          .col-md-9
+            %h3
+              %b
+                &#35;{{selected_batch.fermenter.id}}
+        .row
+          .col-md-3.text-right
+            %span.overview-label
+              flavor:
+          .col-md-9.toggle-container
+            .show-toggle
+              %h3
+                %b
+                  {{selected_batch.flavor.name}}
+                %a
+                  %span.glyphicon.glyphicon-pencil.toggle-edit.actions
+            .edit-toggle{:style => 'display:none;'}
+              %select.edit_flavor{"ng-model"=>"flavor_id", 'ng-options'=>'flavor.id as flavor.name for flavor in flavors'}
+              %a{style:"position:relative;top:5px;"}
+                %span.glyphicon.glyphicon-ok-circle.toggle-edit.submit-edit{'ng-click'=>'updateFlavor()'}
+        .row
+          .col-md-3.text-right
+            %span.overview-label
+              brew date:
+          .col-md-9.toggle-container
+            .show-toggle
+              %h3
+                %b
+                  {{selected_batch.brew_date}}
+                %a
+                  %span.glyphicon.glyphicon-pencil.toggle-edit.actions
+            .edit-toggle{:style => 'display:none;'}
+              %input.form-control.edit_brew_date{:placeholder => "brew_date", "ng-model"=>"selected_batch.brew_date"}
+              %a
+                %span.glyphicon.glyphicon-ok-circle.toggle-edit.submit-edit{'ng-click'=>'updateBrewDate()'}
+  .row
+    %hr.styled
+
+    .col-md-3.text-right
+      %span.overview-label
+        recipe:
 

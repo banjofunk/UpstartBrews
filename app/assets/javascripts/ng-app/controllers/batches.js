@@ -7,13 +7,25 @@ angular.module('AngularUpstart')
         $scope.batches = data;
       })
 
+    $http.get('/api/flavors')
+      .success(function(data, status, headers, config) {
+        $scope.flavors = data;
+      })
+
     $scope.showModal = false;
-    $scope.toggleModal = function(batchId){
+    $scope.toggleModal = function(batch){
       $scope.details_category = "";
-      $http.get('/api/batches/' + batchId + '.json').
+      $http.get('/api/batches/' + batch.id + '.json').
         success(function(data, status, headers, config) {
           $scope.selected_batch = data;
-          $scope.details_category = "readings";
+          var batches = $scope.batches
+          for(var i = 0, len = batches.length; i < len; i++) {
+            if (batches[i].id === data.id) {
+              batches[i] = $scope.selected_batch
+              break;
+            }
+          }
+          $scope.details_category = "overview";
         })
       $scope.showModal = !$scope.showModal;
     };
@@ -35,10 +47,43 @@ angular.module('AngularUpstart')
       $scope.details_category = category
     }
 
-    $scope.addBatch = function(){
-      debugger
-      // $scope.batches.push({"id":1,"flavor":"lemon poop","created_at":"2014-12-17","batch_readings":[{"id":1,"reading_date":"2014-12-17","ph":0.0,"brix":10.0,"temp":10.0},{"id":2,"reading_date":"2014-12-16","ph":1.1,"brix":21.1,"temp":21.1},{"id":3,"reading_date":"2014-12-15","ph":2.2,"brix":32.2,"temp":32.2},{"id":4,"reading_date":"2014-12-14","ph":3.3,"brix":43.3,"temp":43.3},{"id":5,"reading_date":"2014-12-13","ph":4.4,"brix":54.4,"temp":54.4}]})
+    $scope.isFull = function(batch) {
+      return batch.fermenter.state=="full"
     }
+
+    $scope.isClean = function(fermenter) {
+      return fermenter.state=="clean"
+    }
+
+    $scope.addBatch = function(flavor, batch){
+      $http.post('/api/batches', {
+          fermenter_id: batch.fermenter.id,
+          flavor_id: flavor.id
+        }).
+        success(function(data, status, headers, config) {
+          index = $scope.batches.indexOf(batch)
+          $scope.batches[index] = data
+          return true
+        }).
+        error(function(data, status, headers, config) {
+          Alert.add("error", 'sorry, you are not authorized to re-order the tanks', 4000);
+        });
+    }
+
+    $scope.changeFermenterState = function(batch, state) {
+      $http.post('/api/fermenters/' + batch.fermenter.id + '/set_fermenter_state', {id: batch.fermenter.id, state_name: state}).
+        success(function(data, status, headers, config) {
+          index = $scope.batches.indexOf(batch)
+          $scope.batches[index].fermenter = data
+          return true
+        }).
+        error(function(data, status, headers, config) {
+          Alert.add("error", 'sorry, you are not authorized to re-order the tanks', 4000);
+        });
+
+    }
+
+
   })
   .controller('BatchCtrl', function ($scope, $routeParams, $http) {
     var batchId = $routeParams.batchId

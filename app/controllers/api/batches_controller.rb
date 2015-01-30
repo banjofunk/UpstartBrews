@@ -23,10 +23,18 @@ class Api::BatchesController < ApplicationController
   end
 
   def create
-    @batch = Batch.new(params)
+    @batch = Batch.new(params[:batch])
+    @batch.brew_date = Time.current
+    @batch.save
+    @batch.fermenter.update_attributes(:state=>Fermenter::FULL)
+    render :partial => "api/batches/batch.json", :locals => { :batch => @batch }
   end
 
   def update
+    params.permit!
+    params[:batch][:brew_date] =  Time.strptime(params[:batch][:brew_date], "%m/%d/%Y") if params[:batch][:brew_date]
+    @batch.update_attributes(params[:batch])
+    render :partial => "api/batches/batch.json", :locals => { :batch => @batch }
   end
 
   def destroy
@@ -40,7 +48,7 @@ class Api::BatchesController < ApplicationController
 
   def set_inventories
     batch = Batch.find(params[:batch_id])
-     batch.inventories.each do |inventory|
+    batch.inventories.each do |inventory|
       inventory.state = Inventory::ACTIVE
       inventory.save
     end
@@ -51,6 +59,10 @@ class Api::BatchesController < ApplicationController
 
   def set_batch
     @batch = Batch.find(params[:id])
+  end
+
+  def batch_params
+    params.require(:batch).permit(:id, :flavor_id, :fermenter_id, :brew_date)
   end
 
 end

@@ -87,7 +87,7 @@ nav {
   }
 
   .batch_container {
-    height:155px;
+    height:156px;
     width: 145px;
     margin:10px;
     .batch_header {
@@ -122,9 +122,9 @@ nav {
         position:absolute;
         top: -8px;
         height: 156px;
-        left: -65px;
+        left: -66px;
         min-width:100px;
-        width: 146px;
+        width: 147px;
         padding:0;
 
         li {
@@ -165,6 +165,80 @@ nav {
       font-size:22px;
       line-height:2px;
       margin-bottom:-5px;
+    }
+  }
+  .brew_batch {
+    position:relative;
+    right:20px;
+    bottom:30px;
+    height:156px;
+    width: 146px;
+    li {
+      display:inline;
+      float:left;
+      width:73px;
+      height:78px;
+      padding-top:20px;
+      border:solid 1px white;
+      &:nth-child(1) {border-top-left-radius:4px;border-top:solid 2px white;border-left:solid 2px white;}
+      &:nth-child(2) {border-top-right-radius:4px;border-top:solid 2px white;border-right:solid 2px white;}
+      &:nth-child(3) {border-bottom-left-radius:4px;border-bottom:solid 2px white;border-left:solid 2px white;}
+      &:nth-child(4) {border-bottom-right-radius:4px;border-bottom:solid 2px white;border-right:solid 2px white;}
+      span {
+        color:white;
+        font-size:24px;
+      }
+    }
+  }
+}
+
+
+
+.overview-container {
+  min-height:360px;
+  .row {
+    padding-top:5px;
+    height:42px;
+  }
+  span.overview-label {
+    margin-top:10px;
+    font-size:24px;
+  }
+  h3 {
+    margin-top: 6px;
+    margin-left:13px;
+  }
+  hr.styled {
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+  }
+  .edit_flavor {
+    display:inline;
+    width:124px;
+    margin:9px 10px 0 14px;
+  }
+  .submit-edit {
+    font-size:22px;
+    margin-left:33px;
+    display:inline;
+  }
+  .edit_brew_date {
+    display:inline;
+    width:148px;
+    margin-top:2px;
+    font-size:24px;
+    font-weight:700;
+    color:#333;
+  }
+  .actions {
+    font-size:22px;
+    margin-left:40px;
+    &:hover {
+      cursor:pointer;
     }
   }
 }

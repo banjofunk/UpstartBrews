@@ -26,7 +26,7 @@
                 duration
               %th
           %tbody
-            %tr{"ng-repeat" => "process in selected_batch.batch_processes"}
+            %tr.toggle-container{"ng-repeat" => "process in selected_batch.batch_processes"}
               %td
                 .show-toggle.process-small
                   {{process.type}}

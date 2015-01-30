@@ -11,4 +11,11 @@ class Api::FermentersController < ApplicationController
     render :json => sort.to_json
   end
 
+  def set_fermenter_state
+    fermenter = Fermenter.find(params[:id])
+    state = "Fermenter::#{params[:state_name].upcase}".constantize
+    fermenter.update_attributes(:state => state)
+    render :partial => "api/fermenters/fermenter.json", :locals => { :fermenter => fermenter }
+  end
+
 end

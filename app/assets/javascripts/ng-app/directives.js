@@ -25,8 +25,20 @@ angular.module('AngularUpstart.directives', [])
         restrict: 'C',
         link: function (scope, element, attr) {
           element.bind('click',function (event) {
-            $(event.target).parents('tr').children('td').children('.edit-toggle').toggle();
-            $(event.target).parents('tr').children('td').children('.show-toggle').toggle();
+            $(event.target).parents('.toggle-container').find('.edit-toggle').toggle();
+            $(event.target).parents('.toggle-container').find('.show-toggle').toggle();
+          });
+        }
+      };
+  }])
+  .directive('toggleBrewView', [
+    function(){
+      return {
+        restrict: 'C',
+        link: function (scope, element, attr) {
+          element.bind('click',function (event) {
+            $('.brew_batch').toggle();
+            $('.other_batch').toggle();
           });
         }
       };
