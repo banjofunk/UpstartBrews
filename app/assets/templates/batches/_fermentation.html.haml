@@ -1,0 +1,61 @@
+.fermentation-container{'ng-controller' => "FermentationCtrl"}
+  .fade-in
+    .row
+      %br
+      .col-md-12
+        .process-actions{'ng-if'=>'canCan("manage", "BatchProcess")'}
+          %ul.list-unstyled
+            %li.pull-left{"ng-repeat" => "process in selected_batch.all_processes | orderBy:order"}
+              %form{:role => "form"}
+                %button{:type=>"submit", :class=>"btn btn-success", "ng-click"=>"startProcess(process)", 'ng-show'=>'!process.currently_on'} start {{process.name}}
+                %button{:type=>"submit", :class=>"btn btn-danger", "ng-click"=>"stopProcess(process.name)", 'ng-show'=>'process.currently_on'} stop {{process.name}}
+          .clearfix
+      %br
+    .row
+      .col-md-12
+        %table.table.table-condensed
+          %thead
+            %tr
+              %th
+                type
+              %th
+                started
+              %th
+                stopped
+              %th
+                duration
+              %th
+          %tbody
+            %tr.toggle-container{"ng-repeat" => "process in selected_batch.batch_processes"}
+              %td
+                .show-toggle.process-small
+                  {{process.type}}
+              %td
+                .show-toggle.process-times
+                  {{process.started}}
+                .edit-toggle{:style => 'display:none;'}
+                  %input.form-control.edit_process{:placeholder => "started", "ng-model"=>"process.started"}
+              %td
+                .show-toggle.process-times
+                  {{process.stopped || process.type + " is on..."}}
+                .edit-toggle{:style => 'display:none;'}
+                  %input.form-control.edit_process{:placeholder => "stopped", "ng-model"=>"process.stopped", 'ng-if'=>'process.stopped'}
+              %td
+                .process-duration
+                  {{process.duration}}
+              %td
+                .show-toggle.process-small
+                  %a.toggle-edit
+                    %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-pencil"}
+                  &nbsp;&nbsp;|&nbsp;&nbsp;
+                  %a{'confirmed-click'=>'removeProcess(process)', "ng-confirm-click"=>"Are you sure you want to delete?"}
+                    %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-remove-circle"}
+                .edit-toggle.process-small{:style => 'display:none;'}
+                  %a.toggle-edit{'ng-click'=>'editProcess(process)'}
+                    %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-ok-circle"}
+            %tr{"ng-show"=>"!selected_batch.batch_processes.length"}
+              %td
+              %td
+                No process so far...
+              %td
+              %td

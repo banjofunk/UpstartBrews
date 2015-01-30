@@ -1,0 +1,25 @@
+.comments-container{'ng-controller' => "CommentsCtrl"}
+  .row
+    %br
+    .col-md-12
+    .well.text-center.fade-in
+      %ul.list-unstyled
+        %li{"ng-repeat" => "comment in selected_batch.comments"}
+          %strong.pull-left.primary-font {{comment.user}}
+          %small.pull-right.text-muted
+            %span.glyphicon.glyphicon-time>
+            &nbsp;{{comment.created_at}}
+          %br
+          .comment-text {{comment.text}}
+
+        %li{"ng-show"=>"!selected_batch.comments.length"}
+          %span
+            No comments so far...
+
+      %hr
+      %form{:role => "form"}
+        .input-group
+          %input#userComment.form-control.input-lg.chat-input{:placeholder => "Your comment here...", :type => "text", "ng-model"=>"comment.text"}/
+          %span.input-group-btn
+            %button.btn.btn-primary.btn-lg{"ng-click"=>"newComment(comment, selected_batch)", :type => "submit"}
+              Add Comment

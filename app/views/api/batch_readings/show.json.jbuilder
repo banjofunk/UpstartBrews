@@ -1,0 +1,1 @@
+json.partial! 'batch_reading', batch: @batch_reading

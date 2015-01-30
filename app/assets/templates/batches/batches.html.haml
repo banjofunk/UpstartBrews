@@ -1,0 +1,53 @@
+#navbar{'ng-include'=>"'navbar/show.html'"}
+%alerts
+
+%div{'ng-if'=>"canCan('read', 'Batch')"}
+  %br
+  .row
+    .col-md-12{:style=>'text-align: center;'}
+      %h1{style: 'color:white; font-size:48px'} Batches
+  %br
+  .row
+    .col-md-1
+    .col-md-10
+      #batches{'ng-include'=>"'batches/_batches.html'"}
+
+  %modal{:title=>'{{selected_batch.flavor.name}}', :visible=>"$parent.showModal"}
+    .modal-header
+      %button.close{"aria-hidden"=>"true", "data-dismiss"=>"modal", :type=>"button", 'ng-click'=>'hideModal()'} ×
+      %h2.modal-title{style: 'display:inline; color:{{selected_batch.flavor.color.secondary}}; '}
+        {{selected_batch.flavor.name}}
+      %span
+        %b
+          brewed: {{selected_batch.brew_date}}
+    .modal-body
+
+      %ul.nav.nav-tabs
+        %li{:role=>"batch_details", 'ng-click'=>'detailsNav("overview")', 'ng-class'=>'{active: details_category=="overview"}'}
+          %a{:href=>"#"} Overview
+        %li{:role=>"batch_details", 'ng-click'=>'detailsNav("readings")', 'ng-class'=>'{active: details_category=="readings"}'}
+          %a{:href=>"#"} Readings
+        %li{:role=>"batch_details", 'ng-click'=>'detailsNav("fermentation")', 'ng-class'=>'{active: details_category=="fermentation"}'}
+          %a{:href=>"#"} Processes
+        %li{:role=>"batch_details", 'ng-click'=>'detailsNav("settings")', 'ng-class'=>'{active: details_category=="settings"}'}
+          %a{:href=>"#"} Equipment Settings
+        %li{:role=>"batch_details", 'ng-click'=>'detailsNav("packaging")', 'ng-class'=>'{active: details_category=="packaging"}'}
+          %a{:href=>"#"} Packaging
+        %li{:role=>"batch_details", 'ng-click'=>'detailsNav("comments")', 'ng-class'=>'{active: details_category=="comments"}'}
+          %a{:href=>"#"} Comments
+
+
+      .batch-details{'ng-show'=>'details_category == "overview"'}
+        #overview{'ng-include'=>"'batches/_overview.html'"}
+      .batch-details{'ng-show'=>'details_category == "fermentation"'}
+        #fermentation{'ng-include'=>"'batches/_fermentation.html'"}
+      .batch-details{'ng-show'=>'details_category == "readings"'}
+        #readings{'ng-include'=>"'batches/_readings.html'"}
+      .batch-details{'ng-show'=>'details_category == "settings"'}
+        #settings{'ng-include'=>"'batches/_settings.html'"}
+      .batch-details{'ng-show'=>'details_category == "packaging"'}
+        #packaging{'ng-include'=>"'batches/_inventories.html'"}
+      .batch-details{'ng-show'=>'details_category == "comments"'}
+        #comments{'ng-include'=>"'batches/_comments.html'"}
+
+

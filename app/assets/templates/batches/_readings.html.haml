@@ -1,0 +1,62 @@
+.readings-container{'ng-controller' => "ReadingsCtrl"}
+  .row
+    .col-md-12
+      %table.table.fade-in
+        %thead
+          %tr
+            %th
+              date
+            %th
+              brix
+            %th
+              ph
+            %th
+              temp
+            %th
+
+        %tbody
+          %tr.toggle-container{"ng-repeat" => "reading in selected_batch.batch_readings", 'data-reading-id' => '{{reading.id}}'}
+            %td.date-column
+              .show-toggle
+                {{reading.reading_date}}
+              .edit-toggle{:style => 'display:none;'}
+                %input.form-control.edit_reading{:placeholder => "reading_date", "ng-model"=>"reading.reading_date"}
+            %td
+              .show-toggle
+                {{reading.brix}}
+              .edit-toggle{:style => 'display:none;'}
+                %input.form-control.edit_reading{:placeholder => "brix", "ng-model"=>"reading.brix"}
+            %td
+              .show-toggle
+                {{reading.ph}}
+              .edit-toggle{:style => 'display:none;'}
+                %input.form-control.edit_reading{:placeholder => "ph", "ng-model"=>"reading.ph"}
+            %td
+              .show-toggle
+                {{reading.temp}}
+              .edit-toggle{:style => 'display:none;'}
+                %input.form-control.edit_reading{:placeholder => "temp", "ng-model"=>"reading.temp"}
+            %td
+              .show-toggle{'ng-if' => 'canCan("manage", "BatchReading")'}
+                %a.toggle-edit
+                  %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-pencil"}
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                %a{'confirmed-click'=>'removeReading(reading.id)', "ng-confirm-click"=>"Are you sure you want to delete?"}
+                  %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-remove-circle"}
+              .edit-toggle{:style => 'display:none;'}
+                %a.toggle-edit{'ng-click'=>'editReading(reading)'}
+                  %span{:style=>"font-size:18px;", :class=>"glyphicon glyphicon-ok-circle"}
+
+          .new_reading_container{'ng-if' => 'canCan("manage", "BatchReading")'}
+            %form{:role => "form"}
+              %tr
+                %td
+                %td
+                  %input#brix.form-control.new_reading{:placeholder => "brix", "ng-model"=>"reading.brix"}
+                %td
+                  %input#ph.form-control.new_reading{:placeholder => "ph", "ng-model"=>"reading.ph"}
+                %td
+                  %input#temp.form-control.new_reading{:placeholder => "temp", "ng-model"=>"reading.temp"}
+                %td
+                  %button{:type=>"submit", :class=>"btn btn-primary", "ng-click"=>"newReading(reading)"}
+                    %span{:class=>"glyphicon glyphicon-plus"}

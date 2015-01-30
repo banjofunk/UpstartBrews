@@ -1,0 +1,22 @@
+.navbar-containter{'ng-controller' => "navCtrl"}
+  %nav.navbar.navbar-default
+    .container-fluid
+      .navbar-header
+        %a.navbar-brand{:href => "/"} Upstart
+      .collapse.navbar-collapse
+        %ul.nav.navbar-nav
+          %li
+            %a{:href => "/batches"} Batches
+        %ul.nav.navbar-nav.navbar-right
+          %li{'ng-if' => "hasRole('admin')"}
+            %a{:href => "/admin"} Admin
+          %li.dropdown
+            %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              {{user.email}}
+              %span.caret
+            %ul.dropdown-menu{:role => "menu"}
+              %li
+                %a{'ng-click' => 'logout()', style: 'margin-right:50px;'} Logout
+      .navbar-collapse
+    .container-fluid
+

@@ -1,0 +1,37 @@
+.inventories-container{'ng-controller' => 'InventoriesCtrl'}
+  %br
+  .row
+    .col-md-12
+      %table.table.inventory-table.fade-in
+        %tbody
+          %tr.toggle-container{'ng-repeat' => 'inventory in selected_batch.inventories'}
+            %td
+              .inventory-img-container
+                %img{'src'=>'{{inventory.package_img}}'}
+            %td.text-right{style:'width:101px;'}
+              .show-toggle
+                %h1{style: 'padding-right:3px;'}
+                  {{inventory.quantity}}
+              .edit-toggle{style: 'display:none;'}
+                %input.form-control.edit_package.text-right{type: 'number', placeholder: '0', 'ng-model'=>'inventory.quantity', style:'width:85px; height:53px; display:inline; font-size:36px; padding:0px 2px 2px 0px; font-weight: 500;'}
+            %td.text-left
+              .package_name
+                %h1
+                  {{inventory.package_name}}
+            %td
+              .show-toggle{'ng-if' => 'canCan("manage", "Batchpackage")'}
+                %a{href: '#', 'ng-click'=>'increaseQty(inventory)'}
+                  %span.glyphicon.glyphicon-chevron-up
+                %a.toggle-edit
+                  %button.btn.btn-primary.btn-sm{type: 'button'} edit
+                %a{href: '#', 'ng-click'=>'decreaseQty(inventory)'}
+                  %span.glyphicon.glyphicon-chevron-down
+              .edit-toggle{style: 'display:none;'}
+                %a.toggle-edit{'ng-click'=>'editQty(inventory)'}
+                  %span.glyphicon.glyphicon-ok-circle
+          %tr
+            %td
+            %td
+            %td
+            %td.inventories-actions
+              %button.btn.btn-success{'ng-if'=>'!selected_batch.inventory_set', 'confirmed-click'=>'setInventories()', "ng-confirm-click"=>"Set the inventory? The batch will be marked as done."} Set

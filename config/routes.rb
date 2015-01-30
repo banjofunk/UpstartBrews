@@ -1,5 +1,44 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+
+  namespace :api, defaults: {format: :json} do
+    devise_scope :user do
+      post '/sessions' => 'sessions#create'
+      delete '/sessions' => 'sessions#destroy'
+    end
+    resource :users, only: [:create, :show, :update, :destroy] do
+      get 'ability' => 'users#ability'
+      get 'roles' => 'users#roles'
+    end
+    resource :admin, only: [] do
+      get 'users' => 'admin#users'
+      put 'users' => 'admin#update_user'
+      delete 'users/:id' => 'admin#delete_user'
+    end
+    match 'fermenters/sort' => 'fermenters#sort', :via => 'post'
+    resources :fermenters, only: [] do
+      post :set_fermenter_state
+    end
+    resources :batches do
+      resources :batch_readings
+      resources :comments
+      resources :batch_processes
+      match 'batch_processes/start_batch_process' => 'batch_processes#start_batch_process', :via => 'post'
+      match 'batch_processes/end_batch_process' => 'batch_processes#end_batch_process', :via => 'post'
+      put :set_inventories
+      post :clean_fermenter
+      member do
+        put :add_comment
+      end
+    end
+    resources :flavors, only: [:index]
+
+    resources :inventories do
+      put :update_quantity
+    end
+  end
+
   root 'application#index'
   get '*path' => 'application#index'
 

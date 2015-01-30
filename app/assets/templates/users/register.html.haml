@@ -1,0 +1,84 @@
+:css
+  .form_container input{
+    font-size: 18px;
+    margin-bottom:12px;
+    height: 40px;
+  }
+  .form_container label{
+    font-size: 16px;
+    text-align: right;
+  }
+  .form_container button{
+    font-size: 18px;
+    width: 100px;
+    height: 40px;
+  }
+  .sign-up{
+    text-align: left;
+    margin-left:-12px;
+  }
+  .sign-in-header {
+    padding-top:0px;
+    line-height:1px;
+    margin-top:-20px;
+    margin-bottom:20px;
+  }
+
+.row
+  .col-md-3{:style => 'text-align: center;'}
+  .col-md-6{:style => 'text-align: center;'}
+    .well
+      .row
+        .col-md-12.sign-in-header
+          .alert.alert-warning{"ng-show" => "authReason"}
+            {{authReason}}
+          .alert.alert-error{"ng-show" => "authError"}
+            {{authError}}
+          %br/
+          %h1 Sign up
+      .row
+        .col-md-3
+        .col-md-6
+          .form_container
+            %form.auth-form{:name => "registrationForm"}
+              .row
+                .col-md-2
+                  %label{:for => 'first_name'}
+                    %span.pull-right first&nbsp;name:
+                .col-md-10.text-left
+                  %input.input-block-level.form-control.new_user{:autofocus => "", "ng-model" => "user.first_name", :placeholder => "Joe", :required => "required", :type => "text", :style => 'text-align:left;'}
+              .row
+                .col-md-2
+                  %label{:for => 'last_name'}
+                    %span.pull-right last&nbsp;name:
+                .col-md-10.text-left
+                  %input.input-block-level.form-control.new_user{:autofocus => "", "ng-model" => "user.last_name", :placeholder => "Schmoe", :required => "required", :type => "text", :style => 'text-align:left;'}
+              .row
+                .col-md-2
+                  %label{:for => 'email'}
+                    %span.pull-right email:
+                .col-md-10.text-left
+                  %input.input-block-level.form-control.new_user{:autofocus => "", "ng-model" => "user.email", :placeholder => "someone@example.com", :required => "required", :type => "text", :style => 'text-align:left;'}
+              .row
+                .col-md-2
+                  %label{:for => 'password'}
+                    %span.pull-right password:
+                .col-md-10
+                  %input#password.input-block-level.form-control.new_user{:placeholder => "password", :type => 'password', "ng-model"=>"user.password", :required => 'required', :style => 'text-align:left;'}
+              .row
+                .col-md-2
+                  %label{:for => 'password'}
+                    %span.pull-right password:
+                .col-md-10
+                  %input#password.input-block-level.form-control.new_user{:placeholder => "confirm password", :type => 'password', "ng-model"=>"user.confirm_password", :required => 'required', :style => 'text-align:left;'}
+              .row
+                .col-md-2
+                .col-md-10
+                  %button.pull-left.btn-large.btn-primary{"ng-click" => "register(user)", "ng-disabled" => "registrationForm.$invalid"}
+                    %span submit
+                  .clearfix
+              .row
+                .col-md-2
+                .col-md-10.sign-up
+                  %a.btn.btn-link{:href => "/users/login"} sign in
+
