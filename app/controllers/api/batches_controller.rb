@@ -12,7 +12,7 @@ class Api::BatchesController < ApplicationController
         batch = fermenter.batches.order('brew_date DESC').first
         if !batch
           batch = Batch.new(
-            :state => Batch::PREBREW,
+            :state => Batch::DELETED,
             :flavor_id => fermenter.flavor_id,
             :fermenter_id => fermenter.id,
             :brew_date => Time.current,

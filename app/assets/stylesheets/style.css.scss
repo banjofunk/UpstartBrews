@@ -242,6 +242,14 @@ nav {
       cursor:pointer;
     }
   }
+  .overview-actions {
+    float:right;
+    margin-right:36px;
+    ul {
+      width:100px;
+      min-width:100px;
+    }
+  }
 }
 
 .fermentation-container {
