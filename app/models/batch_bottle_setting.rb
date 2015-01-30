@@ -3,12 +3,12 @@ class BatchBottleSetting < ActiveRecord::Base
 
   scope :kind, lambda { |short_name| where(:kind => (KINDS.select {|kind| kind[:short_name] == short_name}).first.try(:[], :kind_id)) }
   KINDS = [
-            {:kind_id=>0, :short_name=>'fill_bright_head', :desc=>'Bright Tank Head', :unit => 'psi'},
-            {:kind_id=>1, :short_name=>'fill_counter_top', :desc=>'Counter Pressure Top', :unit => 'psi'},
-            {:kind_id=>2, :short_name=>'fill_counter_bottom', :desc=>'Counter Pressure Bottom', :unit => 'psi'},
-            {:kind_id=>3, :short_name=>'fill_air', :desc=>'Compressed Air Pressure', :unit => 'psi'},
-            {:kind_id=>4, :short_name=>'fill_upper', :desc=>'CO2 Blow off line (upper range)', :unit => 'psi'},
-            {:kind_id=>5, :short_name=>'fill_lower', :desc=>'fill start line (lower range)', :unit => 'psi'}
+            {:kind_id=>0, :short_name=>'fill_bright_head', :desc=>'bright tank head pressure', :unit => 'psi'},
+            {:kind_id=>1, :short_name=>'fill_counter_top', :desc=>'counter pressure - top guage', :unit => 'psi'},
+            {:kind_id=>2, :short_name=>'fill_counter_bottom', :desc=>'counter pressure - bottom guage', :unit => 'psi'},
+            {:kind_id=>3, :short_name=>'fill_air', :desc=>'compressed air pressure guage', :unit => 'psi'},
+            {:kind_id=>4, :short_name=>'fill_upper', :desc=>'co2 blow off setting (upper range)', :unit => 'psi'},
+            {:kind_id=>5, :short_name=>'fill_lower', :desc=>'fill start setting (lower range)', :unit => 'psi'}
           ]
 
   def readable_kind

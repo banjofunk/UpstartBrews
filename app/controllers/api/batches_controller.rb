@@ -55,6 +55,7 @@ class Api::BatchesController < ApplicationController
   end
 
   def add_comment
+    params.permit!
     comment = @batch.comments.create(:user => current_user, :text => params[:text])
     render :partial => "api/comments/comment.json", :locals => { :comment => comment }
   end

@@ -12,7 +12,8 @@ angular.module('AngularUpstart')
 
     $scope.newComment = function(comment, batch) {
       $http.put('/api/batches/' + batch.id + '/add_comment', {
-        text: comment.text
+        text: comment.text,
+        id: batch.id
       }).
         success(function(data, status, headers, config) {
           batch.comments.push(data)
