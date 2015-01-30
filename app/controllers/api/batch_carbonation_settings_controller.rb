@@ -1,5 +1,5 @@
 class Api::BatchCarbonationSettingsController < ApplicationController
-  before_action :set_batch_carbonation_setting, only: [:show, :update, :destroy]
+  before_action :set_batch_carbonation_setting, only: [:show, :destroy]
 
 
   def index

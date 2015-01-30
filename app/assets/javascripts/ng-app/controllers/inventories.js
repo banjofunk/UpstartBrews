@@ -67,7 +67,7 @@ angular.module('AngularUpstart')
 
     $scope.setInventories = function() {
       id = $scope.selected_batch.id
-    $http.put('/api/batches/' + id + '/set_inventories', {})
+    $http.put('/api/batches/' + id + '/set_inventories', {id:id})
       .success(function(data, status, headers, config) {
         $scope.selected_batch.inventory_set = data.inventory_set
         return true

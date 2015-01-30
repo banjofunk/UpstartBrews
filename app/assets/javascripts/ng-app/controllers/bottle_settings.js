@@ -20,20 +20,20 @@ angular.module('AngularUpstart')
     $scope.update_queue = [];
     var timeout = null;
     var saveUpdates = function() {
-      bottle_settingIds = $scope.update_queue.reduce(function(p, c) {
+      bottleSettingShortNames = $scope.update_queue.reduce(function(p, c) {
         if (p.indexOf(c) < 0) p.push(c);
         return p;
       }, []);
       $scope.update_queue = [];
 
-      for (var i = 0; i < bottle_settingIds.length; i++) {
-        var id = bottle_settingIds[i]
+      for (var i = 0; i < bottleSettingShortNames.length; i++) {
+        var short_name = bottleSettingShortNames[i]
         var bottle_setting = $scope.selected_batch.bottle_settings.filter(function( obj ) {
-          return obj.id == id;
+          return obj.kind.short_name == short_name;
         });
         bottle_setting = bottle_setting[0]
 
-        $http.put(' /api/batches/' + $scope.selected_batch.id + '/batch_bottle_settings/' + bottle_setting.id + '/update_quantity', {
+        $http.put(' /api/batches/' + $scope.selected_batch.id + '/batch_bottle_settings/update_quantity', {
           quantity: bottle_setting.quantity,
           batch_id: $scope.selected_batch.id,
           kind: bottle_setting.kind.id
@@ -59,19 +59,19 @@ angular.module('AngularUpstart')
 
     $scope.increaseQty = function(bottle_setting) {
       bottle_setting.quantity += 1;
-      $scope.update_queue.push(bottle_setting.id)
+      $scope.update_queue.push(bottle_setting.kind.short_name)
     }
 
     $scope.decreaseQty = function(bottle_setting) {
       bottle_setting.quantity -= 1;
-      $scope.update_queue.push(bottle_setting.id)
+      $scope.update_queue.push(bottle_setting.kind.short_name)
     }
 
     $scope.editQty = function(bottle_setting) {
       if(!bottle_setting.quantity) {
         bottle_setting.quantity = 0
       }
-      $scope.update_queue.push(bottle_setting.id)
+      $scope.update_queue.push(bottle_setting.kind.short_name)
     }
 
     $scope.$watch('update_queue.length', debounceSaveUpdates)

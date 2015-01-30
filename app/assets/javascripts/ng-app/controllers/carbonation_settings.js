@@ -19,18 +19,18 @@ angular.module('AngularUpstart')
     $scope.update_queue = [];
     var timeout = null;
     var saveUpdates = function() {
-      carbonation_settingIds = $scope.update_queue.reduce(function(p, c) {
+      var carbonationSettingNamesArray = $scope.update_queue.reduce(function(p, c) {
         if (p.indexOf(c) < 0) p.push(c);
         return p;
       }, []);
       $scope.update_queue = [];
-      for (var i = 0; i < carbonation_settingIds.length; i++) {
-        var id = carbonation_settingIds[i]
+      for (var i = 0; i < carbonationSettingNamesArray.length; i++) {
+        var short_name = carbonationSettingNamesArray[i]
         var carbonation_setting = $scope.selected_batch.carbonation_settings.filter(function( obj ) {
-          return obj.id == id;
+          return obj.kind.short_name == short_name;
         });
         carbonation_setting = carbonation_setting[0]
-        $http.put(' /api/batches/' + $scope.selected_batch.id + '/batch_carbonation_settings/' + carbonation_setting.id + '/update_quantity', {
+        $http.put(' /api/batches/' + $scope.selected_batch.id + '/batch_carbonation_settings/update_quantity', {
           quantity: carbonation_setting.quantity,
           batch_id: $scope.selected_batch.id,
           kind: carbonation_setting.kind.id
@@ -55,19 +55,19 @@ angular.module('AngularUpstart')
 
     $scope.increaseQty = function(carbonation_setting) {
       carbonation_setting.quantity += 1;
-      $scope.update_queue.push(carbonation_setting.id)
+      $scope.update_queue.push(carbonation_setting.kind.short_name)
     }
 
     $scope.decreaseQty = function(carbonation_setting) {
       carbonation_setting.quantity -= 1;
-      $scope.update_queue.push(carbonation_setting.id)
+      $scope.update_queue.push(carbonation_setting.kind.short_name)
     }
 
     $scope.editQty = function(carbonation_setting) {
       if(!carbonation_setting.quantity) {
         carbonation_setting.quantity = 0
       }
-      $scope.update_queue.push(carbonation_setting.id)
+      $scope.update_queue.push(carbonation_setting.kind.short_name)
     }
 
     $scope.$watch('update_queue.length', debounceSaveUpdates)
