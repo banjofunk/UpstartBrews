@@ -12,6 +12,14 @@ angular.module('AngularUpstart')
         $scope.flavors = data;
       })
 
+    $scope.isFull = function(fermenter) {
+      return fermenter.state=="full"
+    }
+
+    $scope.isClean = function(fermenter) {
+      return fermenter.state=="clean"
+    }
+
     $scope.showModal = false;
     $scope.toggleModal = function(batch){
       $scope.details_category = "";
@@ -43,18 +51,6 @@ angular.module('AngularUpstart')
         });
     }
 
-    $scope.detailsNav = function(category) {
-      $scope.details_category = category
-    }
-
-    $scope.isFull = function(batch) {
-      return batch.fermenter.state=="full"
-    }
-
-    $scope.isClean = function(fermenter) {
-      return fermenter.state=="clean"
-    }
-
     $scope.addBatch = function(flavor, batch){
       $http.post('/api/batches', {
           fermenter_id: batch.fermenter.id,
@@ -70,6 +66,10 @@ angular.module('AngularUpstart')
         });
     }
 
+    $scope.detailsNav = function(category) {
+      $scope.details_category = category
+    }
+
     $scope.changeFermenterState = function(batch, state) {
       $http.post('/api/fermenters/' + batch.fermenter.id + '/set_fermenter_state', {id: batch.fermenter.id, state_name: state}).
         success(function(data, status, headers, config) {
@@ -80,7 +80,6 @@ angular.module('AngularUpstart')
         error(function(data, status, headers, config) {
           Alert.add("error", 'sorry, you are not authorized to re-order the tanks', 4000);
         });
-
     }
 
 

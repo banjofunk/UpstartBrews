@@ -14,7 +14,7 @@ class Batch < ActiveRecord::Base
   # scope :bottling, lambda { where(:state => BOTTLING)}
   # scope :packaged, lambda { where(:state => PACKAGED)}
 
-  STATES = ['brewing', 'fermenting', 'carbonating', 'bottling', 'packaged']
+  STATES = ['brewing', 'fermenting', 'carbonating', 'bottling', 'packaged', 'prebrew']
   STATES.to_enum.with_index(0).each { |v, idx| self.const_set(v.to_s.upcase, idx) }
 
   def state_name

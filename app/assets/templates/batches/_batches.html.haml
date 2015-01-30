@@ -1,6 +1,6 @@
 .batches_container.ui-sortable{"ng-model"=>"batches"}
   .batch_container.well.pull-left{"ng-repeat" => "batch in batches", :id => "{{batch.fermenter.id}}"}
-    .full_batch{'ng-if'=>'isFull(batch)'}
+    .full_batch{'ng-if'=>'isFull(batch.fermenter)'}
       .batch_header.row
         .col-md-4
           %span
@@ -29,7 +29,7 @@
             , ph:
             %b {{batch.last_ph}}
 
-    .other_batch{'ng-if'=>'!isFull(batch)'}
+    .other_batch{'ng-if'=>'!isFull(batch.fermenter)'}
       .batch_header.row
         .col-md-4
           %span
@@ -55,8 +55,9 @@
             %h2{style: 'color:{{batch.flavor.color.primary}};'}
               {{batch.fermenter.state}}
 
-    .brew_batch{'ng-if'=>'!isFull(batch)', style:'display:none;'}
+    .brew_batch{'ng-if'=>'!isFull(batch.fermenter)', style:'display:none;'}
       %ul.list-unstyled
         %li.text-center{'ng-repeat'=>'flavor in flavors', style:'background-color: {{flavor.color.primary}};', 'ng-click'=>'addBatch(flavor, batch)'}
           %span
             {{flavor.abv}}
+      %span.glyphicon.glyphicon-remove-circle.toggle-brew-view{style:'position:relative; top:-186px; left:141px; color:white; font-size:23px'}

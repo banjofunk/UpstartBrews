@@ -37,8 +37,8 @@ angular.module('AngularUpstart.directives', [])
         restrict: 'C',
         link: function (scope, element, attr) {
           element.bind('click',function (event) {
-            $('.brew_batch').toggle();
-            $('.other_batch').toggle();
+            $(event.target).parents('.batch_container').find('.brew_batch').toggle();
+            $(event.target).parents('.batch_container').find('.other_batch').toggle();
           });
         }
       };

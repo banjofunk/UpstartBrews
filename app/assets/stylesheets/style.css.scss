@@ -114,9 +114,10 @@ nav {
           font-size:15px;
           font-weight:500;
         }
-        &:hover, &:active, &:visited {
+        &:hover, &:active, &:focus {
           background-color:white;
         }
+
       }
       .dropdown-menu{
         position:absolute;

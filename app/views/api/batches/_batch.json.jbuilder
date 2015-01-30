@@ -1,13 +1,10 @@
 json.id batch.id
-
 json.fermenter do |fermenter|
   json.partial! '/api/fermenters/fermenter', fermenter: batch.fermenter
 end
-
 json.flavor do |flavor|
   json.partial! '/api/flavors/flavor', flavor: batch.flavor
 end
-
 json.inventory_set batch.inventory_set
 json.created_at batch.created_at.in_time_zone.strftime("%m/%d/%Y")
 json.brew_date batch.brew_date.in_time_zone.strftime("%m/%d/%Y")

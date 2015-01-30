@@ -8,7 +8,20 @@ class Api::BatchesController < ApplicationController
     if params['show_all']
       @batches = Batch.all
     else
-      @batches = Fermenter.order('position ASC').map {|v| v.batches.order('brew_date DESC').first}
+      @batches = Fermenter.order('position ASC').map {|fermenter|
+        batch = fermenter.batches.order('brew_date DESC').first
+        if !batch
+          batch = Batch.new(
+            :state => Batch::PREBREW,
+            :flavor_id => fermenter.flavor_id,
+            :fermenter_id => fermenter.id,
+            :brew_date => Time.current,
+            :created_at => Time.current
+            )
+          fermenter.update_attributes(:state => Fermenter::EMPTY)
+        end
+        batch
+      }
     end
   end
 
