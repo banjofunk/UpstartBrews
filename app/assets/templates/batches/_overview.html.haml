@@ -18,9 +18,9 @@
                   actions
                 %span.caret
               %ul.dropdown-menu{:role => "menu"}
-                %li.text-center
+                %li.text-center{'confirmed-click'=>'changeBatchState(selected_batch, "dumped")', "ng-confirm-click"=>"Are you sure you want to dump this batch?"}
                   %a Dump
-                %li.text-center
+                %li.text-center{'confirmed-click'=>'changeBatchState(selected_batch, "deleted")', "ng-confirm-click"=>"Are you sure you want to delete this batch?"}
                   %a Delete
 
         .row

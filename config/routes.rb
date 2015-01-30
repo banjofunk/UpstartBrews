@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       match 'batch_processes/start_batch_process' => 'batch_processes#start_batch_process', :via => 'post'
       match 'batch_processes/end_batch_process' => 'batch_processes#end_batch_process', :via => 'post'
       put :set_inventories
-      post :clean_fermenter
+      post :set_batch_state
       member do
         put :add_comment
       end

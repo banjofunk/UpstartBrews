@@ -82,6 +82,19 @@ angular.module('AngularUpstart')
         });
     }
 
+    $scope.changeBatchState = function(batch, state) {
+      $http.post('/api/batches/' + batch.id + '/set_batch_state', {id: batch.id, state: state}).
+        success(function(data, status, headers, config) {
+          index = $scope.batches.indexOf(batch)
+          $scope.batches[index] = data
+          return true
+        }).
+        error(function(data, status, headers, config) {
+          Alert.add("error", 'sorry, you are not authorized to re-order the tanks', 4000);
+        });
+
+    }
+
 
   })
   .controller('BatchCtrl', function ($scope, $routeParams, $http) {

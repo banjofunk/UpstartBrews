@@ -8,6 +8,7 @@ class Batch < ActiveRecord::Base
 
   after_create :create_inventories
 
+  scope :state, lambda { |state| where(:state => "Batch::#{state.upcase}".constantize) }
   STATES = ['brewing', 'packaged', 'dumped', 'deleted']
   STATES.to_enum.with_index(0).each { |v, idx| self.const_set(v.to_s.upcase, idx) }
 

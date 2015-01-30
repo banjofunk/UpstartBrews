@@ -1,4 +1,5 @@
 json.id batch.id
+json.state_name batch.state_name
 json.fermenter do |fermenter|
   json.partial! '/api/fermenters/fermenter', fermenter: batch.fermenter
 end

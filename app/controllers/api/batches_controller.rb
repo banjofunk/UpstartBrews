@@ -68,6 +68,15 @@ class Api::BatchesController < ApplicationController
     render :partial => "api/batches/batch.json", :locals => { :batch => batch }
   end
 
+  def set_batch_state
+    batch = Batch.find(params[:batch_id])
+    batch.update_attributes(:state => "Batch::#{params[:state].upcase}".constantize)
+    if batch.state = (Batch::DELETED || Batch::DUMPED)
+      batch.fermenter.update_attributes(:state => Fermenter::EMPTY)
+    end
+    render :partial => "api/batches/batch.json", :locals => { :batch => batch }
+  end
+
   private
 
   def set_batch
