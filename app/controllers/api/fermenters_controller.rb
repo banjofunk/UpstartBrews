@@ -3,12 +3,14 @@ class Api::FermentersController < ApplicationController
 
   def sort
     sort = params['sort']
+    new_sort = []
     sort.each_with_index do |ferm_id, idx|
       ferm = Fermenter.find(ferm_id)
       ferm.position = idx
       ferm.save
+      new_sort << {:id => ferm.id, :position => ferm.position}
     end
-    render :json => sort.to_json
+    render :json => new_sort.to_json
   end
 
   def set_fermenter_state

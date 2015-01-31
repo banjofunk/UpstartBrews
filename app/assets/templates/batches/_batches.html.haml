@@ -1,11 +1,11 @@
 .batches_container.ui-sortable{"ng-model"=>"batches"}
-  .batch_container.well.pull-left{"ng-repeat" => "batch in batches", :id => "{{batch.fermenter.id}}"}
+  .batch_container.well.pull-left{"ng-repeat" => "batch in batches | orderBy:fermenterOrder", :id => "{{batch.fermenter.id}}"}
     .full_batch{'ng-if'=>'isFull(batch.fermenter)'}
       .batch_header.row
         .col-md-4
           %span
             %b
-              &#35;{{batch.fermenter.id}}
+              &#35;{{batch.fermenter.id}}:{{batch.fermenter.position}}
         .col-md-8
           %button.btn.btn-xs.btn-primary.details{'ng-click' => 'toggleModal(batch);'}
             %span

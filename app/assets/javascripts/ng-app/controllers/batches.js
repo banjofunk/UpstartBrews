@@ -20,6 +20,10 @@ angular.module('AngularUpstart')
       return fermenter.state=="clean"
     }
 
+    $scope.fermenterOrder = function(batch) {
+      return batch.fermenter.position
+    }
+
     $scope.showModal = false;
     $scope.toggleModal = function(batch){
       $scope.details_category = "";
@@ -44,6 +48,12 @@ angular.module('AngularUpstart')
     $scope.postSort = function(sort){
       $http.post('/api/fermenters/sort', { sort: sort }).
         success(function(data, status, headers, config) {
+          var fermenter_ids = $scope.batches.map(function(batch){ return batch.fermenter.id; });
+          for(var i = 0, len = data.length; i < len; i++) {
+            var fermenter = data[i]
+            var batch_idx = fermenter_ids.indexOf(fermenter.id)
+            $scope.batches[batch_idx].fermenter.position = fermenter.position
+          }
           return true
         }).
         error(function(data, status, headers, config) {
@@ -57,8 +67,15 @@ angular.module('AngularUpstart')
           flavor_id: flavor.id
         }).
         success(function(data, status, headers, config) {
-          index = $scope.batches.indexOf(batch)
-          $scope.batches[index] = data
+
+          var batches = $scope.batches
+          for(var i = 0, len = batches.length; i < len; i++) {
+            if (batches[i].id === batch.id) {
+              batches[i] = data
+              break;
+            }
+          }
+
           return true
         }).
         error(function(data, status, headers, config) {
