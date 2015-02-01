@@ -24,17 +24,6 @@ angular.module('sessionService', [])
             redirect(redirectTo);
           });
         },
-
-        register: function(first_name, last_name, email, password, confirm_password) {
-          return $http.post('/api/users', {user: {first_name: first_name, last_name: last_name, email: email, password: password, password_confirmation: confirm_password} })
-          .then(function(response) {
-            service.currentUser = response.data;
-            if (service.isAuthenticated()) {
-              $rootScope.$broadcast('authLoginSuccess');
-              $location.path('/');
-            }
-          });
-        },
         requestCurrentUser: function() {
           if (service.isAuthenticated()) {
             return $q.when(service.currentUser);

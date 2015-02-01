@@ -22,8 +22,7 @@ class Api::UsersController < Api::BaseController
   def create
     @user = User.create(user_params)
     if @user.valid?
-      sign_in(@user)
-      respond_with @user, :location => api_users_path
+      render :partial => "api/admin/users/user.json", :locals => { :user => @user }
     else
       respond_with @user.errors, :location => api_users_path
     end
@@ -34,6 +33,7 @@ class Api::UsersController < Api::BaseController
   end
 
   def destroy
+
     respond_with :api, User.find(current_user.id).destroy
   end
 

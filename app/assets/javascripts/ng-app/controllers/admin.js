@@ -17,6 +17,7 @@ angular.module('AngularUpstart')
 
       $http.put('api/admin/users/' + user.id, { user: user }).
         success(function(data, status, headers, config) {
+
           return true
         }).
         error(function(data, status, headers, config) {
@@ -39,8 +40,6 @@ angular.module('AngularUpstart')
     }
 
     $scope.addUser = function(user) {
-
-
       $http.post('/api/admin/users', {
           user: {
             first_name: user.first_name,
@@ -49,7 +48,7 @@ angular.module('AngularUpstart')
           }
         })
         .success(function(data, status, headers, config) {
-          $scope.users.push(data)
+          $scope.$parent.users.push(data)
           $scope.user = {}
           return true
         })

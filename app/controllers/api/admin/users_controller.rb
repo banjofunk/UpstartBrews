@@ -6,6 +6,7 @@ class Api::Admin::UsersController < Api::AdminController
   end
 
   def create
+    authorize!(:manage, :admin)
     @user = User.create(
       :first_name => params['user']['first_name'],
       :last_name => params['user']['last_name'],
