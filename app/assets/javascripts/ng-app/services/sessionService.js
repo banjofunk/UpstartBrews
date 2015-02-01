@@ -10,7 +10,7 @@ angular.module('sessionService', [])
           return $http.post('/api/sessions', {user: {email: email, password: password} })
             .success(function(response) {
               service.currentUser = response.user;
-              if (service.isAuthenticated()) {
+              if (!!service.currentUser) {
                 $rootScope.$broadcast('authLoginSuccess');
                 redirect('/');
               }
@@ -25,7 +25,7 @@ angular.module('sessionService', [])
           });
         },
         requestCurrentUser: function() {
-          if (service.isAuthenticated()) {
+          if (!!service.currentUser) {
             return $q.when(service.currentUser);
           } else {
             return $http.get('/api/users').then(function(response) {
@@ -41,5 +41,6 @@ angular.module('sessionService', [])
           return !!service.currentUser;
         }
       };
+      service.requestCurrentUser();
       return service;
   });

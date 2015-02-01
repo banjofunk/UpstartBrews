@@ -17,7 +17,6 @@ angular.module('AngularUpstart')
 
       $http.put('api/admin/users/' + user.id, { user: user }).
         success(function(data, status, headers, config) {
-
           return true
         }).
         error(function(data, status, headers, config) {
@@ -27,7 +26,6 @@ angular.module('AngularUpstart')
     }
 
     $scope.deleteUser = function(user) {
-
       $http.delete('api/admin/users/' + user.id).
         success(function(data, status, headers, config) {
           var index = $scope.users.indexOf(user);

@@ -1,0 +1,38 @@
+#navbar{'ng-include'=>"'navbar/show.html'"}
+%alerts
+
+.settings-container
+  %br
+  .row
+    .col-md-12{:style => 'text-align: center;'}
+      %h1{style: 'color:white; font-size:48px'} Settings
+      %br
+  .row
+  %br
+    .col-md-3
+    .col-md-6
+      .well
+        .row
+          %h3.text-center
+            Change Password
+        %br
+        .row
+          .col-md-1
+          .col-md-10
+            .form_container{'ng-controller'=>'SettingsCtrl'}
+              %form{:name => "changePasswordForm", :method => 'post'}
+                .row
+                  .col-md-3
+                  .col-md-6.text-left
+                    %input.input-block-level.form-control.new_user{:autofocus => "", "ng-model" => "user.password", :name=>'password', :placeholder => "Password", :required => "required", :type => "password", :style => 'text-align:left;'}
+                .row
+                  .col-md-3
+                  .col-md-6.text-left
+                    %input.input-block-level.form-control.new_user{:autofocus => "", "ng-model" => "user.password_confirmation", :name=>'password_confirmation', :placeholder => "Password Confirmation", :required => "required", :type => "password", :style => 'text-align:left;'}
+                .row
+                  .col-md-3
+                  .col-md-6
+                    %button.pull-right.btn.btn-large.btn-primary{"ng-click" => "changePassword(user)"}
+                      %span submit
+
+

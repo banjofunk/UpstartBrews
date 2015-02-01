@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resource :users, only: [:create, :show, :update, :destroy] do
       get 'ability' => 'users#ability'
       get 'roles' => 'users#roles'
+      put 'change_password'
     end
     namespace :admin do
       resource :admin, only: []

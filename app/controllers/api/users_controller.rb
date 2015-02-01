@@ -33,8 +33,17 @@ class Api::UsersController < Api::BaseController
   end
 
   def destroy
-
     respond_with :api, User.find(current_user.id).destroy
+  end
+
+  def change_password
+    current_user.password = params[:password]
+    current_user.password_confirmation = params[:password_confirmation]
+    if current_user.save
+      render :json => {:msg => 'new password is set'}
+    else
+      render :json => {:msg => 'error'}
+    end
   end
 
   private
