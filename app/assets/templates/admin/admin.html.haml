@@ -1,8 +1,6 @@
 #navbar{'ng-include' => "'navbar/show.html'"}
 %alerts
-
-.alert.alert-danger{:role => 'alert', 'ng-repeat' => 'error in errors', "ng-show" => "errors"} {{error}}
-.nav_container{'ng-if' => "hasRole('admin')"}
+.admin-container{'ng-if' => "hasRole('admin')"}
   %br
   .row
     .col-md-12{:style => 'text-align: center;'}
@@ -37,3 +35,21 @@
                       &nbsp;{{role}}
                   %td
                     %span.glyphicon.glyphicon-remove{'confirmed-click'=>'deleteUser(user)', "ng-confirm-click"=>"Are you sure you want to delete {{user.email}}?"}
+        .row
+          %h3.text-center
+            Create A User
+
+        .row
+          .col-md-1
+          .col-md-10
+            #addUserForm.form_container{'ng-controller'=>'AdminCtrl'}
+              %form{:name => "addUserForm", :method => 'post'}
+                .col-md-3.text-left
+                  %input.input-block-level.form-control.new_user{:autofocus => "", "ng-model" => "user.first_name", :name=>'first_name', :placeholder => "first name", :required => "required", :type => "text", :style => 'text-align:left;'}
+                .col-md-3.text-left
+                  %input.input-block-level.form-control.new_user{:autofocus => "", "ng-model" => "user.last_name", :name=>'last_name', :placeholder => "last name", :required => "required", :type => "text", :style => 'text-align:left;'}
+                .col-md-4.text-left
+                  %input.input-block-level.form-control.new_user{:autofocus => "", "ng-model" => "user.email", :name=>'email', :placeholder => "email", :required => "required", :type => "text", :style => 'text-align:left;'}
+                .col-md-1.text-left
+                  %button.pull-left.btn.btn-large.btn-primary{"ng-click" => "addUser(user)", "ng-disabled" => "registrationForm.$invalid"}
+                    %span submit

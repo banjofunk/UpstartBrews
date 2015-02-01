@@ -15,7 +15,7 @@ angular.module('AngularUpstart')
         user.roles.splice(index, 1)
       }
 
-      $http.put('api/admin/users', { user: user }).
+      $http.put('api/admin/users/' + user.id, { user: user }).
         success(function(data, status, headers, config) {
           return true
         }).
@@ -36,6 +36,27 @@ angular.module('AngularUpstart')
         error(function(data, status, headers, config) {
           Alert.add("error", 'sorry, you are not authorized to delete users', 4000);
         });
+    }
+
+    $scope.addUser = function(user) {
+
+
+      $http.post('/api/admin/users', {
+          user: {
+            first_name: user.first_name,
+            last_name: user.last_name,
+            email: user.email
+          }
+        })
+        .success(function(data, status, headers, config) {
+          $scope.users.push(data)
+          $scope.user = {}
+          return true
+        })
+        .error(function(data, status, headers, config) {
+          Alert.add("error", 'sorry, you are not authorized to re-order the tanks', 4000);
+        });
+
     }
 
   });

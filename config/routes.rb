@@ -11,10 +11,12 @@ Rails.application.routes.draw do
       get 'ability' => 'users#ability'
       get 'roles' => 'users#roles'
     end
-    resource :admin, only: [] do
-      get 'users' => 'admin#users'
-      put 'users' => 'admin#update_user'
-      delete 'users/:id' => 'admin#delete_user'
+    namespace :admin do
+      resource :admin, only: []
+      resources :users, only: [:index, :create, :update, :destroy]
+      # get 'users' => 'admin#users'
+      # put 'users' => 'admin#update_user'
+      # delete 'users/:id' => 'admin#delete_user'
     end
     resources :fermenters, only: [] do
       post :set_fermenter_state
