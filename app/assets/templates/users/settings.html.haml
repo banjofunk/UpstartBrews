@@ -1,7 +1,7 @@
 #navbar{'ng-include'=>"'navbar/show.html'"}
 %alerts
 
-.settings-container
+.settings-container{'ng-if'=>'user'}
   %br
   .row
     .col-md-12{:style => 'text-align: center;'}

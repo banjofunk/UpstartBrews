@@ -37,9 +37,10 @@ class Api::UsersController < Api::BaseController
   end
 
   def change_password
-    current_user.password = params[:password]
-    current_user.password_confirmation = params[:password_confirmation]
-    if current_user.save
+    @user = User.find(current_user.id)
+    if @user.update(user_params)
+      # Sign in the user by passing validation in case their password changed
+      sign_in @user, :bypass => true
       render :json => {:msg => 'new password is set'}
     else
       render :json => {:msg => 'error'}
