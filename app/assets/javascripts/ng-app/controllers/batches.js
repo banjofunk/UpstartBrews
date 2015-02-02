@@ -5,6 +5,7 @@ angular.module('AngularUpstart')
     $http.get('/api/batches')
       .success(function(data, status, headers, config) {
         $scope.batches = data;
+        $scope.sort = $scope.batches.map(function(batch){ return batch.fermenter.id; });
       })
 
     $http.get('/api/flavors')
@@ -21,7 +22,7 @@ angular.module('AngularUpstart')
     }
 
     $scope.fermenterOrder = function(batch) {
-      return batch.fermenter.position
+      return $scope.sort.indexOf(batch.fermenter.id)
     }
 
     $scope.showModal = false;
@@ -47,12 +48,7 @@ angular.module('AngularUpstart')
     $scope.postSort = function(sort){
       $http.post('/api/fermenters/sort', { sort: sort }).
         success(function(data, status, headers, config) {
-          var fermenter_ids = $scope.batches.map(function(batch){ return batch.fermenter.id; });
-          for(var i = 0, len = data.length; i < len; i++) {
-            var fermenter = data[i]
-            var batch_idx = fermenter_ids.indexOf(fermenter.id)
-            $scope.batches[batch_idx].fermenter.position = fermenter.position
-          }
+          $scope.sort = data
           return true
         }).
         error(function(data, status, headers, config) {

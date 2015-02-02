@@ -1,17 +1,30 @@
 class Api::FermentersController < ApplicationController
   load_and_authorize_resource
 
-  def sort
+  # def sort
+  #   sort = params['sort']
+  #   new_sort = []
+  #   sort.each_with_index do |ferm_id, idx|
+  #     ferm = Fermenter.find(ferm_id)
+  #     ferm.position = idx
+  #     ferm.save
+  #     new_sort << {:id => ferm.id, :position => ferm.position}
+  #   end
+  #   render :json => new_sort.to_json
+  # end
+
+
+   def sort
     sort = params['sort']
-    new_sort = []
+    sort_return = []
     sort.each_with_index do |ferm_id, idx|
       ferm = Fermenter.find(ferm_id)
       ferm.position = idx
       ferm.save
-      new_sort << {:id => ferm.id, :position => ferm.position}
+      sort_return << ferm_id.to_i
     end
-    render :json => new_sort.to_json
-  end
+    render :json => sort_return.to_json
+   end
 
   def set_fermenter_state
     fermenter = Fermenter.find(params[:id])
