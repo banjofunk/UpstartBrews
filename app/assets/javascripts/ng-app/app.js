@@ -7,7 +7,7 @@ angular
     'abilityService',
     'alertService'
   ])
-  .config(function ($routeProvider, $locationProvider) {
+  .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', { templateUrl: 'batches/batches.html', controller: 'BatchesCtrl' })
       .when('/batches', { templateUrl: 'batches/batches.html', controller: 'BatchesCtrl' })
@@ -17,7 +17,7 @@ angular
       .when('/admin', {templateUrl:'admin/admin.html', controller:'AdminCtrl'})
       .otherwise({ redirectTo: '/' });
     $locationProvider.html5Mode(true);
-  })
+  }])
   .config(['$httpProvider', function($httpProvider){
     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
     $httpProvider.interceptors.push(function ($q, $location, Alert) {
