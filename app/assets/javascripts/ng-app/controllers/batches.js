@@ -65,7 +65,7 @@ angular.module('AngularUpstart')
 
           var batches = $scope.batches
           for(var i = 0, len = batches.length; i < len; i++) {
-            if (batches[i].id === batch.id) {
+            if (batches[i].fermenter.id === batch.fermenter.id) {
               batches[i] = data
               break;
             }
