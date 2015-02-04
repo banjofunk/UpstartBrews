@@ -1,5 +1,5 @@
 angular.module('AngularUpstart')
-  .controller('CarbonationSettingsCtrl', function ($scope, $location, Session, Ability, $http, Alert, $timeout) {
+  .controller('CarbonationSettingsCtrl', ['$scope', '$location', 'Session', 'Ability', '$http', 'Alert', '$timeout', function($scope, $location, Session, Ability, $http, Alert, $timeout) {
 
     $scope.$watch('details_category', function(newValue, oldValue) {
       if(newValue == "carb_settings"){
@@ -72,4 +72,4 @@ angular.module('AngularUpstart')
 
     $scope.$watch('update_queue.length', debounceSaveUpdates)
 
-  });
+  }]);

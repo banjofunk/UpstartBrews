@@ -1,5 +1,5 @@
 angular.module('AngularUpstart')
-  .controller('ReadingsCtrl', function ($scope, $http, Ability, Alert) {
+  .controller('ReadingsCtrl', ['$scope', '$http', 'Ability', 'Alert', function($scope, $http, Ability, Alert) {
 
     $scope.$watch('details_category', function(newValue, oldValue) {
       if(newValue == "readings"){
@@ -53,4 +53,4 @@ angular.module('AngularUpstart')
         });
     }
 
-  });
+  }]);

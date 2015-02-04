@@ -1,5 +1,5 @@
 angular.module('AngularUpstart')
-  .controller('BottleSettingsCtrl', function ($scope, $location, Session, Ability, $http, Alert, $timeout) {
+  .controller('BottleSettingsCtrl', ['$scope', '$location', 'Session', 'Ability', '$http', 'Alert', '$timeout', function ($scope, $location, Session, Ability, $http, Alert, $timeout) {
 
     $scope.$watch('details_category', function(newValue, oldValue) {
       if(newValue == "bottle_settings"){
@@ -76,4 +76,4 @@ angular.module('AngularUpstart')
 
     $scope.$watch('update_queue.length', debounceSaveUpdates)
 
-  });
+  }]);

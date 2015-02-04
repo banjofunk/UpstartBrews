@@ -1,5 +1,5 @@
 angular.module('AngularUpstart')
-  .controller('SettingsCtrl', function ($scope, $location, Session, Ability, Alert, $http) {
+  .controller('SettingsCtrl', ['$scope', '$location', 'Session', 'Ability', 'Alert', '$http', function($scope, $location, Session, Ability, Alert, $http) {
 
     $http.get('/api/users').success(function(response) {
       $scope.user = response.user;
@@ -26,4 +26,4 @@ angular.module('AngularUpstart')
     }
 
 
-  });
+  }]);

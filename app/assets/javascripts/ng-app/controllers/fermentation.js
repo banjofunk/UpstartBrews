@@ -1,5 +1,5 @@
 angular.module('AngularUpstart')
-  .controller('FermentationCtrl', function ($scope, $http, Ability, Alert) {
+  .controller('FermentationCtrl', ['$scope', '$http', 'Ability', 'Alert', function($scope, $http, Ability, Alert) {
 
     $scope.$watch('details_category', function(newValue, oldValue) {
       if(newValue == "fermentation"){
@@ -12,4 +12,4 @@ angular.module('AngularUpstart')
       }
     });
 
-  });
+  }]);

@@ -1,5 +1,5 @@
 angular.module('AngularUpstart')
-  .controller('InventoriesCtrl', function ($scope, $http, Ability, Alert, $timeout) {
+  .controller('InventoriesCtrl', ['$scope', '$http', 'Ability', 'Alert', '$timeout', function($scope, $http, Ability, Alert, $timeout) {
     $scope.update_queue = [];
 
     $scope.$watch('details_category', function(newValue, oldValue) {
@@ -80,4 +80,4 @@ angular.module('AngularUpstart')
 
     $scope.$watch('update_queue.length', debounceSaveUpdates)
 
-  });
+  }]);

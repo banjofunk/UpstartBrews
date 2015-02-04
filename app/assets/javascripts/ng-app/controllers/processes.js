@@ -1,5 +1,5 @@
 angular.module('AngularUpstart')
-  .controller('ProcessesCtrl', function ($scope, $http, Ability, Alert) {
+  .controller('ProcessesCtrl', ['$scope', '$http', 'Ability', 'Alert', function($scope, $http, Ability, Alert) {
 
 
     $scope.$on('setProcessType', function(event, type) {
@@ -85,4 +85,4 @@ angular.module('AngularUpstart')
         });
     }
 
-  });
+  }]);

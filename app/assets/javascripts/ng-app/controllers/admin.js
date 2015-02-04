@@ -1,5 +1,5 @@
 angular.module('AngularUpstart')
-  .controller('AdminCtrl', function ($scope, Session, $http, Ability, Alert) {
+  .controller('AdminCtrl', ['$scope', 'Session', '$http', 'Ability', 'Alert', function ($scope, Session, $http, Ability, Alert) {
     $scope.errors = [];
     $http.get('/api/admin/users.json')
       .success(function(data, status, headers, config) {
@@ -56,5 +56,5 @@ angular.module('AngularUpstart')
 
     }
 
-  });
+  }]);
 

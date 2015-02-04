@@ -1,5 +1,5 @@
 angular.module('AngularUpstart')
-  .controller('CommentsCtrl', function ($scope, $location, Session, Ability, $http, Alert) {
+  .controller('CommentsCtrl', ['$scope', '$location', 'Session', 'Ability', '$http', 'Alert', function ($scope, $location, Session, Ability, $http, Alert) {
 
     $scope.$watch('details_category', function(newValue, oldValue) {
       if(newValue == "comments"){
@@ -25,4 +25,4 @@ angular.module('AngularUpstart')
         });
     };
 
-  });
+  }]);

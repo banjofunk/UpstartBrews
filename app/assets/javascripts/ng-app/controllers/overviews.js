@@ -1,5 +1,5 @@
 angular.module('AngularUpstart')
-  .controller('OverviewsCtrl', function ($scope, $location, Session, Ability, $http, Alert) {
+  .controller('OverviewsCtrl', ['$scope', '$location', 'Session', 'Ability', '$http', 'Alert', function($scope, $location, Session, Ability, $http, Alert) {
 
     $scope.$watch('details_category', function(newValue, oldValue) {
       if(newValue == "overview"){
@@ -40,4 +40,4 @@ angular.module('AngularUpstart')
     }
 
 
-  });
+  }]);

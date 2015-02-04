@@ -1,5 +1,5 @@
 angular.module('AngularUpstart')
-  .controller('navCtrl', function ($scope, $location, Session, Ability, $http) {
+  .controller('navCtrl', ['$scope', '$location', 'Session', 'Ability', '$http', function($scope, $location, Session, Ability, $http) {
 
     $http.get('/api/users').success(function(response) {
       $scope.user = response.user;
@@ -12,4 +12,4 @@ angular.module('AngularUpstart')
     $scope.hasRole = function(role){
       return Ability.hasRole(role)
     };
-  });
+  }]);
