@@ -1,5 +1,5 @@
 angular.module('sessionService', [])
-  .factory('Session', function($location, $http, $q, $rootScope, $route) {
+  .factory('Session', ['$location', '$http', '$q', '$rootScope', '$route', function($location, $http, $q, $rootScope, $route) {
       // Redirect to the given url (defaults to '/')
       function redirect(url) {
         url = url || '/';
@@ -43,4 +43,4 @@ angular.module('sessionService', [])
       };
       service.requestCurrentUser();
       return service;
-  });
+  }]);

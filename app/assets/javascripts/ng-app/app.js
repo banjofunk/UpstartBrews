@@ -20,7 +20,7 @@ angular
   }])
   .config(['$httpProvider', function($httpProvider){
     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
-    $httpProvider.interceptors.push(function ($q, $location, Alert) {
+    $httpProvider.interceptors.push(['$q', '$location', 'Alert', function ($q, $location, Alert) {
       return {
         'response': function (response) {
           return response;
@@ -44,9 +44,10 @@ angular
             return $q.reject(response);
         }
       };
-    });
+    }]);
+
   }])
-  .controller('AppCtrl', function($scope,$route,$location, Ability){
+  .controller('AppCtrl', ['$scope','$route','$location', 'Ability', function($scope, $route, $location, Ability) {
     $scope.$on("authLoginSuccess",function(){
       Ability.currentAbility = null;
       Ability.currentRoles = null;
@@ -60,4 +61,4 @@ angular
     $scope.hasRole = function(role){
       return Ability.hasRole(role)
     };
-  })
+  }])

@@ -1,5 +1,5 @@
 angular.module('abilityService', [])
-  .factory('Ability', function($http, $q) {
+  .factory('Ability', ['$http', '$q', function($http, $q) {
       var service = {
         canCan: function(action, subject) {
           if(service.currentAbility){
@@ -51,4 +51,4 @@ angular.module('abilityService', [])
       };
       service.requestCurrentAbility();
       return service;
-  })
+  }])

@@ -1,5 +1,5 @@
 angular.module('AngularUpstart')
-  .controller('UsersCtrl', function ($scope, Session, Ability, Alert) {
+  .controller('UsersCtrl', ['$scope', 'Session', 'Ability', 'Alert', function ($scope, Session, Ability, Alert) {
     $scope.login = function(user) {
         $scope.authError = null;
 
@@ -19,5 +19,5 @@ angular.module('AngularUpstart')
       Session.logout();
     };
 
-});
+}]);
 

@@ -1,5 +1,5 @@
 angular.module('alertService', [])
-.factory('Alert', function($rootScope, $timeout) {
+.factory('Alert', ['$rootScope', '$timeout' , function($rootScope, $timeout) {
     var alertService;
     $rootScope.alerts = [];
 
@@ -27,4 +27,4 @@ angular.module('alertService', [])
     }
 
     return alertService;
-  });
+  }]);

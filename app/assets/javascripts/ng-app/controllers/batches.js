@@ -1,5 +1,5 @@
 angular.module('AngularUpstart')
-  .controller('BatchesCtrl', function ($scope, $http, Ability, Alert, $timeout) {
+  .controller('BatchesCtrl', ['$scope', '$http', 'Ability', 'Alert', '$timeout', function ($scope, $http, Ability, Alert, $timeout) {
     $scope.errors = [];
     $scope.selected_batch = {};
     $http.get('/api/batches')
@@ -109,7 +109,7 @@ angular.module('AngularUpstart')
     }
 
 
-  })
+  }])
   .controller('BatchCtrl', function ($scope, $routeParams, $http) {
     var batchId = $routeParams.batchId
     var url = '/api/batches/' + batchId + '.json';
