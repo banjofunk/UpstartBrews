@@ -18,6 +18,10 @@ class Batch < ActiveRecord::Base
     STATES[self.state]
   end
 
+  def state_name=(state_name)
+    self.state = STATES.index state_name
+  end
+
   def inventory_set
     self.inventories.estimated.count == 0
   end

@@ -39,5 +39,31 @@ angular.module('AngularUpstart')
 
     }
 
+    $scope.updateState = function() {
+      $http.put('/api/batches/' + $scope.selected_batch.id, {
+        batch: {
+          state_name: $scope.selected_batch.state_name
+        }
+      }).
+        success(function(data, status, headers, config) {
+          $scope.selected_batch.state_name = data.state_name
+          if($scope.selected_batch.state_name === 'brewing'){
+            $scope.bottling_batches.pop($scope.selected_batch)
+            $scope.$parent.changeFermenterState($scope.selected_batch, 'full')
+          } else if($scope.selected_batch.state_name === 'bottling') {
+            $scope.bottling_batches.push($scope.selected_batch)
+            $scope.$parent.changeFermenterState($scope.selected_batch, 'empty')
+          } else {
+            $scope.$parent.changeFermenterState($scope.selected_batch, 'empty')
+          }
+
+          return true
+        }).
+        error(function(data, status, headers, config) {
+          Alert.add("danger", 'sorry, you are not authorized to edit batches', 4000);
+        });
+
+    }
+
 
   }]);

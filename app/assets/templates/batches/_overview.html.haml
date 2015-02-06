@@ -53,6 +53,21 @@
               %input.form-control.edit_brew_date{:placeholder => "brew_date", "ng-model"=>"selected_batch.brew_date"}
               %a
                 %span.glyphicon.glyphicon-ok-circle.toggle-edit.submit-edit{'ng-click'=>'updateBrewDate()'}
+        .row
+          .col-md-3.text-right
+            %span.overview-label
+              state:
+          .col-md-9.toggle-container
+            .show-toggle
+              %h3
+                %b
+                  {{selected_batch.state_name}}
+                %a
+                  %span.glyphicon.glyphicon-pencil.toggle-edit.actions
+            .edit-toggle{:style => 'display:none;'}
+              %select.edit_flavor{"ng-model"=>"selected_batch.state_name", 'ng-options'=>'state_name as state_name for state_name in selected_batch.states'}
+              %a
+                %span.glyphicon.glyphicon-ok-circle.toggle-edit.submit-edit{'ng-click'=>'updateState()'}
   .row
     %hr.styled
 

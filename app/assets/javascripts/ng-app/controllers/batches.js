@@ -4,7 +4,8 @@ angular.module('AngularUpstart')
     $scope.selected_batch = {};
     $http.get('/api/batches')
       .success(function(data, status, headers, config) {
-        $scope.batches = data;
+        $scope.batches = data.fermenting;
+        $scope.bottling_batches = data.bottling;
         $scope.sort = $scope.batches.map(function(batch){ return batch.fermenter.id; });
       })
 
@@ -85,8 +86,15 @@ angular.module('AngularUpstart')
     $scope.changeFermenterState = function(batch, state) {
       $http.post('/api/fermenters/' + batch.fermenter.id + '/set_fermenter_state', {id: batch.fermenter.id, state_name: state}).
         success(function(data, status, headers, config) {
-          index = $scope.batches.indexOf(batch)
-          $scope.batches[index].fermenter = data
+
+          var batches = $scope.batches
+          for(var i = 0, len = batches.length; i < len; i++) {
+            if (batches[i].fermenter.id === batch.fermenter.id) {
+              batch.fermenter = data
+              $scope.batches[i] = batch
+              break;
+            }
+          }
           return true
         }).
         error(function(data, status, headers, config) {

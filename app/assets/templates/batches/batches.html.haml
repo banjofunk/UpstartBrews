@@ -1,6 +1,5 @@
 #navbar{'ng-include'=>"'navbar/show.html'"}
 %alerts
-
 %div{'ng-if'=>"canCan('read', 'Batch')"}
   %br
   .row
@@ -10,7 +9,21 @@
   .row
     .col-md-1
     .col-md-10
-      #batches{'ng-include'=>"'batches/_batches.html'"}
+      .batches_container.ui-sortable{"ng-model"=>"batches"}
+        .batch_container.well.pull-left{"ng-repeat" => "batch in batches | orderBy:fermenterOrder", :id => "{{batch.fermenter.id}}"}
+          .batch{'ng-include'=>"'batches/_batch.html'"}
+  .bottling{'ng-if'=>"bottling_batches.length"}
+    .row
+      .col-md-12{:style=>'text-align: center;'}
+        %h1{style: 'color:white; font-size:48px'} Bottling
+    .row
+      .col-md-1
+      .col-md-10
+        .batches_container
+          .batch_container.well.pull-left{"ng-repeat" => "batch in bottling_batches | orderBy:fermenterOrder", :id => "{{batch.fermenter.id}}"}
+            .batch{'ng-include'=>"'batches/_bottling_batch.html'"}
+  %br
+
 
   %modal{:title=>'{{selected_batch.flavor.name}}', :visible=>"$parent.showModal"}
     .modal-header

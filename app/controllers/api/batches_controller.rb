@@ -8,8 +8,9 @@ class Api::BatchesController < ApplicationController
     if params['show_all']
       @batches = Batch.all
     else
+      @bottling_batches = Batch.state('bottling')
       @batches = Fermenter.order('position ASC').map {|fermenter|
-        batch = fermenter.batches.order('brew_date DESC').first
+        batch = fermenter.batches.state('brewing').order('brew_date DESC').first
         if !batch
           batch = Batch.new(
             :state => Batch::DELETED,
@@ -85,7 +86,7 @@ class Api::BatchesController < ApplicationController
   end
 
   def batch_params
-    params.require(:batch).permit(:id, :flavor_id, :fermenter_id, :brew_date)
+    params.require(:batch).permit(:id, :flavor_id, :fermenter_id, :brew_date, :state_name)
   end
 
 end

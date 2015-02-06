@@ -1,0 +1,30 @@
+.full_batch
+  .batch_header.row
+    .col-md-4
+      %span
+        %b
+          &#35;{{batch.fermenter.id}}
+    .col-md-8
+      %button.btn.btn-xs.btn-primary.details{'ng-click' => 'toggleModal(batch);'}
+        %span
+          details
+  .flavor_container.row{style: 'background-color:{{batch.flavor.color.primary}};border:2px solid {{batch.flavor.color.secondary}}; '}
+    .col-md-12
+      %span
+        %b
+          carb:
+      %span
+        {{batch.total_carbonation}}
+    .col-md-12
+      %span
+        %b
+          bottle:
+      %span
+        {{batch.total_bottling}}
+  .row.last-reading
+    .col-md-12
+      %span
+        br:
+        %b {{batch.last_brix}}
+        , ph:
+        %b {{batch.last_ph}}
