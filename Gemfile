@@ -16,6 +16,7 @@ gem 'angular-rails-templates'
 gem 'devise', '~> 3.2'
 gem 'cancancan', '~> 1.7'
 gem 'role_model'
+gem 'ruby-units'
 
 gem "therubyracer"
 gem "less-rails"

@@ -3,22 +3,22 @@ class Api::BatchCarbonationSettingsController < ApplicationController
 
 
   def index
-    batch = Batch.find(params[:batch_id])
-
-    @batch_carbonation_settings = BatchCarbonationSetting::KINDS.map {|kind|
-      batch_carbonation_setting = batch.batch_carbonation_settings.kind(kind[:short_name]).first
-      if !batch_carbonation_setting
-        batch_carbonation_setting = BatchCarbonationSetting.new(
-          :batch_id => kind[:batch_id],
+    current_batch = Batch.find(params[:batch_id])
+    if current_batch.batch_carbonation_settings.size > 0
+      @batch_carbonation_settings = current_batch.batch_carbonation_settings
+    else
+      old_batch = Batch.order('brew_date DESC').where(:flavor_id => current_batch.flavor_id).select { |batch| batch.batch_carbonation_settings.size > 0 }.first
+      BatchCarbonationSetting::KINDS.map { |kind|
+        setting = old_batch.batch_carbonation_settings.where(:kind => kind[:kind_id]).first if old_batch
+        current_batch.batch_carbonation_settings.create(
+          :batch_id => current_batch.id,
           :kind => kind[:kind_id],
-          :quantity => 0,
-          :unit => kind[:unit],
-          :created_at => Time.current
+          :quantity => setting.try(:quantity) || 0,
+          :unit => setting.try(:unit) || kind[:unit]
         )
-      end
-      batch_carbonation_setting
-    }
-
+      }
+      @batch_carbonation_settings = current_batch.batch_carbonation_settings
+    end
   end
 
   def show
