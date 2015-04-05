@@ -7,7 +7,7 @@ angular.module('AngularUpstart')
           .success(function(data, status, headers, config) {
             $scope.$broadcast('setProcessType', 'fermentation');
             $scope.selected_batch.fermentation_processes = data.batch_processes;
-            $scope.selected_batch.all_fermentation_processes = data.all_processes;
+            $scope.selected_batch.all_fermentation_processes = data.all_processes.fermentation;
           })
       }
     });

@@ -1,8 +1,12 @@
 json.all_processes do
-  json.array! @process_types.each do |type|
-    json.name type.name
-    json.currently_on @batch_processes.kind(type.name).current.count > 0
-    json.order type.sort_order
+  @process_types.each do |category, types|
+    json.set! category do
+      json.array! types.each do |type|
+        json.name type.name
+        json.currently_on @batch_processes.kind(type.name).current.count > 0
+        json.order type.sort_order
+      end
+    end
   end
 end
 json.batch_processes do

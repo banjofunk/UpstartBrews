@@ -27,6 +27,10 @@ class Api::BatchesController < ApplicationController
   end
 
   def show
+    @process_types = {}
+    ProcessType::CATEGORIES.each do |category|
+      @process_types[category] = ProcessType.category(category)
+    end
   end
 
   def new

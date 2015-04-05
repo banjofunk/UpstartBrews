@@ -11,6 +11,7 @@ angular.module('AngularUpstart')
 
       $http.post('/api/batches/' + $scope.selected_batch.id + '/batch_processes/start_batch_process', { batch_id: $scope.selected_batch.id, process_type: process.name }).
         success(function(data, status, headers, config) {
+          debugger
           var all_proc = $scope.selected_batch[all_processes]
           for(var i = 0, len = all_proc.length; i < len; i++) {
             if (all_proc[i].name === data.type) {

@@ -11,7 +11,7 @@ angular
     $routeProvider
       .when('/', { templateUrl: 'batches/batches.html', controller: 'BatchesCtrl' })
       .when('/batches', { templateUrl: 'batches/batches.html', controller: 'BatchesCtrl' })
-      .when('/batches/:batchId', { templateUrl: 'batches/batch.html', controller: 'BatchCtrl' })
+      .when('/batches/:batchId', { templateUrl: 'batch/batch.html', controller: 'BatchCtrl' })
       .when('/users/login', {templateUrl:'users/login.html', controller:'UsersCtrl'})
       .when('/settings', {templateUrl:'users/settings.html', controller:'SettingsCtrl'})
       .when('/admin', {templateUrl:'admin/admin.html', controller:'AdminCtrl'})

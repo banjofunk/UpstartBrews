@@ -117,13 +117,4 @@ angular.module('AngularUpstart')
     }
 
 
-  }])
-  .controller('BatchCtrl', function ($scope, $routeParams, $http) {
-    var batchId = $routeParams.batchId
-    var url = '/api/batches/' + batchId + '.json';
-    $http.get(url).
-      success(function(data, status, headers, config) {
-        $scope.batch = data;
-      })
-
-  });
+  }]);

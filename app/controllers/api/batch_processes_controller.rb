@@ -4,11 +4,26 @@ class Api::BatchProcessesController < ApplicationController
   before_filter :determine_scope, :only => [:index, :end_batch_process]
 
   def index
-    @process_types = ProcessType.category(params[:category])
-    if can? :manage, BatchProcess
-      @batch_processes = @scope.category(params[:category]).joins(:process_type).order_kind
+
+
+    if params[:category] == 'all'
+      @process_types = {}
+      ProcessType::CATEGORIES.each do |category|
+        @process_types[category] = ProcessType.category(category)
+      end
+      if can? :manage, BatchProcess
+        @batch_processes = @scope.joins(:process_type).order_kind
+      else
+        @batch_processes = @scope.secured.joins(:process_type).order_kind
+
+      end
     else
-      @batch_processes = @scope.category(params[:category]).secured.joins(:process_type).order_kind
+      @process_types = {params[:category] => ProcessType.category(params[:category])}
+      if can? :manage, BatchProcess
+        @batch_processes = @scope.category(params[:category]).joins(:process_type).order_kind
+      else
+        @batch_processes = @scope.category(params[:category]).secured.joins(:process_type).order_kind
+      end
     end
 
   end
