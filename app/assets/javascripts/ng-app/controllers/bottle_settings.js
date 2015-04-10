@@ -9,9 +9,9 @@ angular.module('AngularUpstart')
           })
         $http.get('/api/batches/' + $scope.selected_batch.id + '/batch_processes', {params: {category: 'bottling'}})
           .success(function(data, status, headers, config) {
-            $scope.selected_batch.bottle_processes = data.batch_processes;
-            $scope.selected_batch.all_bottle_processes = data.all_processes.bottling;
-            $scope.$broadcast('setProcessType', 'bottle');
+            $scope.selected_batch.current_processes = $scope.selected_batch.current_processes || {}
+            $scope.selected_batch.all_processes = $scope.selected_batch.all_processes || {}
+
           })
 
       }

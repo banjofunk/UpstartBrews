@@ -31,6 +31,10 @@ class Api::BatchesController < ApplicationController
     ProcessType::CATEGORIES.each do |category|
       @process_types[category] = ProcessType.category(category)
     end
+    @batch_processes = {}
+    ProcessType::CATEGORIES.each do |category|
+      @batch_processes[category] = @batch.batch_processes.category(category).joins(:process_type).order_kind || {}
+    end
   end
 
   def new

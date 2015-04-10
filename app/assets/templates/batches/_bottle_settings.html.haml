@@ -36,16 +36,16 @@
         .col-md-12
           .bottle-actions{'ng-if'=>'canCan("manage", "BatchProcess")'}
             %ul.list-unstyled
-              %li.pull-right{"ng-repeat" => "process in selected_batch.all_bottle_processes | orderBy:order"}
+              %li.pull-right{"ng-repeat" => "process in selected_batch.all_processes.bottling | orderBy:order"}
                 %form{:role => "form"}
                   %button{:type=>"submit", :class=>"btn btn-success", "ng-click"=>"startProcess(process)", 'ng-show'=>'!process.currently_on'} start {{process.name}}
-                  %button{:type=>"submit", :class=>"btn btn-danger", "ng-click"=>"stopProcess(process.name)", 'ng-show'=>'process.currently_on'} stop {{process.name}}
+                  %button{:type=>"submit", :class=>"btn btn-danger", "ng-click"=>"stopProcess(process)", 'ng-show'=>'process.currently_on'} stop {{process.name}}
             .clearfix
         %br
       .row
         .col-md-1
         .col-md-10
-          %table.table.table-condensed{"ng-show"=>"selected_batch.bottle_processes.length"}
+          %table.table.table-condensed{"ng-show"=>"selected_batch.current_processes.bottling.length"}
             %thead
               %tr
                 %th
@@ -56,7 +56,7 @@
                   duration
                 %th
             %tbody
-              %tr.toggle-container{"ng-repeat" => "process in selected_batch.bottle_processes"}
+              %tr.toggle-container{"ng-repeat" => "process in selected_batch.current_processes.bottling"}
                 %td
                   .show-toggle.process-times
                     {{process.started}}

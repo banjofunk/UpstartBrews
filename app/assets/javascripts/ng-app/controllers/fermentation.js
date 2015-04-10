@@ -3,11 +3,10 @@ angular.module('AngularUpstart')
 
     $scope.$watch('details_category', function(newValue, oldValue) {
       if(newValue == "fermentation"){
-        $http.get('/api/batches/' + $scope.selected_batch.id + '/batch_processes', {params: {category: 'fermentation'}})
+        $http.get('/api/batches/' + $scope.selected_batch.id + '/batch_processes')
           .success(function(data, status, headers, config) {
-            $scope.$broadcast('setProcessType', 'fermentation');
-            $scope.selected_batch.fermentation_processes = data.batch_processes;
-            $scope.selected_batch.all_fermentation_processes = data.all_processes.fermentation;
+            $scope.selected_batch.current_processes = data.current_processes
+            $scope.selected_batch.all_processes = data.all_processes
           })
       }
     });
