@@ -1,28 +1,11 @@
-== README
+# UpstartBrews
+A Kombucha brewery manager - Made with Rails and Angularjs
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### What does it do?
 
-Things you may want to cover:
+This is a project I put together while making [Upstart Kombucha])(http://drinkupstart.com/). Its a basic brewery manager that tracks different readings and tests on a batch of brewing kombucha. You can rearrange fermenters, add test results and take notes on flavor and brew progress.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Check it out [here](https://upstartbrews.herokuapp.com/).
+you can log in with:
+u: test@test.com
+p: testtest
